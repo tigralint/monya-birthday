@@ -1,0 +1,147 @@
+/* --- СТИЛИ УРОВНЯ 1.9: 'ДИАЛОГОВЫЙ ТРЕНАЖЕР ФТ' (ИДЕЯ 8) --- */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    --font-dialogue: 'Lora', serif;
+    --font-mono: 'Share+Tech+Mono', monospace;
+    --color-bg: #000;
+    --color-monya-text: #ffc0cb; /* Нежно-розовый */
+    --color-tigran-text: #a0d2ff; /* Светло-синий (мысли) */
+    --color-border: #444;
+    --color-feedback-correct: #39FF14;
+    --color-feedback-error: #B22222;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: #fff;
+    font-family: var(--font-dialogue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+.sim-container {
+    max-width: 700px;
+    width: 100%;
+    border: 2px solid var(--color-border);
+    box-shadow: 0 0 20px rgba(160, 210, 255, 0.3);
+    background: #111;
+}
+
+/* --- Окно диалога (Моня) --- */
+.dialogue-window {
+    padding: 20px;
+    border-bottom: 2px solid var(--color-border);
+    min-height: 150px;
+}
+
+.speaker-name {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    color: var(--color-monya-text);
+    font-weight: 700;
+}
+
+.dialogue-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #fff;
+    margin-top: 10px;
+}
+
+/* --- Окно Опций (Тигран) --- */
+.options-window {
+    padding: 20px;
+    background: #0a0a0a;
+}
+
+.speaker-name.tigran {
+    color: var(--color-tigran-text);
+}
+
+.option-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    font-family: var(--font-dialogue);
+    font-size: 1.1rem;
+    color: #fff;
+    background: #333;
+    border: 1px solid var(--color-border);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.option-button:not(:disabled):hover {
+    background: var(--color-tigran-text);
+    color: #000;
+    border-color: #fff;
+}
+.option-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* --- Обратная связь --- */
+.feedback-window {
+    padding: 15px 20px;
+    border-top: 2px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+}
+.feedback-window.correct {
+    color: var(--color-feedback-correct);
+    animation: pulse-green 0.5s;
+}
+.feedback-window.error {
+    color: var(--color-feedback-error);
+    animation: shake-red 0.5s;
+}
+
+.monya-response {
+    font-family: var(--font-dialogue);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-top: 10px;
+}
+
+@keyframes pulse-green {
+    from { box-shadow: 0 0 20px var(--color-feedback-correct); }
+    to { box-shadow: 0 0 0px transparent; }
+}
+@keyframes shake-red {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+/* --- Экран Победы --- */
+.win-screen {
+    padding: 30px;
+    text-align: center;
+}
+.win-screen h1 {
+    font-family: var(--font-mono);
+    color: var(--color-feedback-correct);
+    font-size: 2rem;
+}
+.win-screen a {
+    display: inline-block;
+    padding: 15px 25px;
+    background: var(--color-feedback-correct);
+    color: #000;
+    font-family: var(--font-mono);
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+.win-screen a:hover {
+    background: #fff;
+}

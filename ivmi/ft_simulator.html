@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СИМУЛЯТОР: ИЗЛЕЧЕНИЕ ФТ</title>
+    <link rel="stylesheet" href="ft_simulator.css">
+</head>
+<body>
+
+    <div class="sim-container">
+        
+        <div id="win-screen" class="win-screen hidden">
+            <h1>ФЕНОМЕН ТИГРАНА (ФТ) ИЗЛЕЧЕН</h1>
+            <p>Вы... Вы смогли. Вы применили 'Здоровую Речь'.</p>
+            <p>Вы побороли свое Эго (Доксона) и стали 'Садовником'.</p>
+            <p>Гармония восстановлена. Протокол Сдерживания стабилизирован.</p>
+            <p>Зарегистрирован новый документ: <strong>Меморандум о Примирении</strong>.</p>
+            <a href="memorandum.html" target="_blank">[ЗАГРУЗИТЬ МЕМОРАНДУМ]</a>
+            <a href="tigran_log.html">[ВЕРНУТЬСЯ В ЖУРНАЛ]</a>
+        </div>
+
+        <main id="game-screen">
+            <section class="dialogue-window">
+                <h2 class="speaker-name">МОНЯ:</h2>
+                <p id="monya-dialogue" class="dialogue-text">...</p>
+            </section>
+
+            <section class="options-window">
+                <h2 class="speaker-name tigran">ТИГРАН (МЫСЛИ):</h2>
+                <p id="tigran-thought">Я совершил 'искренний промах'. Она расстроена. Что я должен сказать?</p>
+                
+                <div id="options-container">
+                    </div>
+            </section>
+
+            <section id="feedback-window" class="feedback-window hidden">
+                <p id="feedback-title">...</p>
+                <p id="feedback-monya-response" class="monya-response">...</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="ft_simulator.js"></script>
+</body>
+</html>
