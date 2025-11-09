@@ -1,0 +1,297 @@
+/* --- Глобальные настройки (Стиль "Терминал") --- */
+@font-face {
+    font-family: 'PP Mondwest'; /* Берем этот шрифт из твоего примера */
+    src: url('../fonts/PP-Mondwest.woff2') format('woff2'),
+         url('../fonts/PP-Mondwest.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --terminal-bg: #1a1a1a;
+    --terminal-text: #f0f0f0;
+    --terminal-green: #39FF14;
+    --terminal-green-dark: #2a2a2a;
+    --terminal-yellow: #ffd452;
+    --terminal-red: #ff4d4d;
+    --terminal-border: #333;
+    --font-main: 'Courier New', Courier, monospace;
+    --font-header: 'PP Mondwest', monospace;
+}
+
+body {
+    background-image: url('../images/Иллюстрация_без_названия 170.png');
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--terminal-text);
+    font-family: var(--font-main);
+    line-height: 1.8;
+    margin: 0;
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- Контейнер Терминала --- */
+.terminal-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(26, 26, 26, 0.9); /* var(--terminal-bg) с прозрачностью */
+    border: 1px solid var(--terminal-border);
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.1);
+    overflow: hidden;
+}
+
+/* --- Шапка Терминала --- */
+.terminal-header {
+    background: #333;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #000;
+}
+.header-lights {
+    display: flex;
+    gap: 8px;
+    margin-right: 15px;
+}
+.light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #555;
+    border: 1px solid #111;
+}
+.light.red { background: #ff5f56; }
+.light.yellow { background: #ffbd2e; }
+.light.green { background: #27c93f; }
+.light.green.active { box-shadow: 0 0 10px var(--terminal-green); }
+
+.header-title {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* --- Тело Терминала (Сайдбар + Контент) --- */
+.terminal-body {
+    display: flex;
+    min-height: 80vh;
+}
+
+/* --- Сайдбар (Навигация) --- */
+.sidebar {
+    flex: 0 0 300px;
+    padding: 20px;
+    border-right: 1px dashed var(--terminal-border);
+    background: rgba(0,0,0,0.1);
+}
+.sidebar-title {
+    font-weight: bold;
+    color: var(--terminal-yellow);
+    margin-bottom: 15px;
+}
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar nav li {
+    margin-bottom: 5px;
+}
+.sidebar nav a {
+    display: block;
+    color: var(--terminal-text);
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+.sidebar nav a:hover {
+    color: var(--terminal-yellow);
+    background: var(--terminal-green-dark);
+    border-color: var(--terminal-yellow);
+    text-shadow: 0 0 5px var(--terminal-yellow);
+}
+.sidebar nav a.active {
+    color: var(--terminal-bg);
+    background: var(--terminal-green);
+    font-weight: bold;
+    border-color: var(--terminal-green);
+    text-shadow: none;
+}
+.sidebar nav a.active:hover {
+    color: var(--terminal-bg);
+    text-shadow: none;
+}
+
+/* --- Область Контента --- */
+.content-area {
+    flex: 1;
+    padding: 20px 30px;
+    overflow-y: auto;
+}
+.content-panel {
+    display: none; /* Скрыты по умолчанию */
+}
+.content-panel.active {
+    display: block; /* Показываем активную вкладку */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+h2 {
+    font-family: var(--font-header);
+    color: var(--terminal-yellow);
+    font-size: 2rem;
+    border-bottom: 1px dashed var(--terminal-yellow);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+h3 {
+    color: var(--terminal-green);
+    font-size: 1.4rem;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+h4 {
+    color: var(--terminal-red);
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.file-path {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--terminal-border);
+    padding-bottom: 10px;
+}
+
+blockquote {
+    border-left: 3px solid var(--terminal-green);
+    padding-left: 15px;
+    margin: 15px 0;
+    font-style: italic;
+    color: #ccc;
+    background: rgba(0,0,0,0.1);
+}
+
+pre {
+    background: #000;
+    border: 1px dashed var(--terminal-border);
+    padding: 15px;
+    overflow-x: auto;
+    color: #ccc;
+    font-size: 0.9rem;
+    border-radius: 4px;
+}
+
+hr {
+    border: none;
+    border-top: 1px dashed var(--terminal-border);
+    margin: 30px 0;
+}
+
+ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+}
+ul li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--terminal-green);
+    font-weight: bold;
+}
+
+/* --- Секретная ссылка на Уровень 2 --- */
+.warning-box {
+    border: 2px solid var(--terminal-red);
+    background: rgba(255, 77, 77, 0.05);
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.warning-box h4 {
+    margin-top: 0;
+}
+.secret-link-level2 {
+    color: var(--terminal-red);
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: crosshair;
+}
+.secret-link-level2:hover {
+    background: var(--terminal-red);
+    color: var(--terminal-bg);
+    text-shadow: none;
+}
+
+/* --- Галерея в Терминале --- */
+.gallery-grid-terminal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+.gallery-grid-terminal a {
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--terminal-border);
+    border-radius: 4px;
+    background: var(--terminal-green-dark);
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+.gallery-grid-terminal a:hover {
+    border-color: var(--terminal-yellow);
+    box-shadow: 0 0 10px rgba(255, 212, 82, 0.3);
+    transform: translateY(-3px);
+}
+.gallery-grid-terminal img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+}
+.gallery-grid-terminal .caption {
+    display: block;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: var(--terminal-text);
+    text-align: center;
+}
+
+/* --- Адаптация для мобильных --- */
+@media (max-width: 800px) {
+    body {
+        padding: 5px;
+    }
+    .terminal-body {
+        flex-direction: column;
+    }
+    .sidebar {
+        flex: 1 1 auto;
+        border-right: none;
+        border-bottom: 1px dashed var(--terminal-border);
+    }
+    .content-area {
+        padding: 20px 15px;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    h3 {
+        font-size: 1.2rem;
+    }
+}

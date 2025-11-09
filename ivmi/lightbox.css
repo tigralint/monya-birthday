@@ -1,0 +1,81 @@
+/*
+ * СТИЛИ ДЛЯ ВСПЛЫВАЮЩЕГО ОКНА (ЛАЙТБОКСА)
+ */
+
+#lightbox-overlay {
+    /*
+     * ВОТ ГЛАВНОЕ ИСПРАВЛЕНИЕ:
+     * 'display: none;' теперь единственный, кто управляет видимостью.
+     * Я убрал 'display: flex;' из этого блока, который все ломал.
+     */
+    display: none; /* Скрыт по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Сильное затемнение */
+    
+    /* Центрирование (сработает, когда JS добавит .visible) */
+    justify-content: center;
+    align-items: center;
+    
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Этот класс JavaScript добавит при клике */
+#lightbox-overlay.visible {
+    display: flex; /* Показываем Лайтбокс */
+}
+
+#lightbox-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 0 50px rgba(255, 212, 82, 0.3);
+    border: 1px solid #ffd452;
+    border-radius: 4px;
+    
+    transform: scale(0.9);
+    animation: zoomIn 0.3s ease-in-out forwards;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffd452;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    display: none; /* Скрываем по умолчанию */
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #fff;
+    font-size: 4rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px #000;
+}
+.lightbox-close:hover {
+    color: #ffd452;
+    transform: scale(1.1);
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
