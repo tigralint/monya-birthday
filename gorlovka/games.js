@@ -12,12 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const customerArea = document.getElementById('customer-area');
     const donMakMessage = document.getElementById('don-mak-message');
     const foodButtons = document.querySelectorAll('.food-button');
+    const timerDisplay = document.getElementById('don-mak-timer'); // Элемент таймера
 
-    let satisfaction = 50; // Начинаем с 50%
+    let satisfaction = 50;
     let customersServed = 0;
     const customersToWin = 10;
     let currentCustomer = null;
     let game1Active = false;
+    let gameTimer; // Переменная для интервала таймера
+    let timeLeft = 60; // 60 секунд
 
     startDonMakButton.addEventListener('click', () => {
         donMakGameContainer.classList.remove('hidden');
@@ -25,8 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
         game1Active = true;
         satisfaction = 50;
         customersServed = 0;
+        timeLeft = 60;
+        timerDisplay.textContent = `ВРЕМЯ: ${timeLeft}`;
         updateSatisfactionBar();
         donMakMessage.textContent = 'Приготовьтесь...';
+        
+        // Запускаем таймер
+        gameTimer = setInterval(updateTimer, 1000);
+        
         setTimeout(spawnCustomer, 2000);
     });
 
@@ -51,14 +60,23 @@ document.addEventListener('DOMContentLoaded', () => {
             clearCustomer();
 
             if (satisfaction <= 0) {
-                loseDonMak();
+                loseDonMak('ПРОВАЛ! "Монино страдание" достигнуто!');
             } else if (customersServed >= customersToWin) {
                 winDonMak();
             } else {
-                setTimeout(spawnCustomer, 1500); // Следующий клиент
+                setTimeout(spawnCustomer, Math.random() * 1000 + 1000); // Следующий клиент (чуть быстрее)
             }
         });
     });
+
+    function updateTimer() {
+        if (!game1Active) return;
+        timeLeft--;
+        timerDisplay.textContent = `ВРЕМЯ: ${timeLeft}`;
+        if (timeLeft <= 0) {
+            loseDonMak('ВРЕМЯ ВЫШЛО! Вы не успели!');
+        }
+    }
 
     function spawnCustomer() {
         if (!game1Active) return;
@@ -85,21 +103,23 @@ document.addEventListener('DOMContentLoaded', () => {
         satisfactionBar.style.width = `${satisfaction}%`;
     }
 
-    function loseDonMak() {
+    function loseDonMak(message) {
         game1Active = false;
-        donMakMessage.textContent = 'ПРОВАЛ! "Монино страдание" достигнуто! Попробуйте снова.';
+        clearInterval(gameTimer); // Останавливаем таймер
+        donMakMessage.textContent = `${message} Попробуйте снова.`;
         clearCustomer();
         startDonMakButton.classList.remove('hidden');
     }
 
     function winDonMak() {
         game1Active = false;
+        clearInterval(gameTimer); // Останавливаем таймер
         donMakGameContainer.classList.add('hidden');
-        challenge1.classList.add('hidden'); // Скрываем первый квест
-        challenge2.classList.remove('hidden'); // Показываем второй квест
+        challenge1.classList.add('hidden'); 
+        challenge2.classList.remove('hidden'); 
     }
 
-    // --- ЛОГИКА ИГРЫ 2: "Прото-Плитки-Фортепіано" (Piano Tiles) ---
+    // --- ЛОГИКА ИГРЫ 2: "Прото-Плитки-Фортепіано" (УЛУЧШЕНА) ---
     const startPianoButton = document.getElementById('start-piano');
     const pianoGameContainer = document.getElementById('piano-game');
     const pianoTrack = document.getElementById('piano-track');
@@ -109,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     const scoreToWin = 20;
     let game2Active = false;
-    let tileInterval;
+    let tileSpawnTimeout;
 
     startPianoButton.addEventListener('click', () => {
         pianoGameContainer.classList.remove('hidden');
@@ -118,28 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         score = 0;
         pianoScoreDisplay.textContent = score;
         pianoMessage.textContent = 'Играйте!';
-        tileInterval = setInterval(spawnTile, 1000); // Спавн плиток
-    });
-
-    pianoTrack.addEventListener('click', (e) => {
-        if (!game2Active) return;
-        
-        if (e.target.classList.contains('piano-tile')) {
-            // ПОПАЛ
-            score++;
-            pianoScoreDisplay.textContent = score;
-            e.target.remove(); // Удаляем плитку
-            
-            if (score >= scoreToWin) {
-                winPianoTiles();
-            }
-        } else {
-            // ПРОМАХ
-            pianoMessage.textContent = 'Фальшь! -5 очков!';
-            score -= 5;
-            if (score < 0) score = 0;
-            pianoScoreDisplay.textContent = score;
-        }
+        spawnTile(); // Запускаем первый спавн
     });
 
     function spawnTile() {
@@ -148,34 +147,71 @@ document.addEventListener('DOMContentLoaded', () => {
         const tile = document.createElement('div');
         tile.classList.add('piano-tile');
         
-        // Рандомная позиция по горизонтали (0, 75, 150, 225)
         const trackWidth = pianoTrack.offsetWidth;
         const tileWidth = 75;
-        const positions = (trackWidth - tileWidth) / tileWidth; // (300-75)/75 = 3
-        const randomPosIndex = Math.floor(Math.random() * (positions + 1)); // 0, 1, 2, or 3
+        const positions = (trackWidth - tileWidth) / tileWidth;
+        const randomPosIndex = Math.floor(Math.random() * (positions + 1));
         tile.style.left = `${randomPosIndex * tileWidth}px`;
+        
+        // --- УЛУЧШЕНИЕ: Динамическая скорость ---
+        // Скорость падения увеличивается с очками
+        const duration = Math.max(1.2, 3 - score * 0.1); // от 3с до 1.2с
+        tile.style.animation = `drop ${duration}s linear`;
+        
+        // --- УЛУЧШЕНИЕ: Надежный клик ---
+        tile.addEventListener('click', hitTile);
         
         pianoTrack.appendChild(tile);
 
-        // Удаляем плитку, если она ушла вниз
+        // Проверка на промах (плитка долетела до низа)
         setTimeout(() => {
-            if (tile.parentElement && !tile.classList.contains('hit')) {
-                // Плитка не была нажата - это промах
-                pianoMessage.textContent = 'Пропуск! -3 очка!';
-                score -= 3;
+            if (game2Active && tile.parentElement) {
+                // Плитка все еще на поле и не была нажата = промах
+                pianoMessage.textContent = 'Пропуск! -1 очко';
+                score--;
                 if (score < 0) score = 0;
                 pianoScoreDisplay.textContent = score;
                 tile.remove();
             }
-        }, 3000); // Время анимации
+        }, duration * 1000 - 50); // Удаляем за 50мс до конца анимации
+
+        // --- УЛУЧШЕНИЕ: Рандомный интервал спавна ---
+        const nextSpawnTime = Math.random() * (1200 - score * 20) + 500; // от ~1.7с до 0.5с
+        tileSpawnTimeout = setTimeout(spawnTile, Math.max(400, nextSpawnTime));
+    }
+
+    function hitTile(e) {
+        if (!game2Active) return;
+        
+        const tile = e.target;
+        
+        // Предотвращаем двойное нажатие
+        if (tile.classList.contains('hit')) return; 
+
+        score++;
+        pianoScoreDisplay.textContent = score;
+        tile.classList.add('hit'); // Помечаем как "нажатую"
+        
+        // Визуально останавливаем анимацию и "тушим" плитку
+        const computedStyle = window.getComputedStyle(tile);
+        const top = computedStyle.getPropertyValue("top");
+        tile.style.animation = 'none';
+        tile.style.top = top;
+        
+        // Удаляем через мгновение
+        setTimeout(() => tile.remove(), 100);
+
+        if (score >= scoreToWin) {
+            winPianoTiles();
+        }
     }
 
     function winPianoTiles() {
         game2Active = false;
-        clearInterval(tileInterval);
+        clearTimeout(tileSpawnTimeout); // Останавливаем спавн
         pianoGameContainer.classList.add('hidden');
-        challenge2.classList.add('hidden'); // Скрываем второй квест
-        reward.classList.remove('hidden'); // Показываем ФИНАЛ
+        challenge2.classList.add('hidden');
+        reward.classList.remove('hidden');
         pianoTrack.innerHTML = ''; // Очищаем поле
     }
 

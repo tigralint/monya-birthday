@@ -1,4 +1,4 @@
-/* --- СТИЛИ УРОВНЯ 0.5: АРХЕО-СИМУЛЯТОР 'ГОРЛОВКА' --- */
+/* --- СТИЛИ УРОВЛЯ 0.5: АРХЕО-СИМУЛЯТОР 'ГОРЛОВКА' --- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
@@ -9,6 +9,7 @@
     --color-border-dark: #4a6900;
     --color-bar-bg: #333;
     --color-bar-fill: #39FF14;
+    --color-timer: #ffff00;
 }
 
 body {
@@ -94,6 +95,15 @@ header h1 {
     background: #111;
 }
 
+/* --- ИЗМЕНЕНИЕ: Добавлен таймер --- */
+#don-mak-timer {
+    font-size: 1.2rem;
+    color: var(--color-timer);
+    text-align: center;
+    margin: 10px 0;
+}
+/* --- --- */
+
 /* Шкала сатисфакции */
 #satisfaction-bar-container {
     width: 100%;
@@ -178,17 +188,20 @@ header h1 {
     overflow: hidden;
     cursor: pointer;
 }
+
+/* --- ИЗМЕНЕНИЕ: Убрана анимация из класса, добавлен .hit --- */
 .piano-tile {
     position: absolute;
     width: 75px; /* 300 / 4 */
     height: 100px;
     background: #000; /* "Антрацитовая клавиша" */
     border: 2px solid #fff;
-    animation: drop 3s linear;
+    /* Анимация будет задаваться через JS */
 }
 .piano-tile.hit {
     background: #555; /* Погашенная клавиша */
 }
+/* --- --- */
 
 @keyframes drop {
     from { top: -100px; }
