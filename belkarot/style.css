@@ -14,18 +14,27 @@ body {
     margin: 0;
     padding: 20px;
     line-height: 1.7;
-    overflow-x: hidden; /* Важно, чтобы "глюки" не ломали верстку */
+    overflow-x: hidden;
+    /* Анимация "включения" по умолчанию */
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 /* --- Анимации "Глюков" --- */
-@keyframes glitch-text {
+@keyframes glitch-text-aggressive {
     0% { transform: skewX(0); opacity: 1; }
     48% { transform: skewX(0); opacity: 1; }
-    50% { transform: skewX(8deg) translate(-5px, 2px); opacity: 0.8; }
+    50% { transform: skewX(15deg) translate(-20px, 5px); opacity: 0.5; }
     52% { transform: skewX(0); opacity: 1; }
-    60% { transform: skewX(-10deg) translate(10px, -5px); opacity: 0.7; }
+    60% { transform: skewX(-20deg) translate(20px, -10px); opacity: 0.4; }
     62% { transform: skewX(0); opacity: 1; }
     100% { transform: skewX(0); opacity: 1; }
+}
+@keyframes glitch-overlay-aggressive {
+    0% { transform: translate(0, 0); opacity: 0.1; }
+    25% { transform: translate(10px, 5px); opacity: 0.05; }
+    50% { transform: translate(-10px, -5px); opacity: 0.1; }
+    75% { transform: translate(5px, -10px); opacity: 0.05; }
+    100% { transform: translate(0, 0); opacity: 0.1; }
 }
 
 @keyframes scanlines {
@@ -38,11 +47,7 @@ body {
     to { opacity: 1; }
 }
 
-.glitch-background {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* --- Эффекты "Старого Монитора" --- */
+/* --- Эффекты "Старого Монитора" (По умолчанию - АГРЕССИВНЫЕ) --- */
 .scanlines {
     position: fixed;
     top: 0;
@@ -50,10 +55,11 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.3) 100%);
-    background-size: 100% 5px;
-    animation: scanlines 0.2s linear infinite;
-    pointer-events: none; /* Не мешает кликать */
+    background-size: 100% 3px; /* Более частые полосы */
+    animation: scanlines 0.1s linear infinite; /* Быстрая анимация */
+    pointer-events: none;
     z-index: 1001;
+    opacity: 0.5;
 }
 
 .glitch-overlay {
@@ -62,12 +68,67 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--horror-bg);
-    opacity: 0.05;
-    animation: glitch-text 0.3s linear infinite;
+    background: var(--horror-red);
+    opacity: 0.1;
+    animation: glitch-overlay-aggressive 0.1s linear infinite;
     pointer-events: none;
     z-index: 1000;
 }
+
+/* --- "Глючный" Заголовок (По умолчанию - АГРЕССИВНЫЙ) --- */
+.glitch {
+    position: relative;
+    font-size: 2rem;
+    color: var(--horror-red);
+    text-transform: uppercase;
+    margin: 0;
+    animation: glitch-text-aggressive 1s infinite; /* Сильный глюк */
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--horror-red-bright);
+    color: var(--horror-text);
+    animation: glitch-text-aggressive 1.5s infinite linear alternate-reverse;
+}
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 #00ffff;
+    color: var(--horror-text);
+    animation: glitch-text-aggressive 2s infinite linear alternate-reverse;
+}
+
+/* * !!! НОВЫЙ КЛАСС "СТАБИЛИЗАЦИИ" !!!
+ * JavaScript добавит этот класс к <body> после ввода пароля
+*/
+body.stabilized .glitch {
+    animation: none; /* Отключаем глюк заголовка */
+}
+body.stabilized .glitch::before,
+body.stabilized .glitch::after {
+    animation: none; /* Отключаем глюки псевдо-элементов */
+    opacity: 0;
+}
+body.stabilized .glitch-overlay {
+    animation: none; /* Отключаем глюк фона */
+    opacity: 0.05; /* Оставляем легкий красный оттенок */
+}
+body.stabilized .scanlines {
+    animation-duration: 2s; /* Замедляем "полосы" до еле заметных */
+    opacity: 0.2;
+    background-size: 100% 5px; /* Делаем их реже */
+}
+/* ----- КОНЕЦ НОВЫХ СТИЛЕЙ ----- */
+
 
 /* --- Основной Контейнер --- */
 .container {
@@ -87,38 +148,6 @@ header.main-header {
     margin-bottom: 30px;
 }
 
-/* --- "Глючный" Заголовок --- */
-.glitch {
-    position: relative;
-    font-size: 2rem;
-    color: var(--horror-red);
-    text-transform: uppercase;
-    animation: glitch-text 2s infinite;
-    margin: 0;
-}
-.glitch::before,
-.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-.glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--horror-red-bright);
-    color: var(--horror-text);
-    animation: glitch-text 1.5s infinite linear alternate-reverse;
-}
-.glitch::after {
-    left: -2px;
-    text-shadow: 2px 0 #00ffff; /* Синий/голубой для "цифрового" глюка */
-    color: var(--horror-text);
-    animation: glitch-text 2s infinite linear alternate-reverse;
-}
-
 .warning-text {
     color: #f0f0f0;
     font-size: 1.1rem;
@@ -127,14 +156,14 @@ header.main-header {
 
 /* --- Секции "Утекших Файлов" --- */
 .leaked-file {
-    background: rgba(139, 0, 0, 0.05); /* Легкий багровый фон */
+    background: rgba(139, 0, 0, 0.05);
     border: 1px solid #333;
     padding: 20px;
     margin-bottom: 30px;
     border-radius: 4px;
     box-shadow: inset 0 0 10px #000;
 }
-
+/* ... (остальные стили .leaked-file, h2, p, strong, .truth-file, .video-grid, footer... остаются БЕЗ ИЗМЕНЕНИЙ) ... */
 .leaked-file h2 {
     color: var(--horror-red);
     font-size: 1.5rem;
