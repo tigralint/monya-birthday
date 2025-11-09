@@ -1,125 +1,222 @@
 /* --- Глобальные настройки --- */
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lora', serif; /* Более элегантный шрифт для основного текста */
     background-color: #fdfaf6; /* Очень светлый, теплый фон */
-    color: #444;
+    color: #3e3e3e; /* Темный, но не черный текст */
     margin: 0;
-    padding: 20px;
-    line-height: 1.6;
+    padding: 0;
+    line-height: 1.7;
+    overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
 }
 
 .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 1200px; /* Чуть шире */
+    margin: 30px auto;
+    padding: 40px 60px; /* Больше отступов */
     background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.08); /* Более выраженная тень */
+    position: relative;
+    z-index: 1;
 }
 
 /* --- Шапка --- */
 header {
     text-align: center;
-    border-bottom: 2px dashed #eee;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee; /* Тонкий разделитель */
+    position: relative;
+}
+
+header::after { /* Элегантный багровый акцент под заголовком */
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #8B0000; /* Глубокий багровый */
+    margin: 20px auto 0;
+    border-radius: 2px;
 }
 
 h1 {
-    color: #d6336c; /* Акцентный "милый" цвет */
+    font-family: 'Playfair Display', serif; /* Изысканный шрифт для заголовков */
+    color: #8B0000; /* Глубокий багровый */
     font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: 0;
+    font-size: 3.5rem; /* Крупнее */
+    margin-bottom: 10px;
+    letter-spacing: 1px; /* Чуть раздвигаем буквы */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .subtitle {
-    font-size: 1.2rem;
-    color: #777;
-    font-weight: 300;
+    font-family: 'Lora', serif;
+    font-size: 1.4rem; /* Крупнее */
+    color: #6a6a6a;
+    font-weight: 400;
+    font-style: italic; /* Курсив для элегантности */
 }
 
-/* --- Галерея --- */
-h2 {
-    color: #333;
-    font-weight: 700;
+/* --- Основной контент (Текстовый блок) --- */
+.text-block {
+    margin-bottom: 60px;
+    padding: 20px 0;
+    border-bottom: 1px dashed #e0e0e0; /* Мягкий разделитель */
+}
+
+.text-block h2 {
+    font-family: 'Playfair Display', serif;
+    color: #5a2e2e; /* Более мягкий багровый для подзаголовков */
+    font-size: 2.2rem;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.text-block p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5em;
+    text-align: justify; /* Выравнивание по ширине для "дорогого" вида */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Секция Галереи --- */
+.gallery-section {
+    margin-bottom: 60px;
+}
+
+.gallery-section h2 {
+    font-family: 'Playfair Display', serif;
+    color: #5a2e2e;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
 }
 
 .gallery-intro {
     text-align: center;
-    color: #555;
-    margin-bottom: 30px;
+    color: #777;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    font-style: italic;
 }
 
 .gallery-grid {
     display: grid;
-    /* Адаптивная сетка: 
-       - На больших экранах: 3 колонки (1fr 1fr 1fr)
-       - На средних: 2 колонки
-       - На малых: 1 колонка
-       (minmax(300px, 1fr) - колонка будет минимум 300px, но может растягиваться)
-    */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Чуть меньший minmax для гибкости */
+    gap: 25px; /* Больше отступов между фото */
 }
 
 .gallery-grid a {
     display: block;
-    border-radius: 8px;
+    border-radius: 10px; /* Чуть более скругленные углы */
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Более мягкая тень */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавная анимация */
+    border: 1px solid #f0f0f0; /* Тонкая светлая рамка */
 }
 
 .gallery-grid img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Картинка заполняет блок, сохраняя пропорции */
+    height: 250px; /* Фиксированная высота для всех превью */
+    object-fit: cover; /* Картинка заполняет блок, обрезая лишнее */
     display: block;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .gallery-grid a:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px) scale(1.02); /* Более выраженный эффект при наведении */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: #d6b3a0; /* Легкая подсветка рамки */
 }
 
 .gallery-grid a:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08); /* Чуть большее увеличение */
 }
 
 /* --- Подвал и СЕКРЕТНАЯ ССЫЛКА --- */
 footer {
     text-align: center;
-    margin-top: 50px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    color: #aaa;
-    font-size: 0.9rem;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #e9e9e9; /* Светлый разделитель */
+    color: #a0a0a0;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.secret-link {
+    margin-top: 20px;
 }
 
 .secret-link a {
-    /* Делаем ссылку почти невидимой */
-    font-size: 0.7rem;
-    color: #e0e0e0; /* Очень светлый серый, почти сливается с фоном */
+    /* Делаем ссылку почти невидимой, но с намеком на багровый */
+    font-family: 'Lora', serif;
+    font-size: 0.8rem;
+    color: #f2e7e7; /* Очень светлый, почти невидимый багровый оттенок */
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding: 5px 10px;
+}
+
+.secret-link a::before { /* Добавляем загадочный символ */
+    content: '///';
+    color: #e2dada;
+    margin-right: 5px;
+    transition: all 0.4s ease;
+}
+.secret-link a::after {
+    content: '\\\ ';
+    color: #e2dada;
+    margin-left: 5px;
+    transition: all 0.4s ease;
 }
 
 .secret-link a:hover {
-    /* При наведении она становится чуть заметнее */
-    color: #c0c0c0;
-    cursor: crosshair; /* Курсор намекает, что тут что-то не то */
+    color: #c9b4b4; /* Становится чуть заметнее, сохраняя таинственность */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="%238B0000" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>') 12 12, pointer; /* Изменяем курсор на что-то таинственное */
+}
+.secret-link a:hover::before,
+.secret-link a:hover::after {
+    color: #b8a6a6;
 }
 
 /* --- Адаптация для мобильных --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .container {
+        margin: 20px auto;
+        padding: 30px;
+    }
     h1 {
-        font-size: 2rem;
+        font-size: 2.8rem;
+    }
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    .text-block h2, .gallery-section h2 {
+        font-size: 1.8rem;
+    }
+    .text-block p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    .subtitle {
+        font-size: 1rem;
     }
     .gallery-grid {
-        /* На мобильных всегда 1 колонка */
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* На очень малых экранах - одна колонка */
     }
 }
