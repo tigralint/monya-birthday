@@ -1,0 +1,125 @@
+/* --- Глобальные настройки --- */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fdfaf6; /* Очень светлый, теплый фон */
+    color: #444;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Шапка --- */
+header {
+    text-align: center;
+    border-bottom: 2px dashed #eee;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #d6336c; /* Акцентный "милый" цвет */
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #777;
+    font-weight: 300;
+}
+
+/* --- Галерея --- */
+h2 {
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.gallery-intro {
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.gallery-grid {
+    display: grid;
+    /* Адаптивная сетка: 
+       - На больших экранах: 3 колонки (1fr 1fr 1fr)
+       - На средних: 2 колонки
+       - На малых: 1 колонка
+       (minmax(300px, 1fr) - колонка будет минимум 300px, но может растягиваться)
+    */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid a {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинка заполняет блок, сохраняя пропорции */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-grid a:hover img {
+    transform: scale(1.05);
+}
+
+/* --- Подвал и СЕКРЕТНАЯ ССЫЛКА --- */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.secret-link a {
+    /* Делаем ссылку почти невидимой */
+    font-size: 0.7rem;
+    color: #e0e0e0; /* Очень светлый серый, почти сливается с фоном */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.secret-link a:hover {
+    /* При наведении она становится чуть заметнее */
+    color: #c0c0c0;
+    cursor: crosshair; /* Курсор намекает, что тут что-то не то */
+}
+
+/* --- Адаптация для мобильных --- */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .gallery-grid {
+        /* На мобильных всегда 1 колонка */
+        grid-template-columns: 1fr;
+    }
+}
