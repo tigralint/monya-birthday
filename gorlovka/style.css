@@ -1,0 +1,209 @@
+/* --- СТИЛИ УРОВНЯ 0.5: АРХЕО-СИМУЛЯТОР 'ГОРЛОВКА' --- */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --font-pixel: 'Press Start 2P', monospace;
+    --color-bg: #2a211c; /* Темно-коричневая земля */
+    --color-text: #9dff00; /* Ярко-зеленый, как DOS-экран */
+    --color-border: #9dff00;
+    --color-border-dark: #4a6900;
+    --color-bar-bg: #333;
+    --color-bar-fill: #39FF14;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-pixel);
+    line-height: 1.8;
+    padding: 20px;
+    font-size: 14px;
+    image-rendering: pixelated; /* Для 8-битного вида */
+}
+
+a {
+    color: #ffff00;
+    text-decoration: underline;
+}
+a:hover {
+    color: #fff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Главный контейнер --- */
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 3px solid var(--color-border);
+    background: #000;
+    padding: 20px;
+    box-shadow: 0 0 20px var(--color-text);
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: #ffff00;
+    text-align: center;
+    border-bottom: 2px dashed var(--color-border-dark);
+    padding-bottom: 15px;
+}
+
+.game-intro p, .challenge-box p {
+    text-align: center;
+}
+
+.start-button {
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+    font-family: var(--font-pixel);
+    font-size: 1.2rem;
+    color: #000;
+    background: var(--color-border);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+.start-button:hover {
+    background: #ffff00;
+}
+.start-button.locked {
+    background: #555;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.challenge-box {
+    border: 2px dashed var(--color-border-dark);
+    padding: 15px;
+    margin-top: 20px;
+}
+.challenge-box h2 {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* --- Игра 1: "Дон-Макъ" --- */
+#don-mak-game {
+    border: 2px solid var(--color-border);
+    padding: 10px;
+    background: #111;
+}
+
+/* Шкала сатисфакции */
+#satisfaction-bar-container {
+    width: 100%;
+    height: 30px;
+    background: var(--color-bar-bg);
+    border: 2px solid var(--color-border-dark);
+    margin-bottom: 15px;
+}
+#satisfaction-bar {
+    width: 50%; /* Начинаем с 50% */
+    height: 100%;
+    background: var(--color-bar-fill);
+    transition: width 0.2s ease;
+}
+
+/* "Прилавок" */
+#don-mak-counter {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-top: 2px dashed var(--color-border-dark);
+}
+.food-button {
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    padding: 15px;
+    background: #4a6900;
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+    cursor: pointer;
+}
+.food-button:hover {
+    background: var(--color-border);
+    color: #000;
+}
+
+/* "Клиенты" */
+#customer-area {
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.customer {
+    width: 60px;
+    height: 100px;
+    /* Здесь можно вставить 8-битный спрайт */
+    background: var(--color-text); 
+    border: 2px solid #000;
+    position: relative;
+}
+.customer-order {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #000;
+    padding: 5px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    border: 1px solid #000;
+}
+
+/* --- Игра 2: "Прото-Плитки-Фортепіано" --- */
+#piano-game {
+    border: 2px solid var(--color-border);
+    padding: 10px;
+    background: #111;
+    text-align: center;
+}
+#piano-track {
+    width: 300px;
+    height: 400px;
+    background: #333;
+    border: 2px solid var(--color-border-dark);
+    margin: 15px auto;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.piano-tile {
+    position: absolute;
+    width: 75px; /* 300 / 4 */
+    height: 100px;
+    background: #000; /* "Антрацитовая клавиша" */
+    border: 2px solid #fff;
+    animation: drop 3s linear;
+}
+.piano-tile.hit {
+    background: #555; /* Погашенная клавиша */
+}
+
+@keyframes drop {
+    from { top: -100px; }
+    to { top: 400px; }
+}
+
+/* --- Финальная награда --- */
+#gorlovka-reward {
+    border: 3px solid #ffff00;
+    padding: 20px;
+    text-align: center;
+    animation: pulse 1s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px #ffff00; }
+    50% { box-shadow: 0 0 30px #ffff00; }
+    100% { box-shadow: 0 0 10px #ffff00; }
+}

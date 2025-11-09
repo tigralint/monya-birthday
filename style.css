@@ -220,3 +220,20 @@ footer {
         grid-template-columns: 1fr; /* На очень малых экранах - одна колонка */
     }
 }
+/* --- СТИЛЬ ДЛЯ ССЫЛКИ НА УРОВЕНЬ 0.5 (ИДЕЯ 5) --- */
+.secret-link-level0 {
+    /* Копируем стиль из .secret-link a, чтобы ссылка была такой же невидимой */
+    font-family: 'Lora', serif;
+    font-size: 0.95rem; /* Тот же размер, что у копирайта */
+    color: #f2e7e7; /* Очень светлый, почти невидимый багровый оттенок */
+    text-decoration: none;
+    transition: all 0.4s ease;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding: 5px 0; /* Убираем боковой padding, чтобы не ломать строку */
+}
+
+.secret-link-level0:hover {
+    color: #c9b4b4; /* Становится чуть заметнее */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="%238B0000" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>') 12 12, pointer; /* Изменяем курсор */
+}
