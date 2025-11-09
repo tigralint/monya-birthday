@@ -1,0 +1,84 @@
+/* --- Глобальные настройки (Ядро) --- */
+@keyframes fadeInMessage {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+body {
+    /* * Возвращаемся к теплому, светлому фону, как на Уровне 0.
+     * Это "свет в конце тоннеля".
+     */
+    font-family: 'Lora', serif;
+    background-color: #fdfaf6;
+    color: #333; /* Чистый, читаемый текст */
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    text-align: center;
+    animation: fadeInMessage 1.5s ease-out;
+}
+
+/* --- Интро-текст --- */
+.intro {
+    font-family: 'Share Tech Mono', monospace; /* Отсылка к Уровню 1 и 2 */
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* --- Основное сообщение --- */
+.message {
+    font-family: 'Playfair Display', serif; /* Элегантный шрифт */
+    font-size: 2rem; /* Крупный, легко читаемый */
+    line-height: 1.6;
+    color: #222;
+    margin-bottom: 60px;
+}
+
+.message p {
+    margin: 1.5em 0;
+}
+
+/* * Акцентируем ключевые слова из "лора"
+ * тем самым "дорогим" багровым цветом.
+ */
+.message span {
+    color: #8B0000; /* Багровый */
+    font-style: italic;
+    font-weight: 700;
+}
+
+/* --- Подпись --- */
+.signoff {
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #555;
+    text-align: right;
+    margin-top: 30px;
+}
+
+/* --- Адаптация --- */
+@media (max-width: 600px) {
+    .message {
+        font-size: 1.5rem;
+    }
+    .signoff {
+        font-size: 1.2rem;
+    }
+}
