@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДОСТУП ОГРАНИЧЕН: СИНИКЗ</title>
+    <link rel="stylesheet" href="jarjar.css">
+</head>
+<body>
+
+    <div class="terminal-container">
+        <header class="terminal-header">
+            ... ЗАГРУЗКА ... СЕКТОР ИЗУЧЕНИЯ НЕЯВНЫХ ИДЕОЛОГИЧЕСКИХ КОНСТРУКЦИЙ (СИНИКЗ) ...
+        </header>
+
+        <div class="terminal-body">
+            
+            <div id="quest-container">
+                <div class="output-area">
+                    <p>> [АУТЕНТИФИКАЦИЯ...] ... ОШИБКА.</p>
+                    <p>> [ПРОФИЛЬ: ИССЛЕДОВАТЕЛЬ Т.М., ИВМИ]</p>
+                    <p>> [УРОВЕНЬ ДОПУСКА: НЕДОСТАТОЧЕН]</p>
+                    <p class="system-message">> ВНИМАНИЕ! ВЫ ПЫТАЕТЕСЬ ПОЛУЧИТЬ ДОСТУП К АРХИВУ СИНИКЗ (ОСОБАЯ ПАПКА 731-JJB).</p>
+                    <p class="system-message">> ДЛЯ ПОДТВЕРЖДЕНИЯ УРОВНЯ ДОПУСКА ТРЕБУЕТСЯ ПРОЙТИ ТЕСТ НА "ПЕДАЛЬНУЮ СЕМИОТИКУ".</p>
+                </div>
+
+                <h2>ТЕСТ 04-Б: "ВЫЯВЛЕНИЕ ИДЕОЛОГИЧЕСКИ НЕБЛАГОНАДЕЖНОГО АРХЕТИПА"</h2>
+                <p style="text-align: center;">Проанализируйте представленные педальные образцы. Укажите объект, демонстрирующий "аномальную устойчивость", "скрытую угрозу" и признаки "замаскированного саботажника".</p>
+
+                <div id="pedal-quiz">
+                    <div class="pedal-option" data-choice="boot">
+                        <img src="https://i.imgur.com/gYqgJkM.png" alt="Армейский ботинок">
+                        <p>ОБРАЗЕЦ-01: (Стабильность)</p>
+                    </div>
+                    <div class="pedal-option" data-choice="heel">
+                        <img src="https://i.imgur.com/8Qj9oQW.png" alt="Каблук">
+                        <p>ОБРАЗЕЦ-02: (Неустойчивость)</p>
+                    </div>
+                    <div class="pedal-option" data-choice="jarjar">
+                        <img src="https://i.imgur.com/R8wL2pE.png" alt="Пяточка Джа Джа">
+                        <p>ОБРАЗЕЦ-03: (Аномалия)</p>
+                    </div>
+                </div>
+
+                <div id="login-prompt" class="hidden">
+                    <p id="quiz-feedback" class="system-message"></p>
+                    <label for="password-input">ПАРОЛЬ ДОСТУПА:</label>
+                    <input type="password" id="password-input" autocomplete="off">
+                    <button id="login-button">ВВОД</button>
+                </div>
+            </div>
+
+            <div id="report-container" class="hidden">
+                </div>
+
+        </div>
+    </div>
+
+    <script src="jarjar.js"></script>
+</body>
+</html>

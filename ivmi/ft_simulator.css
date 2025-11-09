@@ -24,6 +24,12 @@ body {
     font-size: 1.1rem;
 }
 
+/* --- НАЧАЛО ИСПРАВЛЕНИЯ --- */
+.hidden {
+    display: none !important;
+}
+/* --- КОНЕЦ ИСПРАВЛЕНИЯ --- */
+
 .sim-container {
     max-width: 700px;
     width: 100%;

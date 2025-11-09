@@ -1,0 +1,181 @@
+/* --- СТИЛИ УРОВНЯ 1.X: 'СОВЕТСКИЙ КРИПТОАНАЛИЗ - ДЕЛО JJB' (ИДЕЯ 9) --- */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+:root {
+    --font-terminal: 'IBM Plex Mono', monospace;
+    --color-bg: #0b0c0b; /* Очень темный */
+    --color-text: #ffb000; /* Янтарный */
+    --color-border: #4a3000;
+    --color-scanline: rgba(255, 176, 0, 0.05);
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-terminal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Эффект старого монитора --- */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            var(--color-scanline) 0px,
+            var(--color-scanline) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    pointer-events: none;
+    z-index: 1001;
+    animation: flicker 0.1s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
+}
+
+/* --- Контейнер терминала --- */
+.terminal-container {
+    max-width: 900px;
+    width: 100%;
+    border: 3px solid var(--color-border);
+    background: #000;
+    box-shadow: 0 0 30px rgba(255, 176, 0, 0.3);
+}
+
+.terminal-header {
+    background: var(--color-border);
+    padding: 5px 10px;
+    color: #000;
+    font-weight: 700;
+}
+
+.terminal-body {
+    padding: 20px;
+    min-height: 500px;
+}
+
+/* --- Область вывода текста --- */
+.output-area {
+    min-height: 100px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed var(--color-border);
+}
+.output-area p {
+    margin: 5px 0;
+    text-shadow: 0 0 5px var(--color-text);
+}
+.output-area .system-message {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* --- Квест --- */
+#quest-container h2 {
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+}
+#pedal-quiz {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+.pedal-option {
+    border: 2px solid var(--color-border);
+    background: #111;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.pedal-option:hover {
+    background: var(--color-text);
+    color: #000;
+    transform: scale(1.05);
+}
+.pedal-option img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    image-rendering: pixelated; /* 8-bit */
+}
+
+/* --- Форма входа --- */
+#login-prompt {
+    margin-top: 20px;
+    text-align: center;
+}
+#login-prompt label {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+#password-input {
+    background: #000;
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
+    font-family: var(--font-terminal);
+    font-size: 1.2rem;
+    padding: 5px;
+    width: 150px;
+    text-transform: uppercase;
+}
+#login-button {
+    background: var(--color-border);
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    font-family: var(--font-terminal);
+    font-size: 1rem;
+    cursor: pointer;
+}
+#login-button:hover {
+    background: var(--color-text);
+}
+
+/* --- Разблокированный отчет (награда) --- */
+#report-container {
+    padding: 15px;
+    background: #111;
+    border: 1px solid var(--color-border);
+}
+#report-container h1 {
+    color: #ffff00;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 10px;
+}
+#report-container h2 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+#report-container p, #report-container li {
+    line-height: 1.8;
+}
+#report-container strong {
+    color: #fff;
+    font-weight: 700;
+}
