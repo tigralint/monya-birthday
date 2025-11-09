@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.lightbox-close');
 
     // 2. Находим ВСЕ ссылки, которые ведут на картинки
-    // (Это ссылки, которые ты уже сделал в Фотопленке, Дневнике и т.д.)
     const imageLinks = document.querySelectorAll('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"]');
 
     imageLinks.forEach(link => {

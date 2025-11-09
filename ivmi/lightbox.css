@@ -3,11 +3,6 @@
  */
 
 #lightbox-overlay {
-    /*
-     * ВОТ ГЛАВНОЕ ИСПРАВЛЕНИЕ:
-     * 'display: none;' теперь единственный, кто управляет видимостью.
-     * Я убрал 'display: flex;' из этого блока, который все ломал.
-     */
     display: none; /* Скрыт по умолчанию */
     position: fixed;
     z-index: 1000;
@@ -17,14 +12,12 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.85); /* Сильное затемнение */
     
-    /* Центрирование (сработает, когда JS добавит .visible) */
     justify-content: center;
     align-items: center;
     
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Этот класс JavaScript добавит при клике */
 #lightbox-overlay.visible {
     display: flex; /* Показываем Лайтбокс */
 }
