@@ -1,0 +1,113 @@
+/*
+ * СТИЛИ ДЛЯ ЛИЧНОГО ЖУРНАЛА ИССЛЕДОВАТЕЛЯ (УРОВЕНЬ 1.5)
+ * Он должен ощущаться более личным и менее "казенным", чем ИВМИ.
+ */
+
+/* Используем переменные из основного style.css, но переопределяем фон */
+body {
+    background-image: none; /* Убираем фон с тиграми */
+    background-color: var(--terminal-bg);
+    color: var(--terminal-text);
+    font-family: var(--font-main);
+    line-height: 1.8;
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.log-container {
+    max-width: 800px; /* Узкий, как личный файл */
+    margin: 30px auto;
+    padding: 30px;
+    background: #111; /* Еще темнее */
+    border: 1px dashed var(--terminal-red); /* Красная рамка, намек на опасность */
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+.log-header {
+    text-align: center;
+    border-bottom: 1px solid var(--terminal-border);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.log-header h1 {
+    font-family: var(--font-header);
+    color: var(--terminal-red); /* Красный заголовок */
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.log-header .status {
+    font-size: 1rem;
+    color: var(--terminal-yellow);
+    text-transform: uppercase;
+}
+
+.log-entry {
+    border-bottom: 1px dashed var(--terminal-border);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.log-entry:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.log-entry .date {
+    font-family: var(--font-main);
+    color: var(--terminal-green);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.log-entry .entry-text {
+    font-size: 1.1rem;
+    color: #f0f0f0; /* Ярче, чем обычный текст */
+    margin-top: 10px;
+}
+
+.log-entry .entry-text strong {
+    color: var(--terminal-yellow);
+    font-weight: bold;
+}
+
+.log-entry .entry-text em {
+    color: var(--terminal-red);
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.log-footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.log-footer a {
+    color: var(--terminal-green);
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid var(--terminal-green);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.log-footer a:hover {
+    background: var(--terminal-green);
+    color: var(--terminal-bg);
+}
+
+/* Адаптация */
+@media (max-width: 600px) {
+    .log-container {
+        padding: 20px;
+    }
+    .log-header h1 {
+        font-size: 1.8rem;
+    }
+}

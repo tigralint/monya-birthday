@@ -7,8 +7,13 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lightbox.css">
-</head>
+    
+    <link rel="stylesheet" href="quiz_style.css">
+    </head>
 <body>
+
+    <audio src="../audio/level1_hum.mp3" autoplay loop volume="0.4"></audio>
+
     <div class="terminal-container">
         
         <header class="terminal-header">
@@ -34,7 +39,9 @@
                         <li><a href="#dossier-004" class="nav-link" data-target="#dossier-004">[ДОСЬЕ-004: КЕЙС-ФАЙЛЫ (ВАЖНО)]</a></li>
                         <li><a href="#dossier-005" class="nav-link" data-target="#dossier-005">[ДОСЬЕ-005: ЛИТЕРАТУРНЫЙ АРХИВ]</a></li>
                         <li><a href="#dossier-006" class="nav-link" data-target="#dossier-006">[АРХИВ НАБЛЮДЕНИЙ (ВИЗУАЛЬНЫЕ ДАННЫЕ)]</a></li>
-                    </ul>
+                        
+                        <li><a href="#dossier-007" class="nav-link" data-target="#dossier-007">[ДОСЬЕ-007: ДИАГНОСТИКА СИСТЕМЫ]</a></li>
+                        </ul>
                 </nav>
             </aside>
 
@@ -138,6 +145,10 @@
 
                         <h3>ФЕНОМЕН: "Феномен Тиграна" (ФТ)</h3>
                         <p>АННОТАЦИЯ: "...анализ «Феномена Тиграна» (ФТ) – уникального и стабильно воспроизводящегося паттерна межличностного взаимодействия, характеризующегося перманентным недостижением Monius Plena Satisfactio... со стороны специфического субъекта («Тиграна»), несмотря на его неизменно искренние и добросовестные попытки угодить «Моне». ...Это так называемый «парадокс искреннего промаха»."</p>
+                        
+                        <div class="warning-box">
+                            <p>ПРИМЕЧАНИЕ ИССЛЕДОВАТЕЛЯ: Я... я больше не могу вести "объективные" записи. Этот "парадокс" - мой кошмар. Я начал вести личный журнал. <a href="tigran_log.html" class="secret-link-level2">[ЗАГРУЗИТЬ TIGRAN.LOG]</a></p>
+                        </div>
 
                         <h3>ТЕОРИЯ: "Красная Моня" (Марксизм-Монианизм)</h3>
                         <p>АННОТАЦИЯ: "...синтез... доктрины Ius Monius и... марксизма. Глубочайшие... переживания неудовлетворенности... «Мони»... являются... отражением объективных классовых противоречий и системного отчуждения. ...Формулируется... теория — марксизм-монианизм, — которая рассматривает всю историю человечества как историю борьбы за освобождение не только труда, но и сатисфакции.</p>
@@ -261,11 +272,42 @@
                     </div>
                 </article>
 
-            </main>
+                <article id="dossier-007" class="content-panel">
+                    <h2>[ДОСЬЕ-007: ДИАГНОСТИКА СИСТЕМЫ]</h2>
+                    <p class="file-path">ПУТЬ: /root/ivmi/diag/containment_check.exe</p>
+                    
+                    <div class="diagnostic-terminal">
+                        
+                        <div id="quiz-intro">
+                            <h3>ТЕСТ НА ВЕРИФИКАЦИЮ ИССЛЕДОВАТЕЛЯ</h3>
+                            <p>ВНИМАНИЕ: Обнаружена аномальная активность в Досье-001 ("Белкарот"). Система Сдерживания требует немедленной верификации вашего уровня допуска.</p>
+                            <p>Вы должны подтвердить знание ключевых Протоколов Сдерживания (Досье 001-004). Ошибка недопустима и приведет к сбросу калибровки.</p>
+                            <button id="start-quiz-button" class="quiz-button">НАЧАТЬ ВЕРИФИКАЦИЮ</button>
+                        </div>
+
+                        <div id="quiz-container" style="display: none;">
+                            <p id="quiz-question">Загрузка вопроса...</p>
+                            <div id="quiz-options">
+                                </div>
+                        </div>
+
+                        <div id="quiz-result" style="display: none;">
+                            <h3>ВЕРИФИКАЦИЯ ПРОЙДЕНА. СИСТЕМА СТАБИЛЬНА.</h3>
+                            <p>Вы подтвердили знание Протоколов. Зафиксирован Ключ Сдерживания для Протокола "Белкарот":</p>
+                            <div class="password-display">1488</div>
+                            <p>ЗАПОМНИТЕ ЭТОТ КОД. Он потребуется в случае полного нарушения Протокола Сдерживания.</p>
+                            <button id="restart-quiz-button" class="quiz-button" onclick="document.getElementById('start-quiz-button').click()">[ПРОЙТИ ПОВТОРНО]</button>
+                        </div>
+
+                    </div>
+                </article>
+                </main>
         </div>
     </div>
     
     <script src="ivmi.js" defer></script>
     <script src="lightbox.js" defer></script>
-</body>
+
+    <script src="quiz.js" defer></script>
+    </body>
 </html>
