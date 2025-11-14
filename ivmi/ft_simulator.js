@@ -98,6 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function winGame() {
         gameScreen.classList.add('hidden');
         winScreen.classList.remove('hidden');
+
+        // --- НОВЫЙ КОД (Этап 4): Сохраняем "ключ" о победе ---
+        localStorage.setItem('ft_sim_complete', 'true');
     }
 
     // --- ЗАПУСК ---

@@ -142,6 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resultScreen.classList.remove('hidden');
         resultTitle.textContent = "СИМУЛЯЦИЯ УСПЕШНА";
         resultText.textContent = `Plena Satisfactio: ${satisfaction}%. Вы выдержали годичный цикл. Вы обладаете базовыми навыками "Садовника" и "Монианской Эмпатии".`;
+        
+        // --- НОВЫЙ КОД (Этап 4): Сохраняем "ключ" о победе ---
+        localStorage.setItem('mch_sim_complete', 'true');
     }
 
     function loseGame() {

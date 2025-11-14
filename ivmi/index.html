@@ -12,7 +12,6 @@
     <script>
         if (localStorage.getItem('gorlovka_complete') !== 'true') {
             alert('ДОСТУП ЗАПРЕЩЕН.\n\nТРЕБУЕТСЯ ВЕРИФИКАЦИЯ "IUS GORICARLIANUM".\n\nПЕРЕНАПРАВЛЕНИЕ В СЕКТОР 0.5...');
-            // Ищем правильный путь к Горловке (на один уровень выше и в папку)
             window.location.href = '../gorlovka/index.html';
         }
     </script>
@@ -275,7 +274,7 @@
                     <p class="file-path">ПУТЬ: /root/ivmi/visual_data/monitoring</p>
                     
                     <div class="file-content">
-                        <p>ПРИМЕЧАНИЕ: Визуальные фиксации состояний Объекта-1488. (Здесь должны быть твои фото. Пути ведут из корня: `../images/photo.jpg`)</p>
+                        <p>ПРИМЕЧАНИЕ: Визуальные фиксации состояний Объекта-1488.</p>
 
                         <div class="gallery-grid-terminal">
                             <a href="../images/photo1.jpg" data-lightbox="gallery-ivmi">
@@ -360,8 +359,9 @@
     
     <script src="../shared/js/typewriter.js" defer></script>
     <script src="ivmi.js" defer></script>
-    <script src="lightbox.js" defer></script>
+    <script src="../shared/js/lightbox.js" defer></script>
     <script src="quiz.js" defer></script>
 
+    <script src="../shared/js/cheat.js" defer></script>
 </body>
 </html>

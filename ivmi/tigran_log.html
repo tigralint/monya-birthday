@@ -7,10 +7,10 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="log_style.css">
-</head>
-<body>
 
     <audio src="../audio/level1_hum.mp3" autoplay loop volume="0.4"></audio>
+</head>
+<body>
 
     <div class="log-container">
         <header class="log-header">
@@ -53,7 +53,7 @@
                 </p>
             </article>
             
-            <article class="log-entry">
+            <article class="log-entry" id="log-entry-ft-link" style="display: none;">
                 <p class="date">[ДАТА: 11.11.2025]</p>
                 <p class="entry-text">
                     Я проанализировал свои ошибки. Дело не в подарках. Дело в <strong>словах</strong>. "Я не понимаю". "Это юмор". "Не ной". Я сам провоцирую сбои. Я должен научиться... говорить. Я должен запустить диагностический симулятор диалога.
@@ -62,12 +62,49 @@
                     <a href="ft_simulator.html" class="secret-link-level2" style="font-size: 1.1rem;">[ЗАПУСТИТЬ TIGRAN-DIALOGUE-SIM v2.0]</a>
                 </div>
             </article>
-            </main>
+
+            <article class="log-entry" id="log-entry-memorandum-link" style="display: none;">
+                <p class="date">[ДАТА: 12.11.2025]</p>
+                <p class="entry-text">
+                    Я... я сделал это. Я прошел симулятор диалога. Я... кажется, понял. "Здоровая Речь". Вот оно.
+                </p>
+                <p class="entry-text">
+                    Я составил <strong>"Меморандум о Примирении"</strong>. Это... первый шаг. Надеюсь, он сработает.
+                </p>
+                <div class="warning-box" style="text-align: center; padding: 10px;">
+                    <a href="memorandum.html" class="secret-link-level2" style="font-size: 1.1rem; color: #39FF14;">[ЗАГРУЗИТЬ МЕМОРАНДУМ]</a>
+                </div>
+            </article>
+        </main>
 
         <footer class="log-footer">
             <a href="index.html">[ВЕРНУТЬСЯ В АРХИВ ИВМИ]</a>
         </footer>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // 1. Проверяем, пройден ли Симулятор МСЧ
+                if (localStorage.getItem('mch_sim_complete') === 'true') {
+                    const entryFtLink = document.getElementById('log-entry-ft-link');
+                    if (entryFtLink) {
+                        entryFtLink.style.display = 'block';
+                    }
+                }
+
+                // 2. Проверяем, пройден ли Симулятор Диалога (ФТ)
+                if (localStorage.getItem('ft_sim_complete') === 'true') {
+                    const entryMemorandum = document.getElementById('log-entry-memorandum-link');
+                    if (entryMemorandum) {
+                        entryMemorandum.style.display = 'block';
+                    }
+                }
+            } catch (e) {
+                console.error("Ошибка при проверке 'localStorage' для динамического журнала:", e);
+            }
+        });
+    </script>
+    <script src="../shared/js/cheat.js" defer></script>
 </body>
 </html>

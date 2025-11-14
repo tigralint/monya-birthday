@@ -14,7 +14,6 @@
     <script>
         if (localStorage.getItem('belkarot_complete') !== 'true') {
             alert('СИСТЕМА НЕ СТАБИЛИЗИРОВАНА.\n\nПРОТОКОЛ 777 НЕ МОЖЕТ БЫТЬ ИСПОЛНЕН.\n\nВОЗВРАТ К ПОСЛЕДНЕЙ ТОЧКЕ СДЕРЖИВАНИЯ...');
-            // Ищем правильный путь к Белкароту (на один уровень выше и в папку)
             window.location.href = '../belkarot/index.html';
         } else {
             // Если квест пройден, очищаем "сохранения", чтобы можно было начать заново
@@ -54,5 +53,6 @@
 
     </div>
 
+    <script src="../shared/js/cheat.js" defer></script>
 </body>
 </html>
