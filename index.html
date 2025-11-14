@@ -11,11 +11,40 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lightbox.css">
-</head>
+
+    <style>
+        #audio-permission-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            background: #8B0000; /* Багровый, в твоем стиле */
+            color: #fff;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 2000; /* Поверх всего */
+            transition: all 0.3s ease;
+        }
+        #audio-permission-banner:hover {
+            background: #5a2e2e;
+        }
+        #audio-permission-banner.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+    </head>
 <body>
 
-    <audio src="audio/level0_lofi.mp3" autoplay loop volume="0.3"></audio>
+    <audio id="level0-audio" src="audio/level0_lofi.mp3" loop volume="0.3"></audio>
 
+    <div id="audio-permission-banner">
+        [ Кликните, чтобы включить музыку ]
+    </div>
     <div class="container">
         <header>
             <h1>София, с Днем Рождения!</h1>
@@ -70,11 +99,31 @@
             <p class="secret-link">
                 <a href="loading.html?target=ivmi/index.html">Институт Высших Монианских Исследований (ИВМИ)</a>
             </p>
-        </footer>
+            </footer>
     </div>
 
     <script src="shared/js/lightbox.js" defer></script>
-    
     <script src="shared/js/cheat.js" defer></script>
-</body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const audioButton = document.getElementById('audio-permission-banner');
+            const audio = document.getElementById('level0-audio');
+
+            if (audioButton && audio) {
+                audioButton.addEventListener('click', () => {
+                    // Пытаемся включить звук
+                    audio.play().then(() => {
+                        // Если получилось, прячем кнопку
+                        audioButton.classList.add('hidden');
+                    }).catch(error => {
+                        // Если не получилось (например, браузер все еще блокирует)
+                        console.error("Не удалось запустить аудио:", error);
+                        // Кнопка останется видимой, чтобы пользователь мог попробовать еще раз
+                    });
+                }, { once: true }); // Скрипт сработает только один раз
+            }
+        });
+    </script>
+    </body>
 </html>
