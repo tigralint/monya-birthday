@@ -1,12 +1,26 @@
-// --- НОВЫЙ КОД (Аудио Этап): Помощник и SFX ---
+// *** НОВЫЙ КОД (Фикс Звука Белкарота) ***
+let stingerPlayed = false;
+let horrorAudioStarted = false; // Флаг, чтобы музыка запустилась 1 раз
+
+// Помощник для SFX
 function playAudio(audioEl) {
     if (audioEl) {
         audioEl.currentTime = 0;
         audioEl.play().catch(e => console.error("Ошибка SFX:", e));
     }
 }
-let stingerPlayed = false; // Флаг, чтобы скример сработал 1 раз
-// --- КОНЕЦ НОВОГО КОДА ---
+
+// Помощник для фоновой музыки (она должна запуститься только 1 раз)
+function playHorrorAudio() {
+    if (horrorAudioStarted) return; // Не запускать, если уже играет
+    
+    const horrorAudio = document.getElementById('horror-audio');
+    if (horrorAudio) {
+        horrorAudio.play().catch(e => console.error("Не удалось запустить хоррор-аудио:", e));
+        horrorAudioStarted = true;
+    }
+}
+// *** КОНЕЦ НОВОГО КОДА ***
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -23,9 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "..."
         );
 
+        // --- ИЗМЕНЕНИЕ (Фикс Звука): Запускаем музыку СРАЗУ ПОСЛЕ клика на prompt ---
+        playHorrorAudio();
+
         if (code === null) {
             alert(
-                "[ОШИБКА! ЗАПРОС НА СТАБИЛИЗАЦИЮ ОТКЛОНЕН!]\n\n" +
+                "[ОШИКА! ЗАПРОС НА СТАБИЛИЗАЦИЮ ОТКЛОНЕН!]\n\n" +
                 "Отказ от ввода протокола недопустим. Система впадает в неконтролируемый резонанс...\n\n" +
                 "ПОВТОРНЫЙ ЗАПРОС ПРОТОКОЛА СДЕРЖИВАНИЯ."
             );
@@ -38,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             header.innerText = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
             header.dataset.text = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
 
+            // --- ИЗМЕНЕНИЕ (Фикс Звука): Теперь мы должны ОСТАНОВИТЬ музыку, которую включили вручную ---
             const horrorAudio = document.getElementById('horror-audio');
             if (horrorAudio) {
                 horrorAudio.pause();
@@ -47,13 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {
             // ПРОВАЛ! 
-            // --- НОВЫЙ КОД (Аудио Этап): Играем скример при ПЕРВОЙ ошибке ---
             if (!stingerPlayed) {
                 playAudio(stinger);
                 stingerPlayed = true;
             }
-            // --- КОНЕЦ НОВОГО КОДА ---
-
+            
             alert(
                 "[ОШИБКА ДОСТУПА! НЕВЕРНЫЙ ПРОТОКОЛ!]\n\n" +
                 "Аффективный резонанс 'Белкарот' усиливается...\n\n" +
