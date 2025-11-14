@@ -44,6 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 horrorAudio.currentTime = 0;
             }
 
+            // --- НОВЫЙ КОД (ШАГ 3) ---
+            // Сохраняем прогресс, чтобы "открыть" финал (Уровень 3)
+            localStorage.setItem('belkarot_complete', 'true');
+            // --- КОНЕЦ НОВОГО КОДА ---
+
         } else {
             // ПРОВАЛ! Пароль неверный.
             // 4. Показываем ошибку и запускаем квест заново (рекурсия)
@@ -56,7 +61,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. Запускаем квест, как только страница загрузилась.
-    requestQuarantineCode();
+    // --- НОВЫЙ КОД ДЛЯ "ПЕЧАТИ" ---
+    
+    // Асинхронная функция для "печати" по очереди
+    async function typeAllTruths() {
+        // Проверяем, есть ли у нас функция "печати"
+        if (typeof typeText !== 'function') {
+            console.error("Функция typeText не найдена. Не могу 'напечатать' истину.");
+            // Все равно показываем текст, чтобы квест не сломался
+            const truthTexts = document.querySelectorAll('.truth-file .truth-text');
+            truthTexts.forEach(textEl => { textEl.style.visibility = 'visible'; });
+            return;
+        }
 
+        const truthTexts = document.querySelectorAll('.truth-file .truth-text');
+        
+        // Прячем все тексты перед началом
+        truthTexts.forEach(textEl => {
+            // Сохраняем оригинальный HTML (включая <strong>)
+            if (!textEl.dataset.text) {
+                textEl.dataset.text = textEl.innerHTML;
+            }
+            textEl.innerHTML = ''; // Стираем
+            textEl.style.visibility = 'hidden'; // Прячем
+        });
+
+        // "await" заставит код ждать, пока одна строка не "напечатается", 
+        // прежде чем начать "печатать" следующую.
+        for (const textEl of truthTexts) {
+            const originalText = textEl.dataset.text;
+            await typeText(textEl, originalText, 40); // 40ms - cкорость
+            await new Promise(resolve => setTimeout(resolve, 300)); // Пауза 300ms между строками
+        }
+    }
+
+    // Запускаем "квест" с паролем
+    requestQuarantineCode();
+    // И СРАЗУ ЖЕ запускаем "печать" истин
+    typeAllTruths();
+
+    // --- КОНЕЦ НОВОГО КОДА ---
 });

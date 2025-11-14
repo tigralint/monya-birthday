@@ -10,7 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
-</head>
+
+    <script>
+        if (localStorage.getItem('belkarot_complete') !== 'true') {
+            alert('СИСТЕМА НЕ СТАБИЛИЗИРОВАНА.\n\nПРОТОКОЛ 777 НЕ МОЖЕТ БЫТЬ ИСПОЛНЕН.\n\nВОЗВРАТ К ПОСЛЕДНЕЙ ТОЧКЕ СДЕРЖИВАНИЯ...');
+            // Ищем правильный путь к Белкароту (на один уровень выше и в папку)
+            window.location.href = '../belkarot/index.html';
+        } else {
+            // Если квест пройден, очищаем "сохранения", чтобы можно было начать заново
+            localStorage.removeItem('gorlovka_complete');
+            localStorage.removeItem('ivmi_quiz_complete');
+            localStorage.removeItem('belkarot_complete');
+        }
+    </script>
+    </head>
 <body>
 
     <audio src="../audio/level3_piano.mp3" autoplay loop volume="0.3"></audio>

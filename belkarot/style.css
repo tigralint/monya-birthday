@@ -281,3 +281,9 @@ footer {
         grid-template-columns: 1fr; /* 1 колонка на мобильных */
     }
 }
+/* --- Интерактивный глюк при наведении --- */
+.glitch-hover:hover {
+    color: var(--horror-red-bright);
+    /* Запускаем агрессивную анимацию только при наведении */
+    animation: glitch-text-aggressive 0.5s infinite;
+}

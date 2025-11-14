@@ -1,0 +1,49 @@
+/*
+ * СТИЛИ ДЛЯ "ЗАГРУЗОЧНОГО" ЭКРАНА
+ */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+    background-color: #0a0a0a;
+    color: #39FF14; /* Зеленый */
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.loader-container {
+    text-align: center;
+}
+
+#loading-text {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #39FF14;
+    animation: flicker 1.5s infinite;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #1e501e; /* Темно-зеленый */
+    border-top-color: #39FF14; /* Ярко-зеленый */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}

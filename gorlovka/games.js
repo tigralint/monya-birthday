@@ -1,3 +1,17 @@
+// --- НОВАЯ ФУНКЦИЯ "ТРЯСКИ" ---
+function triggerShake() {
+    const container = document.querySelector('.game-container');
+    if (!container) return;
+    
+    // Убираем класс, если он уже есть, чтобы анимация перезапустилась
+    container.classList.remove('screen-shake');
+    // Эта "хитрость" (void) заставляет браузер применить изменения немедленно
+    void container.offsetWidth; 
+    container.classList.add('screen-shake');
+}
+// --- КОНЕЦ НОВОЙ ФУНКЦИИ ---
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- ОБЩИЕ ЭЛЕМЕНТЫ ---
@@ -53,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // НЕПРАВИЛЬНО
                 satisfaction -= 20;
                 donMakMessage.textContent = 'Не тот заказ! (-20)';
+                triggerShake(); // <-- ТРЯСКА
             }
             
             if (satisfaction > 100) satisfaction = 100;
@@ -107,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         game1Active = false;
         clearInterval(gameTimer); // Останавливаем таймер
         donMakMessage.textContent = `${message} Попробуйте снова.`;
+        triggerShake(); // <-- ТРЯСKA
         clearCustomer();
         startDonMakButton.classList.remove('hidden');
     }
@@ -172,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (score < 0) score = 0;
                 pianoScoreDisplay.textContent = score;
                 tile.remove();
+                triggerShake(); // <-- ТРЯСКА
             }
         }, duration * 1000 - 50); // Удаляем за 50мс до конца анимации
 
@@ -213,6 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
         challenge2.classList.add('hidden');
         reward.classList.remove('hidden');
         pianoTrack.innerHTML = ''; // Очищаем поле
+        
+        // --- НОВЫЙ КОД (ШАГ 3) ---
+        // Сохраняем прогресс, чтобы "открыть" следующий уровень
+        localStorage.setItem('gorlovka_complete', 'true');
+        // --- КОНЕЦ НОВОГО КОДА ---
     }
 
 });

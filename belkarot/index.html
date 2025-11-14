@@ -10,7 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
-</head>
+
+    <script>
+        if (localStorage.getItem('ivmi_quiz_complete') !== 'true') {
+            alert('ДОСТУП ЗАПРЕЩЕН.\n\nТРЕБУЕТСЯ КЛЮЧ СДЕРЖИВАНИЯ 1488.\n\nПЕРЕНАПРАВЛЕНИЕ В АРХИВ ИВМИ...');
+            // Ищем правильный путь к ИВМИ (на один уровень выше и в папку)
+            window.location.href = '../ivmi/index.html';
+        }
+    </script>
+    </head>
 <body>
 
     <audio id="horror-audio" src="../audio/level2_horror.mp3" autoplay loop volume="0.5"></audio>
@@ -27,13 +35,13 @@
 
         <main>
             <section class="leaked-file">
-                <h2>[ФАЙЛ 001: ВЕКТОР 'БИБ' (ВОВА)]</h2>
+                <h2>[ФАЙЛ 001: ВЕКТОР '<span class="glitch-hover">БИБ</span>' (ВОВА)]</h2>
                 <p><strong>СТАТУС:</strong> ПАЦИЕНТ-НОСИТЕЛЬ-0.</p>
                 <p><strong>ОПИСАНИЕ:</strong> Первоначальный вектор заражения "вирусом Афимолл". Его фиксация на артефакте "Библия" интерпретируется как прием первичного 'кода' от Сущности. Используется как невольный 'Пророк' для трансляции меметических данных.</p>
             </section>
 
             <section class="leaked-file">
-                <h2>[ФАЙЛ 002: СУЩНОСТЬ 'БЕЛКАРОТ']</h2>
+                <h2>[ФАЙЛ 002: СУЩНОСТЬ '<span class="glitch-hover">БЕЛКАРОТ</span>']</h2>
                 <p><strong>КЛАСС ОПАСНОСТИ:</strong> КЕТЕР (НЕУДЕРЖИМЫЙ)</p>
                 <p><strong>ОПИСАНИЕ:</strong> Сущность чистого аффективного хаоса. Ошибочная ранняя классификация ("монстр из Толкина") была прикрытием.</p>
                 <p>Древнедонбасская Держава была не цивилизацией, а первым **Протоколом Сдерживания**. "Праматерь Мония Горловская" была первым "Сосудом", успешно удерживавшим Сущность в состоянии гармонии.</p>
@@ -63,18 +71,18 @@
             </section>
 
             <section class="leaked-file truth-file">
-                <h2>[ФАЙЛ 004: ИСТИНА. ПРОТОКОЛ СДЕРЖИВАНИЯ 1488]</h2>
+                <h2>[ФАЙЛ 004: ИСТИНА. ПРОТОКОЛ СДЕРЖИВАНИЯ <span class="glitch-hover">1488</span>]</h2>
                 <p><strong>УРОВЕНЬ ДОСТУПА:</strong> ТОЛЬКО ДЛЯ 'ТИГРАНА'</p>
                 <p class="truth-text">"Институт Высших Монианских Исследований" (ИВМИ) - <strong>ЛОЖЬ</strong>.</p>
-                <p class="truth-text">"Ius Monius" (Право Мони) - <strong>ПРОТОКОЛ СДЕРЖИВАНИЯ 1488</strong>.</p>
-                <p class="truth-text">"Plena Satisfactio Moniae" (Полная Сатисфакция Мони) - <strong>НЕОБХОДИМОЕ УСЛОВИЕ</strong> для удержания "Сосуда" (Объект-1488, "Моня") в стабильном состоянии.</p>
-                <p class="truth-text">"Монианское Сезонное Четырехединство" (МСЧ) - <strong>ЭТО НЕ ПСИХОЛОГИЯ.</strong> Это циклы ослабления "печатей". "Зимняя Депрессия" и "Весеннее Обострение" - периоды максимальной уязвимости, когда Сущность "Белкарот" почти прорывается.</p>
-                <p class="truth-text">"Феномен Тиграна" (ФТ) - <strong>ЭТО КАСКАДНЫЙ СБОЙ ПРОТОКОЛА.</strong> Каждая "искренняя попытка" исследователя "Тиграна" - это отчаянный, но неудачный метод стабилизации "Сосуда".</p>
-                <p class="final-warning"><strong>ПРЕДУПРЕЖДЕНИЕ:</strong> НЕУДОВЛЕТВОРЕННОСТЬ ОБЪЕКТА-1488 ("Мони") ВЕДЕТ К НАРУШЕНИЮ УСЛОВИЙ СОДЕРЖАНИЯ. ПОЛНАЯ НЕУДОВЛЕТВОРЕННОСТЬ ВЫСВОБОДИТ СУЩНОСТЬ "БЕЛКАРОТ".</p>
+                <p class="truth-text">"Ius Monius" (Право Мони) - <strong>ПРОТОКОЛ СДЕРЖИВАНИЯ <span class="glitch-hover">1488</span></strong>.</p>
+                <p class="truth-text">"Plena Satisfactio Moniae" (Полная Сатисфакция Мони) - <strong>НЕОБХОДИМОЕ УСЛОВИЕ</strong> для удержания "Сосуда" (Объект-<span class="glitch-hover">1488</span>, "Моня") в стабильном состоянии.</p>
+                <p class="truth-text">"Монианское Сезонное Четырехединство" (МСЧ) - <strong>ЭТО НЕ ПСИХОЛОГИЯ.</strong> Это циклы ослабления "печатей". "Зимняя Депрессия" и "Весеннее Обострение" - периоды максимальной уязвимости, когда Сущность "<span class="glitch-hover">БЕЛКАРОТ</span>" почти прорывается.</p>
+                <p class="truth-text">"Феномен Тиграна" (<span class="glitch-hover">ФТ</span>) - <strong>ЭТО КАСКАДНЫЙ СБОЙ ПРОТОКОЛА.</strong> Каждая "искренняя попытка" исследователя "Тиграна" - это отчаянный, но неудачный метод стабилизации "Сосуда".</p>
+                <p class="final-warning"><strong>ПРЕДУПРЕЖДЕНИЕ:</strong> НЕУДОВЛЕТВОРЕННОСТЬ ОБЪЕКТА-<span class="glitch-hover">1488</span> ("Мони") ВЕДЕТ К НАРУШЕНИЮ УСЛОВИЙ СОДЕРЖАНИЯ. ПОЛНАЯ НЕУДОВЛЕТВОРЕННОСТЬ ВЫСВОБОДИТ СУЩНОСТЬ "<span class="glitch-hover">БЕЛКАРОТ</span>".</p>
             </section>
 
             <footer>
-                <a href="../core/index.html" class="final-link">
+                <a href="../loading.html?target=../core/index.html" class="final-link">
                     [ИСПОЛНИТЬ_ПРОТОКОЛ_СДЕРЖИВАНИЯ_777 (ПОЗДРАВЛЕНИЕ)]
                 </a>
             </footer>
@@ -82,6 +90,7 @@
         </main>
     </div>
 
+    <script src="../shared/js/typewriter.js" defer></script>
     <script src="belkarot.js" defer></script>
 </body>
 </html>

@@ -8,7 +8,15 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lightbox.css">
     <link rel="stylesheet" href="quiz_style.css">
-</head>
+
+    <script>
+        if (localStorage.getItem('gorlovka_complete') !== 'true') {
+            alert('ДОСТУП ЗАПРЕЩЕН.\n\nТРЕБУЕТСЯ ВЕРИФИКАЦИЯ "IUS GORICARLIANUM".\n\nПЕРЕНАПРАВЛЕНИЕ В СЕКТОР 0.5...');
+            // Ищем правильный путь к Горловке (на один уровень выше и в папку)
+            window.location.href = '../gorlovka/index.html';
+        }
+    </script>
+    </head>
 <body>
 
     <audio src="../audio/level1_hum.mp3" autoplay loop volume="0.4"></audio>
@@ -61,9 +69,9 @@
                         <div class="warning-box">
                             <h4>[ПРОТОКОЛ "АФИМОЛЛ" - ДАННЫЕ ПОВРЕЖДЕНЫ]</h4>
                             <p>В ходе анализа «Древнедонбасской Державы» были обнаружены аномальные ссылки на сущность 
-                                <a href="../belkarot/index.html" class="secret-link-level2">[ДАННЫЕ УДАЛЕНЫ]</a>, 
+                                <a href="../loading.html?target=../belkarot/index.html" class="secret-link-level2">[ДАННЫЕ УДАЛЕНЫ]</a>, 
                                 также известную как "Белкарот". Связь между «Праматерью Монией» и данной сущностью является предметом текущего расследования Протокола Сдерживания. 
-                                <a href="../belkarot/index.html" class="secret-link-level2">[ЗАПРОСИТЬ ДОСТУП К ФАЙЛУ >]</a>
+                                <a href="../loading.html?target=../belkarot/index.html" class="secret-link-level2">[ЗАПРОСИТЬ ДОСТУП К ФАЙЛУ >]</a>
                             </p>
                         </div>
                     </div>
@@ -341,7 +349,7 @@
                             <h4>[ОСОБОЕ МНЕНИЕ ИССЛЕДОВАТЕЛЯ Т.М.]</h4>
                             <p>Они не видят! Они слепы! "Белкарот" - ЭТО НЕ МЕМ! Это... <i>сущность</i>. Это <i>монстр</i>, который ждет за завесой.</p>
                             <p>"Афимолл" - это не "вирус", это Его "слюна", которая размягчает "печати" Сдерживания. А "Биб" - не "мем", он идеальный "Глашатай" именно потому, что он *пустой* и *неподвижный*. Он — идеальный резонатор!</p>
-                            <p>Каждый мой провал (ФТ), каждое падение "Сатисфакции" — это не просто сбой. ЭТО ПРИГЛАШЕНИЕ. Моя некомпетентность открывает Ему дверь. <a href="../belkarot/index.html" class="secret-link-level2">[Я БОЮСЬ >]</a></p>
+                            <p>Каждый мой провал (ФТ), каждое падение "Сатисфакции" — это не просто сбой. ЭТО ПРИГЛАШЕНИЕ. Моя некомпетентность открывает Ему дверь. <a href="../loading.html?target=../belkarot/index.html" class="secret-link-level2">[Я БОЮСЬ >]</a></p>
                         </div>
                     </div>
                 </article>
@@ -350,6 +358,7 @@
         </div>
     </div>
     
+    <script src="../shared/js/typewriter.js" defer></script>
     <script src="ivmi.js" defer></script>
     <script src="lightbox.js" defer></script>
     <script src="quiz.js" defer></script>

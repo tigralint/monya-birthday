@@ -129,6 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!quizBlock || !resultBlock) return;
         quizBlock.style.display = 'none'; // Скрываем квест
         resultBlock.style.display = 'block'; // Показываем пароль
+
+        // --- НОВЫЙ КОД (ШАГ 3) ---
+        // Сохраняем прогресс, чтобы "открыть" следующий уровень (Белкарот)
+        localStorage.setItem('ivmi_quiz_complete', 'true');
+        // --- КОНЕЦ НОВОГО КОДА ---
     }
 
 });

@@ -220,3 +220,16 @@ header h1 {
     50% { box-shadow: 0 0 30px #ffff00; }
     100% { box-shadow: 0 0 10px #ffff00; }
 }
+/* --- Анимация "Тряска экрана" --- */
+.screen-shake {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
