@@ -24,12 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.classList.add('hidden');
             wrapper.classList.add('unlocked');
 
-            // Специальный фикс для "Белкарота":
-            // Если на странице есть функция belkarot_prompt(),
-            // запускаем ее СРАЗУ ПОСЛЕ клика.
+            // *** ИСПРАВЛЕНИЕ ЗДЕСЬ (Фикс "Белкарота") ***
+            // Мы должны дать музыке 100 мс, чтобы ОНА УСПЕЛА ЗАИГРАТЬ,
+            // ПРЕЖДЕ ЧЕМ 'prompt()' "заморозит" страницу.
             if (typeof belkarot_prompt === 'function') {
-                belkarot_prompt();
+                setTimeout(belkarot_prompt, 100); // 100ms задержка
             }
+            // *** КОНЕЦ ИСПРАВЛЕНИЯ ***
 
         }).catch(error => {
             // Если браузер все еще блокирует (очень редкий случай)
