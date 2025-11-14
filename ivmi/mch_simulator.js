@@ -1,6 +1,17 @@
+// --- НОВЫЙ КОД (Аудио Этап): Помощник и SFX ---
+function playAudio(audioEl) {
+    if (audioEl) {
+        audioEl.currentTime = 0;
+        audioEl.play().catch(e => console.error("Ошибка SFX:", e));
+    }
+}
+const sfxSuccess = document.getElementById('audio-sfx-success');
+const sfxFail = document.getElementById('audio-sfx-fail');
+// --- КОНЕЦ НОВОГО КОДА ---
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- БАЗА ДАННЫХ ИГРЫ (Основано на moryapsychology.docx и Мония.docx) ---
+    // --- БАЗА ДАННЫХ ИГРЫ ---
     const gameData = [
         {
             season: "СЕЗОН 1: ЛЕТО",
@@ -100,20 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedButton = e.target;
         const isCorrect = selectedButton.dataset.correct === 'true';
 
-        // Блокируем кнопки
         optionButtons.forEach(button => button.disabled = true);
-        
         const season = gameData[currentSeason];
 
         if (isCorrect) {
             satisfaction += 25;
             feedbackMessage.textContent = `> СИСТЕМА: ${season.feedback_correct}`;
             monyaAvatar.classList.remove('damage');
+            playAudio(sfxSuccess); // <-- SFX
         } else {
             satisfaction -= 30;
             feedbackMessage.textContent = `> СИСТЕМА: ${season.feedback_incorrect}`;
             monyaAvatar.classList.add('damage');
-            // Убираем класс анимации
+            playAudio(sfxFail); // <-- SFX
             setTimeout(() => monyaAvatar.classList.remove('damage'), 300);
         }
 
@@ -142,8 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultScreen.classList.remove('hidden');
         resultTitle.textContent = "СИМУЛЯЦИЯ УСПЕШНА";
         resultText.textContent = `Plena Satisfactio: ${satisfaction}%. Вы выдержали годичный цикл. Вы обладаете базовыми навыками "Садовника" и "Монианской Эмпатии".`;
-        
-        // --- НОВЫЙ КОД (Этап 4): Сохраняем "ключ" о победе ---
+        playAudio(sfxSuccess); // <-- SFX
         localStorage.setItem('mch_sim_complete', 'true');
     }
 
@@ -152,9 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resultScreen.classList.remove('hidden');
         resultTitle.textContent = "СИМУЛЯЦИЯ ПРОВАЛЕНА";
         resultText.textContent = `Plena Satisfactio: ${satisfaction}%. Достигнуто "Монино Страдание" (Нарушение Статьи 3 ЕКМПФС). Рекомендуется повторное изучение "Феномена Тиграна".`;
+        playAudio(sfxFail); // <-- SFX
     }
 
-    // --- ЗАПУСК ---
     optionButtons.forEach(button => button.addEventListener('click', selectAnswer));
     startGame();
 })

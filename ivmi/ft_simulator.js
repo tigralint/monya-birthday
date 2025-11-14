@@ -1,3 +1,14 @@
+// --- НОВЫЙ КОД (Аудио Этап): Помощник и SFX ---
+function playAudio(audioEl) {
+    if (audioEl) {
+        audioEl.currentTime = 0;
+        audioEl.play().catch(e => console.error("Ошибка SFX:", e));
+    }
+}
+const sfxSuccess = document.getElementById('audio-sfx-success');
+const sfxFail = document.getElementById('audio-sfx-fail');
+// --- КОНЕЦ НОВОГО КОДА ---
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- ЭЛЕМЕНТЫ DOM ---
@@ -10,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackTitle = document.getElementById('feedback-title');
     const feedbackMonyaResponse = document.getElementById('feedback-monya-response');
 
-    // --- БАЗА ДАННЫХ ДИАЛОГА (из Мония.docx и lingvomonya.docx) ---
+    // --- БАЗА ДАННЫХ ДИАЛОГА ---
     const scenario = {
         monyaSpeech: "Ты... ты опять все сделал не так. Я не это имела в виду.",
         options: [
@@ -69,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedButton = e.target;
         const isCorrect = selectedButton.dataset.correct === 'true';
 
-        // Блокируем кнопки
         Array.from(optionsContainer.children).forEach(button => {
             button.disabled = true;
             if (button !== selectedButton) {
@@ -77,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Показываем обратную связь
         feedbackWindow.classList.remove('hidden');
         feedbackTitle.textContent = selectedButton.dataset.feedback;
         feedbackMonyaResponse.textContent = `МОНЯ: ${selectedButton.dataset.response}`;
@@ -85,12 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCorrect) {
             feedbackWindow.classList.add('correct');
             feedbackWindow.classList.remove('error');
-            // Переход к победе
+            playAudio(sfxSuccess); // <-- SFX
             setTimeout(winGame, 3000);
         } else {
             feedbackWindow.classList.add('error');
             feedbackWindow.classList.remove('correct');
-            // Перезапуск
+            playAudio(sfxFail); // <-- SFX
             setTimeout(loadScenario, 4000);
         }
     }
@@ -98,11 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function winGame() {
         gameScreen.classList.add('hidden');
         winScreen.classList.remove('hidden');
-
-        // --- НОВЫЙ КОД (Этап 4): Сохраняем "ключ" о победе ---
         localStorage.setItem('ft_sim_complete', 'true');
     }
 
-    // --- ЗАПУСК ---
     loadScenario();
 });

@@ -1,3 +1,14 @@
+// --- НОВЫЙ КОД (Аудио Этап): Помощник и SFX ---
+function playAudio(audioEl) {
+    if (audioEl) {
+        audioEl.currentTime = 0;
+        audioEl.play().catch(e => console.error("Ошибка SFX:", e));
+    }
+}
+const sfxSuccess = document.getElementById('audio-sfx-success');
+const sfxFail = document.getElementById('audio-sfx-fail');
+// --- КОНЕЦ НОВОГО КОДА ---
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- ЭЛЕМЕНТЫ DOM ---
     const questContainer = document.getElementById('quest-container');
@@ -14,17 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
     pedalOptions.forEach(option => {
         option.addEventListener('click', (e) => {
             const choice = e.currentTarget.dataset.choice;
-
-            // Блокируем выбор
             pedalOptions.forEach(opt => opt.style.pointerEvents = 'none');
 
             if (choice === 'jarjar') {
                 // ПРАВИЛЬНЫЙ ВЫБОР
+                playAudio(sfxSuccess); // <-- SFX
                 quizFeedback.textContent = "> ВЕРНО. ОБЪЕКТ-03 ИДЕНТИФИЦИРОВАН КАК УГРОЗА. ДЕШИФРОВКА КЛЮЧЕВОГО СЛОВА... 'С-И-Т-Х'.";
                 loginPrompt.classList.remove('hidden');
                 passwordInput.focus();
             } else {
                 // НЕПРАВИЛЬНЫЙ ВЫБОР
+                playAudio(sfxFail); // <-- SFX
                 quizFeedback.textContent = "> ОШИБКА АНАЛИЗА. ВЫ НЕ ГОТОВЫ. СИСТЕМА БЛОКИРУЕТ ДОСТУП.";
                 loginPrompt.classList.remove('hidden');
                 loginPrompt.innerHTML = `<p class="system-message">${quizFeedback.textContent}</p><a href="index.html" style="color: #ffb000;">[ВЕРНУТЬСЯ В АРХИВ]</a>`;
@@ -44,9 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const input = passwordInput.value.trim().toUpperCase();
         if (input === correctPassword) {
             // УСПЕХ
+            playAudio(sfxSuccess); // <-- SFX
             grantAccess();
         } else {
             // ПРОВАЛ
+            playAudio(sfxFail); // <-- SFX
             passwordInput.value = '';
             passwordInput.focus();
             alert("НЕВЕРНЫЙ КОД ДОСТУПА. ПОПЫТКА ЗАРЕГИСТРИРОВАНА.");
@@ -57,13 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function grantAccess() {
         questContainer.classList.add('hidden');
         
-        // Загружаем контент отчета
         fetch('jarjar_report.html')
             .then(response => response.text())
             .then(html => {
                 reportContainer.innerHTML = html;
                 reportContainer.classList.remove('hidden');
-                // Прокручиваем к началу отчета
                 window.scrollTo(0, 0);
             })
             .catch(err => {

@@ -1,18 +1,42 @@
-// --- НОВАЯ ФУНКЦИЯ "ТРЯСКИ" ---
+// --- НОВЫЙ КОД (Аудио Этап): Центральный Аудио Менеджер ---
+
+// 1. Помощники для управления звуком
+function playAudio(audioEl, loop = false) {
+    if (audioEl) {
+        audioEl.currentTime = 0;
+        audioEl.loop = loop;
+        audioEl.play().catch(e => console.error("Ошибка воспроизведения аудио:", e));
+    }
+}
+function stopAudio(audioEl) {
+    if (audioEl) {
+        audioEl.pause();
+        audioEl.currentTime = 0;
+    }
+}
+
+// 2. Функция "Тряски"
 function triggerShake() {
     const container = document.querySelector('.game-container');
     if (!container) return;
-    
-    // Убираем класс, если он уже есть, чтобы анимация перезапустилась
     container.classList.remove('screen-shake');
-    // Эта "хитрость" (void) заставляет браузер применить изменения немедленно
     void container.offsetWidth; 
     container.classList.add('screen-shake');
 }
-// --- КОНЕЦ НОВОЙ ФУНКЦИИ ---
-
+// --- КОНЕЦ НОВОГО КОДА ---
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- НОВЫЙ КОД (Аудио Этап): Получаем все аудио-элементы ---
+    const audioBg = document.getElementById('audio-bg');
+    const audioDonMak = document.getElementById('audio-donmak');
+    const audioPiano = document.getElementById('audio-piano');
+    const sfxSuccess = document.getElementById('audio-sfx-success');
+    const sfxFail = document.getElementById('audio-sfx-fail');
+
+    // 3. Запускаем фоновую музыку Горловки
+    playAudio(audioBg, true);
+    // --- КОНЕЦ НОВОГО КОДА ---
 
     // --- ОБЩИЕ ЭЛЕМЕНТЫ ---
     const challenge1 = document.getElementById('challenge-1');
@@ -26,17 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const customerArea = document.getElementById('customer-area');
     const donMakMessage = document.getElementById('don-mak-message');
     const foodButtons = document.querySelectorAll('.food-button');
-    const timerDisplay = document.getElementById('don-mak-timer'); // Элемент таймера
+    const timerDisplay = document.getElementById('don-mak-timer'); 
 
     let satisfaction = 50;
     let customersServed = 0;
     const customersToWin = 10;
     let currentCustomer = null;
     let game1Active = false;
-    let gameTimer; // Переменная для интервала таймера
-    let timeLeft = 60; // 60 секунд
+    let gameTimer; 
+    let timeLeft = 60; 
 
     startDonMakButton.addEventListener('click', () => {
+        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку ---
+        stopAudio(audioBg);
+        playAudio(audioDonMak, true);
+        // --- КОНЕЦ НОВОГО КОДА ---
+
         donMakGameContainer.classList.remove('hidden');
         startDonMakButton.classList.add('hidden');
         game1Active = true;
@@ -47,9 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSatisfactionBar();
         donMakMessage.textContent = 'Приготовьтесь...';
         
-        // Запускаем таймер
         gameTimer = setInterval(updateTimer, 1000);
-        
         setTimeout(spawnCustomer, 2000);
     });
 
@@ -63,11 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 satisfaction += 15;
                 customersServed++;
                 donMakMessage.textContent = `Клиент доволен! (+15) Подано: ${customersServed}/${customersToWin}`;
+                playAudio(sfxSuccess); // <-- SFX
             } else {
                 // НЕПРАВИЛЬНО
                 satisfaction -= 20;
                 donMakMessage.textContent = 'Не тот заказ! (-20)';
-                triggerShake(); // <-- ТРЯСКА
+                triggerShake(); 
+                playAudio(sfxFail); // <-- SFX
             }
             
             if (satisfaction > 100) satisfaction = 100;
@@ -79,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (customersServed >= customersToWin) {
                 winDonMak();
             } else {
-                setTimeout(spawnCustomer, Math.random() * 1000 + 1000); // Следующий клиент (чуть быстрее)
+                setTimeout(spawnCustomer, Math.random() * 1000 + 1000); 
             }
         });
     });
@@ -120,22 +149,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loseDonMak(message) {
         game1Active = false;
-        clearInterval(gameTimer); // Останавливаем таймер
+        clearInterval(gameTimer); 
         donMakMessage.textContent = `${message} Попробуйте снова.`;
-        triggerShake(); // <-- ТРЯСKA
+        triggerShake(); 
         clearCustomer();
         startDonMakButton.classList.remove('hidden');
+
+        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку обратно ---
+        stopAudio(audioDonMak);
+        playAudio(audioBg, true);
+        // --- КОНЕЦ НОВОГО КОДА ---
     }
 
     function winDonMak() {
         game1Active = false;
-        clearInterval(gameTimer); // Останавливаем таймер
+        clearInterval(gameTimer); 
         donMakGameContainer.classList.add('hidden');
         challenge1.classList.add('hidden'); 
         challenge2.classList.remove('hidden'); 
+
+        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку обратно ---
+        stopAudio(audioDonMak);
+        playAudio(audioBg, true);
+        playAudio(sfxSuccess);
+        // --- КОНЕЦ НОВОГО КОДА ---
     }
 
-    // --- ЛОГИКА ИГРЫ 2: "Прото-Плитки-Фортепіано" (УЛУЧШЕНА) ---
+    // --- ЛОГИКА ИГРЫ 2: "Прото-Плитки-Фортепіано" ---
     const startPianoButton = document.getElementById('start-piano');
     const pianoGameContainer = document.getElementById('piano-game');
     const pianoTrack = document.getElementById('piano-track');
@@ -148,13 +188,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let tileSpawnTimeout;
 
     startPianoButton.addEventListener('click', () => {
+        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку ---
+        stopAudio(audioBg);
+        playAudio(audioPiano, true);
+        // --- КОНЕЦ НОВОГО КОДА ---
+
         pianoGameContainer.classList.remove('hidden');
         startPianoButton.classList.add('hidden');
         game2Active = true;
         score = 0;
         pianoScoreDisplay.textContent = score;
         pianoMessage.textContent = 'Играйте!';
-        spawnTile(); // Запускаем первый спавн
+        spawnTile(); 
     });
 
     function spawnTile() {
@@ -169,31 +214,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const randomPosIndex = Math.floor(Math.random() * (positions + 1));
         tile.style.left = `${randomPosIndex * tileWidth}px`;
         
-        // --- УЛУЧШЕНИЕ: Динамическая скорость ---
-        // Скорость падения увеличивается с очками
-        const duration = Math.max(1.2, 3 - score * 0.1); // от 3с до 1.2с
+        const duration = Math.max(1.2, 3 - score * 0.1); 
         tile.style.animation = `drop ${duration}s linear`;
         
-        // --- УЛУЧШЕНИЕ: Надежный клик ---
         tile.addEventListener('click', hitTile);
         
         pianoTrack.appendChild(tile);
 
-        // Проверка на промах (плитка долетела до низа)
+        // Проверка на промах
         setTimeout(() => {
             if (game2Active && tile.parentElement) {
-                // Плитка все еще на поле и не была нажата = промах
                 pianoMessage.textContent = 'Пропуск! -1 очко';
                 score--;
                 if (score < 0) score = 0;
                 pianoScoreDisplay.textContent = score;
                 tile.remove();
-                triggerShake(); // <-- ТРЯСКА
+                triggerShake(); 
+                playAudio(sfxFail); // <-- SFX
             }
-        }, duration * 1000 - 50); // Удаляем за 50мс до конца анимации
+        }, duration * 1000 - 50); 
 
-        // --- УЛУЧШЕНИЕ: Рандомный интервал спавна ---
-        const nextSpawnTime = Math.random() * (1200 - score * 20) + 500; // от ~1.7с до 0.5с
+        const nextSpawnTime = Math.random() * (1200 - score * 20) + 500; 
         tileSpawnTimeout = setTimeout(spawnTile, Math.max(400, nextSpawnTime));
     }
 
@@ -201,21 +242,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!game2Active) return;
         
         const tile = e.target;
-        
-        // Предотвращаем двойное нажатие
         if (tile.classList.contains('hit')) return; 
 
         score++;
         pianoScoreDisplay.textContent = score;
-        tile.classList.add('hit'); // Помечаем как "нажатую"
+        tile.classList.add('hit'); 
+        playAudio(sfxSuccess); // <-- SFX
         
-        // Визуально останавливаем анимацию и "тушим" плитку
         const computedStyle = window.getComputedStyle(tile);
         const top = computedStyle.getPropertyValue("top");
         tile.style.animation = 'none';
         tile.style.top = top;
         
-        // Удаляем через мгновение
         setTimeout(() => tile.remove(), 100);
 
         if (score >= scoreToWin) {
@@ -225,16 +263,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function winPianoTiles() {
         game2Active = false;
-        clearTimeout(tileSpawnTimeout); // Останавливаем спавн
+        clearTimeout(tileSpawnTimeout); 
         pianoGameContainer.classList.add('hidden');
         challenge2.classList.add('hidden');
         reward.classList.remove('hidden');
-        pianoTrack.innerHTML = ''; // Очищаем поле
+        pianoTrack.innerHTML = ''; 
         
-        // --- НОВЫЙ КОД (ШАГ 3) ---
-        // Сохраняем прогресс, чтобы "открыть" следующий уровень
         localStorage.setItem('gorlovka_complete', 'true');
+        
+        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку обратно ---
+        stopAudio(audioPiano);
+        playAudio(audioBg, true);
+        playAudio(sfxSuccess);
         // --- КОНЕЦ НОВОГО КОДА ---
     }
-
 });
