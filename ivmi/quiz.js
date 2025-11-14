@@ -1,15 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- НОВЫЙ КОД (Аудио Этап): Помощник и SFX ---
-    function playAudio(audioEl) {
-        if (audioEl) {
-            audioEl.currentTime = 0;
-            audioEl.play().catch(e => console.error("Ошибка SFX:", e));
-        }
-    }
+    // --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
     const sfxSuccess = document.getElementById('audio-sfx-success');
     const sfxFail = document.getElementById('audio-sfx-fail');
-    // --- КОНЕЦ НОВОГО КОДА ---
+    // --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
     // --- БАЗА ДАННЫХ ВОПРОСОВ (ИЗ ЛОРА) ---
     const questions = [
@@ -106,9 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (isCorrect) {
-            // --- НОВЫЙ КОД (Аудио Этап): Звук успеха ---
-            playAudio(sfxSuccess);
-            // --- КОНЕЦ НОВОГО КОДА ---
+            playAudio(sfxSuccess); // <-- SFX
             
             setTimeout(() => {
                 currentQuestionIndex++;
@@ -119,9 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 1000); 
         } else {
-            // --- НОВЫЙ КОД (Аудио Этап): Звук провала ---
-            playAudio(sfxFail);
-            // --- КОНЕЦ НОВОГО КОДА ---
+            playAudio(sfxFail); // <-- SFX
 
             setTimeout(() => {
                 alert("[ОШИБКА ВЕРИФИКАЦИИ] Протокол нарушен. Повторная калибровка...");

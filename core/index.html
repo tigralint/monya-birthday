@@ -11,48 +11,57 @@
     
     <link rel="stylesheet" href="style.css">
 
+    <link rel="stylesheet" href="../shared/gate.css">
+
     <script>
         if (localStorage.getItem('belkarot_complete') !== 'true') {
             alert('СИСТЕМА НЕ СТАБИЛИЗИРОВАНА.\n\nПРОТОКОЛ 777 НЕ МОЖЕТ БЫТЬ ИСПОЛНЕН.\n\nВОЗВРАТ К ПОСЛЕДНЕЙ ТОЧКЕ СДЕРЖИВАНИЯ...');
             window.location.href = '../belkarot/index.html';
         } else {
-            // Если квест пройден, очищаем "сохранения", чтобы можно было начать заново
             localStorage.removeItem('gorlovka_complete');
             localStorage.removeItem('ivmi_quiz_complete');
             localStorage.removeItem('belkarot_complete');
         }
     </script>
-    </head>
+</head>
 <body>
 
-    <audio src="../audio/level3_piano.mp3" autoplay loop volume="0.3"></audio>
+    <audio id="page-audio" src="../audio/level3_piano.mp3" loop volume="0.3"></audio>
 
-    <div class="container">
-        
-        <p class="intro">Протокол 777 исполнен. Загрузка ядра.</p>
-
-        <div class="message">
-            <p>София,</p>
-
-            <p>Ты — наша <span>Праматерь из Древней Горловки</span> и наш самый страшный <span>Белкарот</span>.</p>
-            
-            <p>Ты — наш <span>"Объект-1488"</span> и наш <span>"Осенний Экзистенциальный Кризис"</span>.</p>
-            
-            <p>Ты — гегемон <span>"Монитариата"</span> и единственная причина <span>"Феномена Тиграна" (ФТ)</span>.</p>
-
-            <p>Ты — эпицентр этого безумного, сложного и невероятно веселого мира, который мы построили вокруг тебя.</p>
-            
-            <p>Твоя главная задача сегодня — нарушить <span>Статью 3 "Европейской Конвенции"</span> и не допустить абсолютно никакого "Мониного страдания".</p>
-
-            <p>Мы тебя очень любим.</p>
-        </div>
-
-        <p class="signoff">
-            — Твой вечно "особенный" исследователь, Тигран
-        </p>
-
+    <div id="audio-gate-overlay">
+        <div id="audio-gate-text">[ ИСПОЛНИТЬ ПРОТОКОЛ 777 ]</div>
     </div>
 
-    <script src="../shared/js/cheat.js" defer></script>
+    <div id="content-wrapper">
+
+        <div class="container">
+            
+            <p class="intro">Протокол 777 исполнен. Загрузка ядра.</p>
+
+            <div class="message">
+                <p>София,</p>
+
+                <p>Ты — наша <span>Праматерь из Древней Горловки</span> и наш самый страшный <span>Белкарот</span>.</p>
+                
+                <p>Ты — наш <span>"Объект-1488"</span> и наш <span>"Осенний Экзистенциальный Кризис"</span>.</p>
+                
+                <p>Ты — гегемон <span>"Монитариата"</span> и единственная причина <span>"Феномена Тиграна" (ФТ)</span>.</p>
+
+                <p>Ты — эпицентр этого безумного, сложного и невероятно веселого мира, который мы построили вокруг тебя.</p>
+                
+                <p>Твоя главная задача сегодня — нарушить <span>Статью 3 "Европейской Конвенции"</span> и не допустить абсолютно никакого "Мониного страдания".</p>
+
+                <p>Мы тебя очень любим.</p>
+            </div>
+
+            <p class="signoff">
+                — Твой вечно "особенный" исследователь, Тигран
+            </p>
+
+        </div>
+
+    </div> <script src="../shared/js/cheat.js" defer></script>
+    
+    <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

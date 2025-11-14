@@ -1,0 +1,49 @@
+/* * СТИЛИ ДЛЯ "ЭКРАНА ВХОДА" (АУДИО-ГЕЙТА)
+ * Это скрывает контент до первого клика, чтобы браузер разрешил звук.
+ */
+
+/* Оверлей, который видит пользователь */
+#audio-gate-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998; /* Почти самый высокий */
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+/* Мигающий текст */
+#audio-gate-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+    animation: gate-flicker 1.5s infinite;
+}
+
+/* Контейнер, который прячет весь контент сайта */
+#content-wrapper {
+    visibility: hidden; /* Скрыто по умолчанию */
+}
+
+/* Класс, который JS добавляет после клика */
+#content-wrapper.unlocked {
+    visibility: visible;
+}
+
+/* Плавное исчезновение оверлея */
+#audio-gate-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes gate-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

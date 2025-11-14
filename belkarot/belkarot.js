@@ -1,32 +1,16 @@
-// *** НОВЫЙ КОД (Фикс Звука Белкарота) ***
+// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 let stingerPlayed = false;
-let horrorAudioStarted = false; // Флаг, чтобы музыка запустилась 1 раз
-
-// Помощник для SFX
-function playAudio(audioEl) {
-    if (audioEl) {
-        audioEl.currentTime = 0;
-        audioEl.play().catch(e => console.error("Ошибка SFX:", e));
-    }
-}
-
-// Помощник для фоновой музыки (она должна запуститься только 1 раз)
-function playHorrorAudio() {
-    if (horrorAudioStarted) return; // Не запускать, если уже играет
-    
-    const horrorAudio = document.getElementById('horror-audio');
-    if (horrorAudio) {
-        horrorAudio.play().catch(e => console.error("Не удалось запустить хоррор-аудио:", e));
-        horrorAudioStarted = true;
-    }
-}
-// *** КОНЕЦ НОВОГО КОДА ***
+// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
     const stinger = document.getElementById('audio-stinger');
+    
+    // --- ИЗМЕНЕНИЕ (Фикс Звука): Эта функция теперь вызывается из gate.js ПОСЛЕ клика ---
+    window.belkarot_prompt = function() {
+        requestQuarantineCode();
+    }
 
-    // Функция, которая запускает "квест"
     function requestQuarantineCode() {
         
         const code = prompt(
@@ -37,12 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             "..."
         );
 
-        // --- ИЗМЕНЕНИЕ (Фикс Звука): Запускаем музыку СРАЗУ ПОСЛЕ клика на prompt ---
-        playHorrorAudio();
-
         if (code === null) {
             alert(
-                "[ОШИКА! ЗАПРОС НА СТАБИЛИЗАЦИЮ ОТКЛОНЕН!]\n\n" +
+                "[ОШИБКА! ЗАПРОС НА СТАБИЛИЗАЦИЮ ОТКЛОНЕН!]\n\n" +
                 "Отказ от ввода протокола недопустим. Система впадает в неконтролируемый резонанс...\n\n" +
                 "ПОВТОРНЫЙ ЗАПРОС ПРОТОКОЛА СДЕРЖИВАНИЯ."
             );
@@ -55,8 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             header.innerText = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
             header.dataset.text = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
 
-            // --- ИЗМЕНЕНИЕ (Фикс Звука): Теперь мы должны ОСТАНОВИТЬ музыку, которую включили вручную ---
-            const horrorAudio = document.getElementById('horror-audio');
+            const horrorAudio = document.getElementById('page-audio'); // <-- ID изменен
             if (horrorAudio) {
                 horrorAudio.pause();
                 horrorAudio.currentTime = 0;
@@ -66,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // ПРОВАЛ! 
             if (!stingerPlayed) {
-                playAudio(stinger);
+                playAudio(stinger); // <-- SFX
                 stingerPlayed = true;
             }
             
@@ -105,6 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    requestQuarantineCode();
+    // --- ИЗМЕНЕНИЕ (Фикс Звука): Запускаем "печать" сразу. 'Prompt' ждет клика. ---
     typeAllTruths();
 });

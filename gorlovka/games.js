@@ -1,17 +1,16 @@
-// --- НОВЫЙ КОД (Аудио Этап): Центральный Аудио Менеджер ---
+// --- ИЗМЕНЕНИЕ (Оптимизация): Убрали 'playAudio', он теперь в shared/audio_manager.js ---
 
-// 1. Помощники для управления звуком
-function playAudio(audioEl, loop = false) {
-    if (audioEl) {
-        audioEl.currentTime = 0;
-        audioEl.loop = loop;
-        audioEl.play().catch(e => console.error("Ошибка воспроизведения аудио:", e));
-    }
-}
+// 1. Помощники для управления фоновой музыкой
 function stopAudio(audioEl) {
     if (audioEl) {
         audioEl.pause();
         audioEl.currentTime = 0;
+    }
+}
+function startAudio(audioEl) {
+    if (audioEl) {
+        audioEl.currentTime = 0;
+        audioEl.play().catch(e => console.error("Ошибка смены аудио:", e));
     }
 }
 
@@ -23,27 +22,25 @@ function triggerShake() {
     void container.offsetWidth; 
     container.classList.add('screen-shake');
 }
-// --- КОНЕЦ НОВОГО КОДА ---
+// --- КОНЕЦ ИЗМЕНЕНИЙ ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- НОВЫЙ КОД (Аудио Этап): Получаем все аудио-элементы ---
-    const audioBg = document.getElementById('audio-bg');
+    const audioBg = document.getElementById('page-audio'); // <-- ID изменен
     const audioDonMak = document.getElementById('audio-donmak');
     const audioPiano = document.getElementById('audio-piano');
     const sfxSuccess = document.getElementById('audio-sfx-success');
     const sfxFail = document.getElementById('audio-sfx-fail');
 
-    // 3. Запускаем фоновую музыку Горловки
-    playAudio(audioBg, true);
-    // --- КОНЕЦ НОВОГО КОДА ---
+    // --- ИЗМЕНЕНИЕ: Музыка запускается "Гейтом", а не здесь ---
+    // playAudio(audioBg, true); 
+    // --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
-    // --- ОБЩИЕ ЭЛЕМЕНТЫ ---
     const challenge1 = document.getElementById('challenge-1');
     const challenge2 = document.getElementById('challenge-2');
     const reward = document.getElementById('gorlovka-reward');
 
-    // --- ЛОГИКА ИГРЫ 1: "Дон-Макъ" (Don-Mak) ---
+    // --- ЛОГИКА ИГРЫ 1: "Дон-Макъ" ---
     const startDonMakButton = document.getElementById('start-don-mak');
     const donMakGameContainer = document.getElementById('don-mak-game');
     const satisfactionBar = document.getElementById('satisfaction-bar');
@@ -61,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let timeLeft = 60; 
 
     startDonMakButton.addEventListener('click', () => {
-        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку ---
+        // --- Меняем музыку ---
         stopAudio(audioBg);
-        playAudio(audioDonMak, true);
-        // --- КОНЕЦ НОВОГО КОДА ---
+        startAudio(audioDonMak);
+        // ---
 
         donMakGameContainer.classList.remove('hidden');
         startDonMakButton.classList.add('hidden');
@@ -155,10 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         clearCustomer();
         startDonMakButton.classList.remove('hidden');
 
-        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку обратно ---
+        // --- Меняем музыку обратно ---
         stopAudio(audioDonMak);
-        playAudio(audioBg, true);
-        // --- КОНЕЦ НОВОГО КОДА ---
+        startAudio(audioBg);
+        // ---
     }
 
     function winDonMak() {
@@ -168,11 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
         challenge1.classList.add('hidden'); 
         challenge2.classList.remove('hidden'); 
 
-        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку обратно ---
+        // --- Меняем музыку обратно ---
         stopAudio(audioDonMak);
-        playAudio(audioBg, true);
+        startAudio(audioBg);
         playAudio(sfxSuccess);
-        // --- КОНЕЦ НОВОГО КОДА ---
+        // ---
     }
 
     // --- ЛОГИКА ИГРЫ 2: "Прото-Плитки-Фортепіано" ---
@@ -188,10 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let tileSpawnTimeout;
 
     startPianoButton.addEventListener('click', () => {
-        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку ---
+        // --- Меняем музыку ---
         stopAudio(audioBg);
-        playAudio(audioPiano, true);
-        // --- КОНЕЦ НОВОГО КОДА ---
+        startAudio(audioPiano);
+        // ---
 
         pianoGameContainer.classList.remove('hidden');
         startPianoButton.classList.add('hidden');
@@ -271,10 +268,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         localStorage.setItem('gorlovka_complete', 'true');
         
-        // --- НОВЫЙ КОД (Аудио Этап): Меняем музыку обратно ---
+        // --- Меняем музыку обратно ---
         stopAudio(audioPiano);
-        playAudio(audioBg, true);
+        startAudio(audioBg);
         playAudio(sfxSuccess);
-        // --- КОНЕЦ НОВОГО КОДА ---
+        // ---
     }
 });

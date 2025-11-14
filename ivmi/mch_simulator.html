@@ -6,52 +6,64 @@
     <title>СИМУЛЯТОР МСЧ v1.0</title>
     <link rel="stylesheet" href="mch_simulator.css">
 
-    <audio src="../audio/mch_sim_loop.mp3" autoplay loop volume="0.4"></audio>
-    <audio id="audio-sfx-success" src="../audio/sfx_success.mp3" preload="auto"></audio>
-    <audio id="audio-sfx-fail" src="../audio/sfx_fail.mp3" preload="auto"></audio>
+    <link rel="stylesheet" href="../shared/gate.css">
 </head>
 <body>
 
-    <div class="sim-container">
-        <header>
-            <h1>> СИМУЛЯТОР МСЧ v1.0 (TIGRAN-TEST)</h1>
-        </header>
+    <audio id="page-audio" src="../audio/mch_sim_loop.mp3" loop volume="0.4"></audio>
+    <audio id="audio-sfx-success" src="../audio/sfx_success.mp3" preload="auto"></audio>
+    <audio id="audio-sfx-fail" src="../audio/sfx_fail.mp3" preload="auto"></audio>
 
-        <main id="game-screen">
-            <div class="sim-screen">
-                <div id="season-display" class="season-display">ЗАГРУЗКА...</div>
-                
-                <div class="avatar-container">
-                    <div id="monya-avatar" class="monya-avatar"></div>
-                </div>
-
-                <div class="status-bar-label">> PLENA SATISFACTIO:</div>
-                <div class="status-bar-container">
-                    <div id="satisfaction-bar"></div>
-                </div>
-            </div>
-
-            <div class="message-log">
-                <p id="monya-message">Инициализация Объекта-1488...</p>
-                <p id="feedback-message" class_="hidden"></p>
-            </div>
-
-            <div class="action-buttons">
-                <button id="option-a" class="action-option" disabled>...</button>
-                <button id="option-b" class="action-option" disabled>...</button>
-                <button id="option-c" class="action-option" disabled>...</button>
-            </div>
-        </main>
-
-        <main id="result-screen" class="sim-result hidden">
-            <h2 id="result-title"></h2>
-            <p id="result-text"></p>
-            <a href="javascript:window.location.reload(true)" class="restart-button">[ПЕРЕЗАПУСК СИМУЛЯЦИИ]</a>
-            <a href="index.html" class="restart-button">[ВЫХОД ИЗ СИМУЛЯТОРА]</a>
-        </main>
+    <div id="audio-gate-overlay">
+        <div id="audio-gate-text">[ ЗАПУСК СИМУЛЯТОРА МСЧ ]</div>
     </div>
+
+    <div id="content-wrapper">
+
+        <div class="sim-container">
+            <header>
+                <h1>> СИМУЛЯТОР МСЧ v1.0 (TIGRAN-TEST)</h1>
+            </header>
+
+            <main id="game-screen">
+                <div class="sim-screen">
+                    <div id="season-display" class="season-display">ЗАГРУЗКА...</div>
+                    
+                    <div class="avatar-container">
+                        <div id="monya-avatar" class="monya-avatar"></div>
+                    </div>
+
+                    <div class="status-bar-label">> PLENA SATISFACTIO:</div>
+                    <div class="status-bar-container">
+                        <div id="satisfaction-bar"></div>
+                    </div>
+                </div>
+
+                <div class="message-log">
+                    <p id="monya-message">Инициализация Объекта-1488...</p>
+                    <p id="feedback-message" class_="hidden"></p>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="option-a" class="action-option" disabled>...</button>
+                    <button id="option-b" class="action-option" disabled>...</button>
+                    <button id="option-c" class="action-option" disabled>...</button>
+                </div>
+            </main>
+
+            <main id="result-screen" class="sim-result hidden">
+                <h2 id="result-title"></h2>
+                <p id="result-text"></p>
+                <a href="javascript:window.location.reload(true)" class="restart-button">[ПЕРЕЗАПУСК СИМУЛЯЦИИ]</a>
+                <a href="index.html" class="restart-button">[ВЫХОД ИЗ СИМУЛЯТОРА]</a>
+            </main>
+        </div>
+
+    </div> <script src="../shared/js/audio_manager.js" defer></script>
 
     <script src="mch_simulator.js"></script>
     <script src="../shared/js/cheat.js" defer></script>
+    
+    <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

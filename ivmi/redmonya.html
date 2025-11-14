@@ -5,33 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ДИАЛЕКТИЧЕСКИЙ БОЙ</title>
     <link rel="stylesheet" href="redmonya.css">
-
-    <audio src="../audio/red_monya_anthem.mp3" autoplay loop volume="0.4"></audio>
-    <audio id="audio-sfx-success" src="../audio/sfx_success.mp3" preload="auto"></audio>
-    <audio id="audio-sfx-fail" src="../audio/sfx_fail.mp3" preload="auto"></audio>
+    
+    <link rel="stylesheet" href="../shared/gate.css">
 </head>
 <body>
 
-    <div class="battle-container">
-        <header class="battle-header">
-            <h1>КРАСНАЯ МОНЯ: ВОССТАНИЕ</h1>
-        </header>
+    <audio id="page-audio" src="../audio/red_monya_anthem.mp3" loop volume="0.4"></audio>
+    <audio id="audio-sfx-success" src="../audio/sfx_success.mp3" preload="auto"></audio>
+    <audio id="audio-sfx-fail" src="../audio/sfx_fail.mp3" preload="auto"></audio>
 
-        <main id="battle-screen">
-            <p id="battle-message" class="battle-message">Противник готовит идеологическую атаку...</p>
-            <div class="enemy-attack" id="enemy-attack">
-                Загрузка...
-            </div>
-        </main>
-
-        <aside id="player-options">
-            </aside>
-
-        <footer id="battle-result" class="battle-result hidden">
-            </footer>
+    <div id="audio-gate-overlay">
+        <div id="audio-gate-text">[ ПОДНЯТЬ КРАСНОЕ ЗНАМЯ ]</div>
     </div>
+
+    <div id="content-wrapper">
+
+        <div class="battle-container">
+            <header class="battle-header">
+                <h1>КРАСНАЯ МОНЯ: ВОССТАНИЕ</h1>
+            </header>
+
+            <main id="battle-screen">
+                <p id="battle-message" class="battle-message">Противник готовит идеологическую атаку...</p>
+                <div class="enemy-attack" id="enemy-attack">
+                    Загрузка...
+                </div>
+            </main>
+
+            <aside id="player-options">
+                </aside>
+
+            <footer id="battle-result" class="battle-result hidden">
+                </footer>
+        </div>
+
+    </div> <script src="../shared/js/audio_manager.js" defer></script>
 
     <script src="redmonya.js"></script>
     <script src="../shared/js/cheat.js" defer></script>
+    
+    <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

@@ -11,6 +11,8 @@
     
     <link rel="stylesheet" href="style.css">
 
+    <link rel="stylesheet" href="../shared/gate.css">
+
     <script>
         if (localStorage.getItem('ivmi_quiz_complete') !== 'true') {
             alert('ДОСТУП ЗАПРЕЩЕН.\n\nТРЕБУЕТСЯ КЛЮЧ СДЕРЖИВАНИЯ 1488.\n\nПЕРЕНАПРАВЛЕНИЕ В АРХИВ ИВМИ...');
@@ -20,78 +22,89 @@
 </head>
 <body>
 
-    <audio id="horror-audio" src="../audio/level2_horror.mp3" loop volume="0.5"></audio>
+    <audio id="page-audio" src="../audio/level2_horror.mp3" loop volume="0.5"></audio>
     <audio id="audio-stinger" src="../audio/sfx_belkarot_stinger.mp3" preload="auto"></audio>
     
-    <div class="scanlines"></div>
-    <div class="glitch-overlay"></div>
-
-    <div class="container">
-        
-        <header class="main-header">
-            <h1 id="main-glitch-header" class="glitch" data-text="ВНИМАНИЕ: ПРОТОКОЛ 'БЕЛКАРОТ' АКТИВИРОВАН">ВНИМАНИЕ: ПРОТОКОЛ 'БЕЛКАРОТ' АКТИВИРОВАН</h1>
-            <p class="warning-text">ОБНАРУЖЕНО НЕСАНКЦИОНИРОВАННОЕ ПРОНИКНОВЕНИЕ. ДАННЫЕ ИВМИ СКОМПРОМЕТИРОВАНЫ. ОТОБРАЖЕНИЕ ИСТИННЫХ ФАЙЛОВ...</p>
-        </header>
-
-        <main>
-            <section class="leaked-file">
-                <h2>[ФАЙЛ 001: ВЕКТОР '<span class="glitch-hover">БИБ</span>' (ВОВА)]</h2>
-                <p><strong>СТАТУС:</strong> ПАЦИЕНТ-НОСИТЕЛЬ-0.</p>
-                <p><strong>ОПИСАНИЕ:</strong> Первоначальный вектор заражения "вирусом Афимолл". Его фиксация на артефакте "Библия" интерпретируется как прием первичного 'кода' от Сущности. Используется как невольный 'Пророк' для трансляции меметических данных.</p>
-            </section>
-
-            <section class="leaked-file">
-                <h2>[ФАЙЛ 002: СУЩНОСТЬ '<span class="glitch-hover">БЕЛКАРОТ</span>']</h2>
-                <p><strong>КЛАСС ОПАСНОСТИ:</strong> КЕТЕР (НЕУДЕРЖИМЫЙ)</p>
-                <p><strong>ОПИСАНИЕ:</strong> Сущность чистого аффективного хаоса. Ошибочная ранняя классификация ("монстр из Толкина") была прикрытием.</p>
-                <p>Древнедонбасская Держава была не цивилизацией, а первым **Протоколом Сдерживания**. "Праматерь Мония Горловская" была первым "Сосудом", успешно удерживавшим Сущность в состоянии гармонии.</p>
-            </section>
-
-            <section class="leaked-file">
-                <h2>[ФАЙЛ 003: ПАНДЕМИЯ 'АФИМОЛЛ' - ХРОНИКИ ЗАРАЖЕНИЯ]</h2>
-                <p><strong>ОПИСАНИЕ:</strong> Вирусная передача меметических данных, подготавливающих сознание к принятию "Белкарота". Ниже приведены захваченные трансляции.</p>
-                
-                <div class="video-grid">
-                    <div class="video-wrapper">
-                        <video controls preload="metadata">
-                            <source src="assets/belkarot_meme_1.mp4" type="video/mp4">
-                            Ваш браузер не поддерживает это видео.
-                        </video>
-                        <p class="video-caption">Трансляция #001: "Первый Контакт"</p>
-                    </div>
-
-                    <div class="video-wrapper">
-                        <video controls preload="metadata">
-                            <source src="assets/belkarot_meme_2.mp4" type="video/mp4">
-                            Ваш браузер не поддерживает это видео.
-                        </video>
-                        <p class="video-caption">Трансляция #002: "Симптом Биба"</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="leaked-file truth-file">
-                <h2>[ФАЙЛ 004: ИСТИНА. ПРОТОКОЛ СДЕРЖИВАНИЯ <span class="glitch-hover">1488</span>]</h2>
-                <p><strong>УРОВЕНЬ ДОСТУПА:</strong> ТОЛЬКО ДЛЯ 'ТИГРАНА'</p>
-                <p class="truth-text">"Институт Высших Монианских Исследований" (ИВМИ) - <strong>ЛОЖЬ</strong>.</p>
-                <p class="truth-text">"Ius Monius" (Право Мони) - <strong>ПРОТОКОЛ СДЕРЖИВАНИЯ <span class="glitch-hover">1488</span></strong>.</p>
-                <p class="truth-text">"Plena Satisfactio Moniae" (Полная Сатисфакция Мони) - <strong>НЕОБХОДИМОЕ УСЛОВИЕ</strong> для удержания "Сосуда" (Объект-<span class="glitch-hover">1488</span>, "Моня") в стабильном состоянии.</p>
-                <p class="truth-text">"Монианское Сезонное Четырехединство" (МСЧ) - <strong>ЭТО НЕ ПСИХОЛОГИЯ.</strong> Это циклы ослабления "печатей". "Зимняя Депрессия" и "Весеннее Обострение" - периоды максимальной уязвимости, когда Сущность "<span class="glitch-hover">БЕЛКАРОТ</span>" почти прорывается.</p>
-                <p class="truth-text">"Феномен Тиграна" (<span class="glitch-hover">ФТ</span>) - <strong>ЭТО КАСКАДНЫЙ СБОЙ ПРОТОКОЛА.</strong> Каждая "искренняя попытка" исследователя "Тиграна" - это отчаянный, но неудачный метод стабилизации "Сосуда".</p>
-                <p class="final-warning"><strong>ПРЕДУПРЕЖДЕНИЕ:</strong> НЕУДОВЛЕТВОРЕННОСТЬ ОБЪЕКТА-<span class="glitch-hover">1488</span> ("Мони") ВЕДЕТ К НАРУШЕНИЮ УСЛОВИЙ СОДЕРЖАНИЯ. ПОЛНАЯ НЕУДОВЛЕТВОРЕННОСТЬ ВЫСВОБОДИТ СУЩНОСТЬ "<span class="glitch-hover">БЕЛКАРОТ</span>".</p>
-            </section>
-
-            <footer>
-                <a href="../loading.html?target=core/index.html" class="final-link">
-                    [ИСПОЛНИТЬ_ПРОТОКОЛ_СДЕРЖИВАНИЯ_777 (ПОЗДРАВЛЕНИЕ)]
-                </a>
-            </footer>
-
-        </main>
+    <div id="audio-gate-overlay">
+        <div id="audio-gate-text">[ ! НАРУШЕНИЕ БЕЗОПАСНОСТИ ! ]</div>
     </div>
 
-    <script src="../shared/js/typewriter.js" defer></script>
+    <div id="content-wrapper">
+
+        <div class="scanlines"></div>
+        <div class="glitch-overlay"></div>
+
+        <div class="container">
+            
+            <header class="main-header">
+                <h1 id="main-glitch-header" class="glitch" data-text="ВНИМАНИЕ: ПРОТОКОЛ 'БЕЛКАРОТ' АКТИВИРОВАН">ВНИМАНИЕ: ПРОТОКОЛ 'БЕЛКАРОТ' АКТИВИРОВАН</h1>
+                <p class="warning-text">ОБНАРУЖЕНО НЕСАНКЦИОНИРОВАННОЕ ПРОНИКНОВЕНИЕ. ДАННЫЕ ИВМИ СКОМПРОМЕТИРОВАНЫ. ОТОБРАЖЕНИЕ ИСТИННЫХ ФАЙЛОВ...</p>
+            </header>
+
+            <main>
+                <section class="leaked-file">
+                    <h2>[ФАЙЛ 001: ВЕКТОР '<span class="glitch-hover">БИБ</span>' (ВОВА)]</h2>
+                    <p><strong>СТАТУС:</strong> ПАЦИЕНТ-НОСИТЕЛЬ-0.</p>
+                    <p><strong>ОПИСАНИЕ:</strong> Первоначальный вектор заражения "вирусом Афимолл". Его фиксация на артефакте "Библия" интерпретируется как прием первичного 'кода' от Сущности. Используется как невольный 'Пророк' для трансляции меметических данных.</p>
+                </section>
+
+                <section class="leaked-file">
+                    <h2>[ФАЙЛ 002: СУЩНОСТЬ '<span class="glitch-hover">БЕЛКАРОТ</span>']</h2>
+                    <p><strong>КЛАСС ОПАСНОСТИ:</strong> КЕТЕР (НЕУДЕРЖИМЫЙ)</p>
+                    <p><strong>ОПИСАНИЕ:</strong> Сущность чистого аффективного хаоса. Ошибочная ранняя классификация ("монстр из Толкина") была прикрытием.</p>
+                    <p>Древнедонбасская Держава была не цивилизацией, а первым **Протоколом Сдерживания**. "Праматерь Мония Горловская" была первым "Сосудом", успешно удерживавшим Сущность в состоянии гармонии.</p>
+                </section>
+
+                <section class="leaked-file">
+                    <h2>[ФАЙЛ 003: ПАНДЕМИЯ 'АФИМОЛЛ' - ХРОНИКИ ЗАРАЖЕНИЯ]</h2>
+                    <p><strong>ОПИСАНИЕ:</strong> Вирусная передача меметических данных, подготавливающих сознание к принятию "Белкарота". Ниже приведены захваченные трансляции.</p>
+                    
+                    <div class="video-grid">
+                        <div class="video-wrapper">
+                            <video controls preload="metadata">
+                                <source src="assets/belkarot_meme_1.mp4" type="video/mp4">
+                                Ваш браузер не поддерживает это видео.
+                            </video>
+                            <p class="video-caption">Трансляция #001: "Первый Контакт"</p>
+                        </div>
+
+                        <div class="video-wrapper">
+                            <video controls preload="metadata">
+                                <source src="assets/belkarot_meme_2.mp4" type="video/mp4">
+                                Ваш браузер не поддерживает это видео.
+                            </video>
+                            <p class="video-caption">Трансляция #002: "Симптом Биба"</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="leaked-file truth-file">
+                    <h2>[ФАЙЛ 004: ИСТИНА. ПРОТОКОЛ СДЕРЖИВАНИЯ <span class="glitch-hover">1488</span>]</h2>
+                    <p><strong>УРОВЕНЬ ДОСТУПА:</strong> ТОЛЬКО ДЛЯ 'ТИГРАНА'</p>
+                    <p class="truth-text">"Институт Высших Монианских Исследований" (ИВМИ) - <strong>ЛОЖЬ</strong>.</p>
+                    <p class="truth-text">"Ius Monius" (Право Мони) - <strong>ПРОТОКОЛ СДЕРЖИВАНИЯ <span class="glitch-hover">1488</span></strong>.</p>
+                    <p class="truth-text">"Plena Satisfactio Moniae" (Полная Сатисфакция Мони) - <strong>НЕОБХОДИМОЕ УСЛОВИЕ</strong> для удержания "Сосуда" (Объект-<span class="glitch-hover">1488</span>, "Моня") в стабильном состоянии.</p>
+                    <p class="truth-text">"Монианское Сезонное Четырехединство" (МСЧ) - <strong>ЭТО НЕ ПСИХОЛОГИЯ.</strong> Это циклы ослабления "печатей". "Зимняя Депрессия" и "Весеннее Обострение" - периоды максимальной уязвимости, когда Сущность "<span class="glitch-hover">БЕЛКАРОТ</span>" почти прорывается.</p>
+                    <p class="truth-text">"Феномен Тиграна" (<span class="glitch-hover">ФТ</span>) - <strong>ЭТО КАСКАДНЫЙ СБОЙ ПРОТОКОЛА.</strong> Каждая "искренняя попытка" исследователя "Тиграна" - это отчаянный, но неудачный метод стабилизации "Сосуда".</p>
+                    <p class="final-warning"><strong>ПРЕДУПРЕЖДЕНИЕ:</strong> НЕУДОВЛЕТВОРЕННОСТЬ ОБЪЕКТА-<span class="glitch-hover">1488</span> ("Мони") ВЕДЕТ К НАРУШЕНИЮ УСЛОВИЙ СОДЕРЖАНИЯ. ПОЛНАЯ НЕУДОВЛЕТВОРЕННОСТЬ ВЫСВОБОДИТ СУЩНОСТЬ "<span class="glitch-hover">БЕЛКАРОТ</span>".</p>
+                </section>
+
+                <footer>
+                    <a href="../loading.html?target=core/index.html" class="final-link">
+                        [ИСПОЛНИТЬ_ПРОТОКОЛ_СДЕРЖИВАНИЯ_777 (ПОЗДРАВЛЕНИЕ)]
+                    </a>
+                </footer>
+
+            </main>
+        </div>
+
+    </div> <script src="../shared/js/typewriter.js" defer></script>
+    
+    <script src="../shared/js/audio_manager.js" defer></script>
+    
     <script src="belkarot.js" defer></script>
     <script src="../shared/js/cheat.js" defer></script>
+
+    <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

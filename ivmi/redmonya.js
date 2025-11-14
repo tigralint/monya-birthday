@@ -1,3 +1,8 @@
+// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
+const sfxSuccess = document.getElementById('audio-sfx-success');
+const sfxFail = document.getElementById('audio-sfx-fail');
+// --- КОНЕЦ ИЗМЕНЕНИЯ ---
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- ЭЛЕМЕНТЫ DOM ---
     const battleScreen = document.getElementById('battle-screen');
@@ -80,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedButton = e.target;
         const isCorrect = selectedButton.dataset.correct === 'true';
 
-        // Блокируем все кнопки
         Array.from(playerOptions.children).forEach(button => {
             button.disabled = true;
             if (button.dataset.correct !== 'true') {
@@ -91,12 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCorrect) {
             selectedButton.classList.add('correct');
             battleMessageText.textContent = `УДАР! ${selectedButton.dataset.response}`;
+            playAudio(sfxSuccess); // <-- SFX
             setTimeout(() => {
                 currentQuestionIndex++;
                 showQuestion();
             }, 2500);
         } else {
             battleMessageText.textContent = `ПРОВАЛ! ${selectedButton.dataset.response}`;
+            playAudio(sfxFail); // <-- SFX
             setTimeout(loseGame, 2500);
         }
     }
@@ -134,6 +140,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('retry-button').addEventListener('click', startGame);
     }
 
-    // Запуск игры
     startGame();
 });

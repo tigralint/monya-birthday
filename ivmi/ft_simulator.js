@@ -1,13 +1,7 @@
-// --- НОВЫЙ КОД (Аудио Этап): Помощник и SFX ---
-function playAudio(audioEl) {
-    if (audioEl) {
-        audioEl.currentTime = 0;
-        audioEl.play().catch(e => console.error("Ошибка SFX:", e));
-    }
-}
+// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 const sfxSuccess = document.getElementById('audio-sfx-success');
 const sfxFail = document.getElementById('audio-sfx-fail');
-// --- КОНЕЦ НОВОГО КОДА ---
+// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
 

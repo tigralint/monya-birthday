@@ -1,13 +1,7 @@
-// --- НОВЫЙ КОД (Аудио Этап): Помощник и SFX ---
-function playAudio(audioEl) {
-    if (audioEl) {
-        audioEl.currentTime = 0;
-        audioEl.play().catch(e => console.error("Ошибка SFX:", e));
-    }
-}
+// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 const sfxSuccess = document.getElementById('audio-sfx-success');
 const sfxFail = document.getElementById('audio-sfx-fail');
-// --- КОНЕЦ НОВОГО КОДА ---
+// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- ЭЛЕМЕНТЫ DOM ---
@@ -28,13 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
             pedalOptions.forEach(opt => opt.style.pointerEvents = 'none');
 
             if (choice === 'jarjar') {
-                // ПРАВИЛЬНЫЙ ВЫБОР
                 playAudio(sfxSuccess); // <-- SFX
                 quizFeedback.textContent = "> ВЕРНО. ОБЪЕКТ-03 ИДЕНТИФИЦИРОВАН КАК УГРОЗА. ДЕШИФРОВКА КЛЮЧЕВОГО СЛОВА... 'С-И-Т-Х'.";
                 loginPrompt.classList.remove('hidden');
                 passwordInput.focus();
             } else {
-                // НЕПРАВИЛЬНЫЙ ВЫБОР
                 playAudio(sfxFail); // <-- SFX
                 quizFeedback.textContent = "> ОШИБКА АНАЛИЗА. ВЫ НЕ ГОТОВЫ. СИСТЕМА БЛОКИРУЕТ ДОСТУП.";
                 loginPrompt.classList.remove('hidden');
@@ -54,11 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkPassword() {
         const input = passwordInput.value.trim().toUpperCase();
         if (input === correctPassword) {
-            // УСПЕХ
             playAudio(sfxSuccess); // <-- SFX
             grantAccess();
         } else {
-            // ПРОВАЛ
             playAudio(sfxFail); // <-- SFX
             passwordInput.value = '';
             passwordInput.focus();

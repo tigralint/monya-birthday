@@ -5,80 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale:1.0">
     <title>ЗАГРУЗКА... ДРЕВНЯЯ ГОРЛОВКА</title>
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="../shared/gate.css">
+</head>
+<body>
 
-    <audio id="audio-bg" src="../audio/gorlovka_8bit_loop.mp3" preload="auto" loop></audio>
+    <audio id="page-audio" src="../audio/gorlovka_8bit_loop.mp3" preload="auto" loop></audio>
+    
     <audio id="audio-donmak" src="../audio/don_mak_8bit_fast.mp3" preload="auto" loop></audio>
     <audio id="audio-piano" src="../audio/piano_game_8bit.mp3" preload="auto" loop></audio>
     <audio id="audio-sfx-success" src="../audio/sfx_success.mp3" preload="auto"></audio>
     <audio id="audio-sfx-fail" src="../audio/sfx_fail.mp3" preload="auto"></audio>
 
-</head>
-<body>
-
-    <div class="game-container">
-        
-        <header>
-            <h1>> ЗАГРУЗКА... [IUS GORICARLIANUM]</h1>
-        </header>
-
-        <main>
-            <section id="intro-sequence">
-                <p>...СИГНАЛ ОБНАРУЖЕН...</p>
-                <p>Вы нашли руины Древнедонбасской Державы. Доступ к более поздним архивам ИВМИ заблокирован.</p>
-                <p>Чтобы доказать, что вы достойны, вы должны сперва постичь основы Древнего Права...</p>
-            </section>
-
-            <section id="challenge-1" class="challenge-box">
-                <h2>[ИСПЫТАНИЕ 1: ПРИНЦИП "MGNVENTIA BASALIS INSTANTANEA"]</h2>
-                <p>Вы должны пройти стажировку в "Царскихъ Хлѣбопекарнях ‘Дон-Макъ’".</p>
-                <p>Ваша задача: достичь полной 'Plena Satisfactio' у 10 Древних Горловчан за 60 секунд.</p>
-                <button id="start-don-mak" class="start-button">НАЧАТЬ СМЕНУ</button>
-                
-                <div id="don-mak-game" class="hidden">
-                    
-                    <div id="don-mak-timer">ВРЕМЯ: 60</div>
-                    <p>ШКАЛА PLENA SATISFACTIO:</p>
-                    <div id="satisfaction-bar-container">
-                        <div id="satisfaction-bar"></div>
-                    </div>
-                    <div id="customer-area">
-                        </div>
-                    <div id="don-mak-counter">
-                        <button class="food-button" data-food="lepeshka">ПОДАТЬ "АНТРАЦИТОВУЮ ЛЕПЕШКУ"</button>
-                        <button class="food-button" data-food="burger">ПОДАТЬ "УГОЛЬНЫЙ БУРГЕР"</button>
-                    </div>
-                    <p id="don-mak-message" style="text-align: center;"></p>
-                </div>
-            </section>
-
-            <section id="challenge-2" class="challenge-box hidden">
-                <h2>[ИСПЫТАНИЕ 2: "ГАРМОНИЗАЦІЯ ДУШЪ"]</h2>
-                <p>Вы постигли основы гостеприимства. Теперь вы должны постичь гармонию.</p>
-                <p>Сыграйте, как Карина Златозвукая, на "Поющихъ Антрацитовыхъ Клавишахъ" в "Садахъ Услада Дланей".</p>
-                <p>Наберите 20 очков гармонии, чтобы "совершить чудо".</p>
-                <button id="start-piano" class="start-button">ИГРАТЬ</button>
-
-                <div id="piano-game" class="hidden">
-                    <p>ОЧКИ ГАРМОНИИ: <span id="piano-score">0</span></p>
-                    <div id="piano-track">
-                        </div>
-                    <p id="piano-message" style="text-align: center;"></p>
-                </div>
-            </section>
-            
-            <section id="gorlovka-reward" class="challenge-box hidden">
-                <h2>[ДОСТУП РАЗРЕШЕН]</h2>
-                <p>Праматерь Мония Горловская довольна.</p>
-                <p>Вы постигли основы Ius Goricarlianum. Теперь вы можете узреть, как ее наследие было искажено потомками.</p>
-                
-                <a href="../loading.html?target=ivmi/index.html" class="start-button">[ВОЙТИ В АРХИВЫ ИВМИ (УРОВЕНЬ 1)]</a>
-            
-            </section>
-
-        </main>
+    <div id="audio-gate-overlay">
+        <div id="audio-gate-text">[ ЗАПУСК СИСТЕМЫ "ГОРЛОВКА" ]</div>
     </div>
+
+    <div id="content-wrapper">
+
+        <div class="game-container">
+            
+            <header>
+                <h1>> ЗАГРУЗКА... [IUS GORICARLIANUM]</h1>
+            </header>
+
+            <main>
+                <section id="intro-sequence">
+                    <p>...СИГНАЛ ОБНАРУЖЕН...</p>
+                    <p>Вы нашли руины Древнедонбасской Державы. Доступ к более поздним архивам ИВМИ заблокирован.</p>
+                    <p>Чтобы доказать, что вы достойны, вы должны сперва постичь основы Древнего Права...</p>
+                </section>
+
+                <section id="challenge-1" class="challenge-box">
+                    <h2>[ИСПЫТАНИЕ 1: ПРИНЦИП "MGNVENTIA BASALIS INSTANTANEA"]</h2>
+                    <p>Вы должны пройти стажировку в "Царскихъ Хлѣбопекарнях ‘Дон-Макъ’".</p>
+                    <p>Ваша задача: достичь полной 'Plena Satisfactio' у 10 Древних Горловчан за 60 секунд.</p>
+                    <button id="start-don-mak" class="start-button">НАЧАТЬ СМЕНУ</button>
+                    
+                    <div id="don-mak-game" class="hidden">
+                        
+                        <div id="don-mak-timer">ВРЕМЯ: 60</div>
+                        <p>ШКАЛА PLENA SATISFACTIO:</p>
+                        <div id="satisfaction-bar-container">
+                            <div id="satisfaction-bar"></div>
+                        </div>
+                        <div id="customer-area">
+                            </div>
+                        <div id="don-mak-counter">
+                            <button class="food-button" data-food="lepeshka">ПОДАТЬ "АНТРАЦИТОВУЮ ЛЕПЕШКУ"</button>
+                            <button class="food-button" data-food="burger">ПОДАТЬ "УГОЛЬНЫЙ БУРГЕР"</button>
+                        </div>
+                        <p id="don-mak-message" style="text-align: center;"></p>
+                    </div>
+                </section>
+
+                <section id="challenge-2" class="challenge-box hidden">
+                    <h2>[ИСПЫТАНИЕ 2: "ГАРМОНИЗАЦІЯ ДУШЪ"]</h2>
+                    <p>Вы постигли основы гостеприимства. Теперь вы должны постичь гармонию.</p>
+                    <p>Сыграйте, как Карина Златозвукая, на "Поющихъ Антрацитовыхъ Клавишахъ" в "Садахъ Услада Дланей".</p>
+                    <p>Наберите 20 очков гармонии, чтобы "совершить чудо".</p>
+                    <button id="start-piano" class="start-button">ИГРАТЬ</button>
+
+                    <div id="piano-game" class="hidden">
+                        <p>ОЧКИ ГАРМОНИИ: <span id="piano-score">0</span></p>
+                        <div id="piano-track">
+                            </div>
+                        <p id="piano-message" style="text-align: center;"></p>
+                    </div>
+                </section>
+                
+                <section id="gorlovka-reward" class="challenge-box hidden">
+                    <h2>[ДОСТУП РАЗРЕШЕН]</h2>
+                    <p>Праматерь Мония Горловская довольна.</p>
+                    <p>Вы постигли основы Ius Goricarlianum. Теперь вы можете узреть, как ее наследие было искажено потомками.</p>
+                    
+                    <a href="../loading.html?target=ivmi/index.html" class="start-button">[ВОЙТИ В АРХИВЫ ИВМИ (УРОВЕНЬ 1)]</a>
+                
+                </section>
+
+            </main>
+        </div>
+
+    </div> <script src="../shared/js/audio_manager.js" defer></script>
 
     <script src="games.js"></script>
     <script src="../shared/js/cheat.js" defer></script>
+    
+    <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

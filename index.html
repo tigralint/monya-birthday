@@ -11,119 +11,79 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lightbox.css">
-
-    <style>
-        #audio-permission-banner {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 15px 25px;
-            background: #8B0000; /* Багровый, в твоем стиле */
-            color: #fff;
-            font-family: 'Lora', serif;
-            font-size: 1.1rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 2000; /* Поверх всего */
-            transition: all 0.3s ease;
-        }
-        #audio-permission-banner:hover {
-            background: #5a2e2e;
-        }
-        #audio-permission-banner.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-    </style>
-    </head>
+    
+    <link rel="stylesheet" href="shared/gate.css">
+</head>
 <body>
 
-    <audio id="level0-audio" src="audio/level0_lofi.mp3" loop volume="0.3"></audio>
+    <audio id="page-audio" src="audio/level0_lofi.mp3" loop volume="0.3"></audio>
 
-    <div id="audio-permission-banner">
-        [ Кликните, чтобы включить музыку ]
+    <div id="audio-gate-overlay">
+        <div id="audio-gate-text">[ КЛИКНИТЕ ДЛЯ ЗАПУСКА ]</div>
     </div>
-    <div class="container">
-        <header>
-            <h1>София, с Днем Рождения!</h1>
-            <p class="subtitle">Наша любимая подруга, этот день только для тебя!</p>
-        </header>
 
-        <main>
-            <section class="text-block">
-                <h2>О тебе, нашей Моне</h2>
-                <p>Дорогая София, в этот особенный день мы хотим от всего сердца поздравить тебя. Ты - не просто подруга, ты - целая вселенная, источник вдохновения и бесконечной радости. Каждый момент, проведенный с тобой, наполнен смехом, глубокими беседами и незабываемыми приключениями. Твоя мудрость, твой уникальный взгляд на мир и твоя способность делать каждый день ярче — это бесценный дар, который мы так ценим.</p>
-                <p>Пусть этот год принесет тебе еще больше счастливых моментов, новых открытий и исполнения самых заветных желаний. Оставайся такой же невероятной, искренней и вдохновляющей. Мы всегда рядом!</p>
-            </section>
+    <div id="content-wrapper">
 
-            <section class="gallery-section">
-                <h2>Галерея Счастливых Моментов</h2>
-                <p class="gallery-intro">Мы собрали несколько самых теплых воспоминаний, запечатленных в фотографиях. Нажми на любое фото, чтобы посмотреть поближе и вновь пережить эти мгновения.</p>
+        <div class="container">
+            <header>
+                <h1>София, с Днем Рождения!</h1>
+                <p class="subtitle">Наша любимая подруга, этот день только для тебя!</p>
+            </header>
+
+            <main>
+                <section class="text-block">
+                    <h2>О тебе, нашей Моне</h2>
+                    <p>Дорогая София, в этот особенный день мы хотим от всего сердца поздравить тебя. Ты - не просто подруга, ты - целая вселенная, источник вдохновения и бесконечной радости. Каждый момент, проведенный с тобой, наполнен смехом, глубокими беседами и незабываемыми приключениями. Твоя мудрость, твой уникальный взгляд на мир и твоя способность делать каждый день ярче — это бесценный дар, который мы так ценим.</p>
+                    <p>Пусть этот год принесет тебе еще больше счастливых моментов, новых открытий и исполнения самых заветных желаний. Оставайся такой же невероятной, искренней и вдохновляющей. Мы всегда рядом!</p>
+                </section>
+
+                <section class="gallery-section">
+                    <h2>Галерея Счастливых Моментов</h2>
+                    <p class="gallery-intro">Мы собрали несколько самых теплых воспоминаний, запечатленных в фотографиях. Нажми на любое фото, чтобы посмотреть поближе и вновь пережить эти мгновения.</p>
+                    
+                    <div class="gallery-grid">
+                        
+                        <a href="images/main_01.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_01.jpg" alt="Воспоминание 1">
+                        </a>
+                        <a href="images/main_02.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_02.jpg" alt="Воспоминание 2">
+                        </a>
+                        <a href="images/main_03.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_03.jpg" alt="Воспоминание 3">
+                        </a>
+                        <a href="images/main_04.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_04.jpg" alt="Воспоминание 4">
+                        </a>
+                        <a href="images/main_05.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_05.jpg" alt="Воспоминание 5">
+                        </a>
+                        <a href="images/main_06.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_06.jpg" alt="Воспоминание 6">
+                        </a>
+                        <a href="images/main_07.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_07.jpg" alt="Воспоминание 7">
+                        </a>
+                        <a href="images/main_08.jpg" data-lightbox="gallery-main">
+                            <img src="images/main_08.jpg" alt="Воспоминание 8">
+                        </a>
+                        
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <p>&copy; <a href="loading.html?target=gorlovka/index.html" class="secret-link-level0">2027</a>. Все права (вроде как) защищены.</p>
                 
-                <div class="gallery-grid">
-                    
-                    <a href="images/main_01.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_01.jpg" alt="Воспоминание 1">
-                    </a>
-                    <a href="images/main_02.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_02.jpg" alt="Воспоминание 2">
-                    </a>
-                    <a href="images/main_03.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_03.jpg" alt="Воспоминание 3">
-                    </a>
-                    <a href="images/main_04.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_04.jpg" alt="Воспоминание 4">
-                    </a>
-                    <a href="images/main_05.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_05.jpg" alt="Воспоминание 5">
-                    </a>
-                    <a href="images/main_06.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_06.jpg" alt="Воспоминание 6">
-                    </a>
-                    <a href="images/main_07.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_07.jpg" alt="Воспоминание 7">
-                    </a>
-                    <a href="images/main_08.jpg" data-lightbox="gallery-main">
-                        <img src="images/main_08.jpg" alt="Воспоминание 8">
-                    </a>
-                    
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; <a href="loading.html?target=gorlovka/index.html" class="secret-link-level0">2027</a>. Все права (вроде как) защищены.</p>
-            
-            <p class="secret-link">
-                <a href="loading.html?target=ivmi/index.html">Институт Высших Монианских Исследований (ИВМИ)</a>
-            </p>
+                <p class="secret-link">
+                    <a href="loading.html?target=ivmi/index.html">Институт Высших Монианских Исследований (ИВМИ)</a>
+                </p>
             </footer>
-    </div>
+        </div>
 
-    <script src="shared/js/lightbox.js" defer></script>
+    </div> <script src="shared/js/lightbox.js" defer></script>
     <script src="shared/js/cheat.js" defer></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const audioButton = document.getElementById('audio-permission-banner');
-            const audio = document.getElementById('level0-audio');
-
-            if (audioButton && audio) {
-                audioButton.addEventListener('click', () => {
-                    // Пытаемся включить звук
-                    audio.play().then(() => {
-                        // Если получилось, прячем кнопку
-                        audioButton.classList.add('hidden');
-                    }).catch(error => {
-                        // Если не получилось (например, браузер все еще блокирует)
-                        console.error("Не удалось запустить аудио:", error);
-                        // Кнопка останется видимой, чтобы пользователь мог попробовать еще раз
-                    });
-                }, { once: true }); // Скрипт сработает только один раз
-            }
-        });
-    </script>
-    </body>
+    
+    <script src="shared/js/gate.js" defer></script>
+</body>
 </html>
