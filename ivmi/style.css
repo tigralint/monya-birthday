@@ -1,6 +1,6 @@
 /* --- Глобальные настройки (Стиль "Терминал") --- */
 @font-face {
-    font-family: 'PP Mondwest'; /* Берем этот шрифт из твоего примера */
+    font-family: 'PP Mondwest';
     src: url('../fonts/PP-Mondwest.woff2') format('woff2'),
          url('../fonts/PP-Mondwest.woff') format('woff');
     font-weight: normal;
@@ -31,12 +31,35 @@ body {
     margin: 0;
     padding: 20px;
     animation: fadeIn 0.5s ease-in-out;
+    
+    /* *** НОВЫЙ КОД (Эффект Scanlines) *** */
+    position: relative; /* Нужно для псевдо-элемента */
+}
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px; /* Размер полос */
+    z-index: 100; /* Под гейтом, но над контентом */
+    pointer-events: none;
+    animation: scanlines 0.2s linear infinite;
 }
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 4px; }
+}
+/* *** КОНЕЦ НОВОГО КОДА *** */
+
 
 /* --- Контейнер Терминала --- */
 .terminal-container {
@@ -47,7 +70,23 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 30px rgba(57, 255, 20, 0.1);
     overflow: hidden;
+    position: relative; /* Для z-index */
+    z-index: 101;
+    
+    /* *** НОВЫЙ КОД (Эффект мерцания текста) *** */
+    animation: text-flicker 3s linear infinite;
 }
+
+@keyframes text-flicker {
+    0%   { text-shadow: 0 0 3px var(--terminal-green); opacity: 1; }
+    5%   { text-shadow: 0 0 5px var(--terminal-green); opacity: 0.8; }
+    6%   { text-shadow: none; opacity: 0.7; }
+    7%   { text-shadow: 0 0 5px var(--terminal-green); opacity: 1; }
+    10%  { text-shadow: 0 0 3px var(--terminal-green); opacity: 1; }
+    100% { text-shadow: 0 0 3px var(--terminal-green); opacity: 1; }
+}
+/* *** КОНЕЦ НОВОГО КОДА *** */
+
 
 /* --- Шапка Терминала --- */
 .terminal-header {
@@ -315,7 +354,6 @@ ul li::before {
     line-height: 1;
 }
 
-/* *** НОВЫЙ КОД (ФИКС ЗЕЛЕНОГО ОГОНЬКА): Возвращаем кружок *** */
 .secret-light-link .light.green {
-    display: block; /* Снова делаем его блочным, чтобы стили .light работали */
+    display: block; 
 }

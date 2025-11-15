@@ -7,19 +7,29 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="log_style.css">
-    
     <link rel="stylesheet" href="../shared/gate.css">
 
     <style>
-        /* Стиль для фото профессора */
         .professor-photo {
             width: 100%;
-            max-width: 400px; /* Чтобы не было слишком большим */
+            max-width: 400px;
             display: block;
             margin: 15px auto 25px;
             border-radius: 4px;
             border: 1px solid var(--terminal-border);
         }
+
+        /* *** НОВЫЙ КОД: Стили для эффекта прокрутки *** */
+        .log-entry {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .log-entry.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* *** КОНЕЦ НОВОГО КОДА *** */
     </style>
 </head>
 <body>
@@ -38,9 +48,9 @@
             </header>
 
             <main>
-                <img src="images/professor_selfie.jpg" alt="Профессор Т.М." class="professor-photo">
+                <img src="images/professor_selfie.jpg" alt="Профессор Т.М." class="professor-photo fade-in-section">
 
-                <article class="log-entry">
+                <article class="log-entry fade-in-section">
                     <p class="date">[ДАТА: 15.11.2025]</p>
                     <p class="entry-text">
                         Она здесь. Она нашла этот лог. Если она это читает, значит, она прошла через все уровни. Горловка, ИВМИ, Белкарот...
@@ -56,7 +66,7 @@
                     </p>
                 </article>
 
-                <article class="log-entry">
+                <article class="log-entry fade-in-section">
                     <p class="date">[ДАТА: 15.11.2025, ПОЗДНО НОЧЬЮ]</p>
                     <p class="entry-text">
                         Я — "Тигран" из "Феномена Тиграна", совершающий "искренний промах".
@@ -72,7 +82,7 @@
                     </p>
                 </article>
 
-                 <article class="log-entry">
+                 <article class="log-entry fade-in-section">
                     <p class="date">[ДАТА: 15.11.2025, СЕЙЧАС]</p>
                     <p class="entry-text">
                         Я просто хочу, чтобы "Моня" была счастлива.
@@ -93,5 +103,7 @@
 
     </div> <script src="../shared/js/cheat.js" defer></script>
     <script src="../shared/js/gate.js" defer></script>
+
+    <script src="../shared/js/scroll_effects.js" defer></script>
 </body>
 </html>

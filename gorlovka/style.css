@@ -52,6 +52,18 @@ header h1 {
     padding-bottom: 15px;
 }
 
+/* *** НОВЫЙ КОД (Мигающий курсор) *** */
+header h1::after {
+    content: '_';
+    font-weight: bold;
+    animation: blink-cursor 1s infinite;
+}
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+/* *** КОНЕЦ НОВОГО КОДА *** */
+
 .game-intro p, .challenge-box p {
     text-align: center;
 }
@@ -71,11 +83,18 @@ header h1 {
 }
 .start-button:hover {
     background: #ffff00;
+    /* *** НОВЫЙ КОД (Вибрация кнопки) *** */
+    animation: button-vibrate 0.1s infinite alternate;
 }
 .start-button.locked {
     background: #555;
     color: #999;
     cursor: not-allowed;
+}
+
+@keyframes button-vibrate {
+    0% { transform: translateX(-1px); }
+    100% { transform: translateX(1px); }
 }
 
 .challenge-box {
@@ -93,16 +112,16 @@ header h1 {
     border: 2px solid var(--color-border);
     padding: 10px;
     background: #111;
+    position: relative; /* Нужно для всплывающих очков */
+    overflow: hidden; /* Чтобы очки не вылетали */
 }
 
-/* --- ИЗМЕНЕНИЕ: Добавлен таймер --- */
 #don-mak-timer {
     font-size: 1.2rem;
     color: var(--color-timer);
     text-align: center;
     margin: 10px 0;
 }
-/* --- --- */
 
 /* Шкала сатисфакции */
 #satisfaction-bar-container {
@@ -153,7 +172,6 @@ header h1 {
 .customer {
     width: 60px;
     height: 100px;
-    /* Здесь можно вставить 8-битный спрайт */
     background: var(--color-text); 
     border: 2px solid #000;
     position: relative;
@@ -177,6 +195,8 @@ header h1 {
     padding: 10px;
     background: #111;
     text-align: center;
+    position: relative; /* Нужно для всплывающих очков */
+    overflow: hidden; /* Чтобы очки не вылетали */
 }
 #piano-track {
     width: 300px;
@@ -189,19 +209,16 @@ header h1 {
     cursor: pointer;
 }
 
-/* --- ИЗМЕНЕНИЕ: Убрана анимация из класса, добавлен .hit --- */
 .piano-tile {
     position: absolute;
-    width: 75px; /* 300 / 4 */
+    width: 75px; 
     height: 100px;
-    background: #000; /* "Антрацитовая клавиша" */
+    background: #000; 
     border: 2px solid #fff;
-    /* Анимация будет задаваться через JS */
 }
 .piano-tile.hit {
-    background: #555; /* Погашенная клавиша */
+    background: #555; 
 }
-/* --- --- */
 
 @keyframes drop {
     from { top: -100px; }
@@ -220,6 +237,7 @@ header h1 {
     50% { box-shadow: 0 0 30px #ffff00; }
     100% { box-shadow: 0 0 10px #ffff00; }
 }
+
 /* --- Анимация "Тряска экрана" --- */
 .screen-shake {
     animation: shake 0.4s;
@@ -232,4 +250,24 @@ header h1 {
     60% { transform: translateX(-10px); }
     80% { transform: translateX(10px); }
     100% { transform: translateX(0); }
+}
+
+/* *** НОВЫЙ КОД (Всплывающие очки) *** */
+.popup-score {
+    position: absolute;
+    font-family: var(--font-pixel);
+    font-size: 1.5rem;
+    font-weight: bold;
+    pointer-events: none; /* Нельзя кликнуть */
+    animation: float-up 1s ease-out forwards;
+}
+.popup-score.good {
+    color: var(--color-border); /* Зеленый */
+}
+.popup-score.bad {
+    color: #ff4d4d; /* Красный */
+}
+@keyframes float-up {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
 }

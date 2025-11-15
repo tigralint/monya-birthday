@@ -15,7 +15,6 @@ body {
     padding: 20px;
     line-height: 1.7;
     overflow-x: hidden;
-    /* Анимация "включения" по умолчанию */
     animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -284,6 +283,11 @@ footer {
 /* --- Интерактивный глюк при наведении --- */
 .glitch-hover:hover {
     color: var(--horror-red-bright);
-    /* Запускаем агрессивную анимацию только при наведении */
     animation: glitch-text-aggressive 0.5s infinite;
+}
+
+/* *** НОВЫЙ КОД (Искажение видео при наведении) *** */
+.video-wrapper:hover video {
+    filter: contrast(2) brightness(1.5) hue-rotate(90deg);
+    transition: filter 0.2s ease-in-out;
 }
