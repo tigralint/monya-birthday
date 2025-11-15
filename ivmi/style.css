@@ -310,4 +310,9 @@ ul li::before {
 .secret-light-link {
     text-decoration: none;
     cursor: help; /* Курсор-подсказка */
+    
+    /* *** НОВЫЙ КОД (ФИКС КНОПКИ): Эти 3 строчки чинят "сломанный" вид *** */
+    color: inherit; 
+    display: inline-block;
+    line-height: 1;
 }

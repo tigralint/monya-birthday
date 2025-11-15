@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetPanel) {
                 targetPanel.classList.add('active');
 
-                // --- НОВЫЙ КОД ДЛЯ "ПЕЧАТИ" ---
+                // --- КОД ДЛЯ "ПИШУЩЕЙ МАШИНКИ" (ЧИНИТ КНОПКИ) ---
                 const titleElement = targetPanel.querySelector('h2');
                 if (titleElement) {
                     // Сохраняем оригинальный текст в data-атрибут, если его там нет
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         titleElement.style.visibility = 'visible';
                     }
                 }
-                // --- КОНЕЦ НОВОГО КОДА ---
+                // --- КОНЕЦ КОДА "ПИШУЩЕЙ МАШИНКИ" ---
             }
         });
     });
@@ -52,11 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks[0].click();
     }
 
-    // --- НОВЫЙ КОД (Пасхалка 1488) ---
+    // --- "Пасхалка 1488" (Идея 1) ---
     const egg1488 = document.getElementById('easter-egg-1488');
     if (egg1488) {
         egg1488.addEventListener('click', () => {
             alert('[ЗАМЕЧАНИЕ ИССЛЕДОВАТЕЛЯ]: Совпадение? Не думаю. - Т.М.');
+        });
+    }
+
+    // --- НОВЫЙ КОД (Фикс Звука в Новых Вкладках) ---
+    const mainAudio = document.getElementById('page-audio');
+    // Находим ВСЕ ссылки, которые открываются в новой вкладке (target="_blank")
+    const externalLinks = document.querySelectorAll('a[target="_blank"]');
+
+    if (mainAudio && externalLinks.length > 0) {
+        externalLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Приглушаем музыку в ЭТОЙ (старой) вкладке
+                mainAudio.pause(); 
+            });
         });
     }
     // --- КОНЕЦ НОВОГО КОДА ---
