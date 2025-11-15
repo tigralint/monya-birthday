@@ -31,16 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const header = document.getElementById('main-glitch-header');
             header.innerText = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
             header.dataset.text = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
+
             localStorage.setItem('belkarot_complete', 'true');
             if (showPromptButton) showPromptButton.style.display = 'none';
-            stopGlitchScroll(); // <-- НОВЫЙ КОД: Отключаем глючный скролл
+
+            // *** ИЗМЕНЕНИЕ: "Печать" запускается ТОЛЬКО ПОСЛЕ УСПЕХА ***
+            typeAllTruths();
 
         } else {
             // ПРОВАЛ! 
             if (!stingerPlayed) {
-                playAudio(stinger); 
+                playAudio(stinger); // <-- SFX
                 stingerPlayed = true;
             }
+            
             alert(
                 "[ОШИБКА ДОСТУПА! НЕВЕРНЫЙ ПРОТОКОЛ!]\n\n" +
                 "Аффективный резонанс 'Белкарот' усиливается...\n\n" +
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // "Печать" текста (запускается сразу при загрузке)
+    // "Печать" текста (теперь это просто функция, которая ждет вызова)
     async function typeAllTruths() {
         if (typeof typeText !== 'function') {
             console.error("Функция typeText не найдена. Не могу 'напечатать' истину.");
@@ -75,41 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- НОВЫЙ КОД (Глючный скроллинг) ---
-    let lastScrollY = window.scrollY;
-    let isGlitching = false;
-
-    function glitchScroll() {
-        // Если система стабилизирована, не делаем ничего
-        if (document.body.classList.contains('stabilized')) return;
-        
-        // C вероятностью 30% "сопротивляемся" скроллу
-        if (Math.random() < 0.3 && !isGlitching) {
-            isGlitching = true;
-            const currentScroll = window.scrollY;
-            
-            // Если скроллит вниз, дергаем вверх
-            if (currentScroll > lastScrollY) {
-                window.scrollBy(0, -Math.random() * 100 - 50); 
-            }
-            
-            lastScrollY = window.scrollY;
-            
-            setTimeout(() => { isGlitching = false; }, 100); // Кулдаун
-        } else {
-            lastScrollY = window.scrollY;
-        }
-    }
-
-    // Функция, чтобы отключить этот эффект после победы
-    function stopGlitchScroll() {
-        window.removeEventListener('scroll', glitchScroll);
-    }
-    
-    // Вешаем "слушатель" на скролл
-    window.addEventListener('scroll', glitchScroll);
-    // --- КОНЕЦ НОВОГО КОДА ---
-
-    // Запускаем "печать" сразу. 'Prompt' ждет клика.
-    typeAllTruths();
+    // *** ИЗМЕНЕНИЕ: Мы БОЛЬШЕ НЕ запускаем "печать" при загрузке. ***
+    // typeAllTruths(); 
 });

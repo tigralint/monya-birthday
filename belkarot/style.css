@@ -106,7 +106,7 @@ body {
     animation: glitch-text-aggressive 2s infinite linear alternate-reverse;
 }
 
-/* !!! НОВЫЙ КЛАСС "СТАБИЛИЗАЦИИ" !!! */
+/* !!! КЛАСС "СТАБИЛИЗАЦИИ" !!! */
 body.stabilized .glitch {
     animation: none; /* Отключаем глюк заголовка */
 }
@@ -124,7 +124,7 @@ body.stabilized .scanlines {
     opacity: 0.2;
     background-size: 100% 5px; /* Делаем их реже */
 }
-/* ----- КОНЕЦ НОВЫХ СТИЛЕЙ ----- */
+/* ----- КОНЕЦ СТИЛЕЙ СТАБИЛИЗАЦИИ ----- */
 
 
 /* --- Основной Контейнер --- */
@@ -286,8 +286,18 @@ footer {
     animation: glitch-text-aggressive 0.5s infinite;
 }
 
-/* *** НОВЫЙ КОД (Искажение видео при наведении) *** */
 .video-wrapper:hover video {
     filter: contrast(2) brightness(1.5) hue-rotate(90deg);
     transition: filter 0.2s ease-in-out;
+}
+
+/* *** НОВЫЙ КОД (Фикс "Блокировки") *** */
+/* По умолчанию скрываем весь <main> контент */
+#main-content {
+    display: none;
+}
+/* Показываем контент, когда система "стабилизирована" */
+body.stabilized #main-content {
+    display: block;
+    animation: fadeIn 1s ease-in-out; /* Плавное появление */
 }
