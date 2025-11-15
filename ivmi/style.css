@@ -306,7 +306,7 @@ ul li::before {
     100% { box-shadow: 0 0 10px var(--terminal-green); opacity: 1; }
 }
 
-/* --- НОВЫЙ КОД (Идея 4): Ссылка на зеленом огоньке --- */
+/* --- (Идея 4): Ссылка на зеленом огоньке --- */
 .secret-light-link {
     text-decoration: none;
     cursor: help; /* Курсор-подсказка */
