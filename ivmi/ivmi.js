@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks[0].click();
     }
 
-    // --- "Пасхалка 1488" (Идея 1) ---
+    // --- "Пасхалка 1488" ---
     const egg1488 = document.getElementById('easter-egg-1488');
     if (egg1488) {
         egg1488.addEventListener('click', () => {
@@ -60,17 +60,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- НОВЫЙ КОД (Фикс Звука в Новых Вкладках) ---
+    // --- Фикс Звука в Новых Вкладках ---
     const mainAudio = document.getElementById('page-audio');
-    // Находим ВСЕ ссылки, которые открываются в новой вкладке (target="_blank")
     const externalLinks = document.querySelectorAll('a[target="_blank"]');
 
     if (mainAudio && externalLinks.length > 0) {
         externalLinks.forEach(link => {
             link.addEventListener('click', () => {
-                // Приглушаем музыку в ЭТОЙ (старой) вкладке
                 mainAudio.pause(); 
             });
+        });
+    }
+    
+    // --- НОВЫЙ КОД (Кнопка Стабилизации) ---
+    const stabilizeButton = document.getElementById('stabilize-button');
+    const bodyElement = document.body; // Мы будем вешать класс на <body>
+
+    if (stabilizeButton && bodyElement) {
+        stabilizeButton.addEventListener('click', () => {
+            // Переключаем (toggle) класс 'stabilized' на <body>
+            bodyElement.classList.toggle('stabilized');
         });
     }
     // --- КОНЕЦ НОВОГО КОДА ---
