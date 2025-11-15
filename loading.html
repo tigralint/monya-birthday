@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЗАГРУЗКА СИСТЕМЫ...</title>
+    <title>СИСТЕМА: ЗАГРУЗКА...</title>
     <link rel="stylesheet" href="loading.css">
 </head>
 <body>
-    <div class="loader-container">
-        <p id="loading-text">ИНИЦИАЛИЗАЦИЯ...</p>
-        <div class="spinner"></div>
+
+    <div class="terminal-loader" id="terminal">
+        <div id="log-output">
+            <p>ЗАПУСК СИСТЕМЫ...</p>
+        </div>
+        
+        <div id="redirect-message">
+            ПЕРЕНАПРАВЛЕНИЕ...
+        </div>
     </div>
     <script src="loading.js"></script>
-
     <script src="shared/js/cheat.js" defer></script>
 </body>
 </html>

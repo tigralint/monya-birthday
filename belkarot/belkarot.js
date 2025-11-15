@@ -4,11 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const stinger = document.getElementById('audio-stinger');
     
-    // *** НОВЫЙ КОД (Фикс Звука): Находим новую кнопку ***
     const showPromptButton = document.getElementById('show-prompt-button');
 
-    // *** ИЗМЕНЕНИЕ (Фикс Звука): Окно пароля НЕ запускается само. ***
-    // Оно ждет клика по кнопке.
     if (showPromptButton) {
         showPromptButton.addEventListener('click', (e) => {
             e.preventDefault(); // Не даем ссылке-кнопке прыгать
@@ -37,11 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
             header.innerText = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
             header.dataset.text = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
 
-            const horrorAudio = document.getElementById('page-audio'); 
-            if (horrorAudio) {
-                horrorAudio.pause();
-                horrorAudio.currentTime = 0;
-            }
+            // *** ИСПРАВЛЕНИЕ: Мы БОЛЬШЕ НЕ ОСТАНАВЛИВАЕМ музыку ***
+            // const horrorAudio = document.getElementById('page-audio'); 
+            // if (horrorAudio) {
+            //     horrorAudio.pause();
+            //     horrorAudio.currentTime = 0;
+            // }
+            // *** КОНЕЦ ИСПРАВЛЕНИЯ ***
+
             localStorage.setItem('belkarot_complete', 'true');
             
             // Прячем кнопку, так как она больше не нужна
@@ -59,8 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Аффективный резонанс 'Белкарот' усиливается...\n\n" +
                 "Повторите ввод."
             );
-            // НЕ вызываем requestQuarantineCode() заново,
-            // даем пользователю самому нажать кнопку еще раз.
         }
     }
 

@@ -1,46 +1,81 @@
 /*
- * СТИЛИ ДЛЯ "ЗАГРУЗОЧНОГО" ЭКРАНА
+ * СТИЛИ ДЛЯ "УМНОГО" ЭКРАНА ЗАГРУЗКИ (ТЕРМИНАЛ)
  */
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
+:root {
+    --color-bg: #0a0a0a;
+    --color-text: #39FF14; /* Зеленый */
+    --color-text-dim: #1e501e; /* Темно-зеленый */
+    --color-success: #39FF14; /* Зеленый */
+    --color-fail: #B22222; /* Красный */
+    --color-highlight: #ffff00; /* Желтый */
+    --font-mono: 'Share Tech Mono', monospace;
+}
+
 body {
-    background-color: #0a0a0a;
-    color: #39FF14; /* Зеленый */
-    font-family: 'Share Tech Mono', monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-mono);
     margin: 0;
-    overflow: hidden;
+    padding: 20px;
+    overflow: hidden; /* Запрещаем прокрутку */
 }
 
-.loader-container {
+/* Контейнер терминала, который занимает больше места */
+.terminal-loader {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #000;
+    border: 1px solid var(--color-text-dim);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
+    padding: 20px;
+    height: 80vh; /* Высота почти во весь экран */
+    overflow-y: scroll; /* Позволяет логу "убегать" вверх */
+    
+    /* Убираем стандартный скроллбар */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+}
+/* Убираем скроллбар для Chrome/Safari */
+.terminal-loader::-webkit-scrollbar {
+    display: none;
+}
+
+/* Блок, куда JS будет "печатать" лог */
+#log-output p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: var(--color-text-dim); /* Старые логи - тусклые */
+}
+
+/* Активная, последняя строка лога */
+#log-output p.active {
+    color: var(--color-text); /* Новая строка - яркая */
+    text-shadow: 0 0 5px var(--color-text);
+}
+
+/* Цветные индикаторы статуса */
+.success {
+    color: var(--color-success);
+}
+.fail {
+    color: var(--color-fail);
+}
+.highlight {
+    color: var(--color-highlight);
+}
+
+/* Финальное сообщение о перенаправлении */
+#redirect-message {
+    display: none; /* Скрыто по умолчанию */
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: var(--color-highlight);
     text-align: center;
-}
-
-#loading-text {
-    font-size: 1.2rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-    text-shadow: 0 0 10px #39FF14;
     animation: flicker 1.5s infinite;
-}
-
-.spinner {
-    width: 60px;
-    height: 60px;
-    border: 5px solid #1e501e; /* Темно-зеленый */
-    border-top-color: #39FF14; /* Ярко-зеленый */
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 @keyframes flicker {
