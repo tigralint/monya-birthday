@@ -13,7 +13,6 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../shared/gate.css">
-    
     <link rel="stylesheet" href="credits.css">
 </head>
 <body>
@@ -68,63 +67,63 @@
                     <h3>Музыка Уровней</h3>
                     <div class="track">
                         <p>Уровень 0: "Элегант" (level0_lofi.mp3)</p>
-                        <audio controls src="../audio/level0_lofi.mp3"></audio>
+                        <audio controls src="../audio/level0_lofi.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>Уровень 0.5: "Древняя Горловка" (gorlovka_8bit_loop.mp3)</p>
-                        <audio controls src="../audio/gorlovka_8bit_loop.mp3"></audio>
+                        <audio controls src="../audio/gorlovka_8bit_loop.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>Уровень 1: "Гул ИВМИ" (level1_hum.mp3)</p>
-                        <audio controls src="../audio/level1_hum.mp3"></audio>
+                        <audio controls src="../audio/level1_hum.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>Уровень 2: "Белкарот" (level2_horror.mp3)</p>
-                        <audio controls src="../audio/level2_horror.mp3"></audio>
+                        <audio controls src="../audio/level2_horror.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>Уровень 3: "Финал" (level3_piano.mp3)</p>
-                        <audio controls src="../audio/level3_piano.mp3"></audio>
+                        <audio controls src="../audio/level3_piano.mp3" preload="metadata"></audio>
                     </div>
 
                     <h3>Темы Мини-Игр</h3>
                     <div class="track">
                         <p>"Дон-Макъ" (don_mak_8bit_fast.mp3)</p>
-                        <audio controls src="../audio/don_mak_8bit_fast.mp3"></audio>
+                        <audio controls src="../audio/don_mak_8bit_fast.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>"Прото-Плитки" (piano_game_8bit.mp3)</p>
-                        <audio controls src="../audio/piano_game_8bit.mp3"></audio>
+                        <audio controls src="../audio/piano_game_8bit.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>"Симулятор МСЧ" (mch_sim_loop.mp3)</p>
-                        <audio controls src="../audio/mch_sim_loop.mp3"></audio>
+                        <audio controls src="../audio/mch_sim_loop.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>"Симулятор ФТ" (ft_dialogue_loop.mp3)</p>
-                        <audio controls src="../audio/ft_dialogue_loop.mp3"></audio>
+                        <audio controls src="../audio/ft_dialogue_loop.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>"Красная Моня" (red_monya_anthem.mp3)</p>
-                        <audio controls src="../audio/red_monya_anthem.mp3"></audio>
+                        <audio controls src="../audio/red_monya_anthem.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>"СИНИКЗ (Джа-Джа)" (jarjar_spy_loop.mp3)</p>
-                        <audio controls src="../audio/jarjar_spy_loop.mp3"></audio>
+                        <audio controls src="../audio/jarjar_spy_loop.mp3" preload="metadata"></audio>
                     </div>
 
                     <h3>Звуковые Эффекты (SFX)</h3>
                     <div class="track">
                         <p>"Успех" (sfx_success.mp3)</p>
-                        <audio controls src="../audio/sfx_success.mp3"></audio>
+                        <audio controls src="../audio/sfx_success.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>"Провал / Ошибка" (sfx_fail.mp3)</p>
-                        <audio controls src="../audio/sfx_fail.mp3"></audio>
+                        <audio controls src="../audio/sfx_fail.mp3" preload="metadata"></audio>
                     </div>
                     <div class="track">
                         <p>"Скример Белкарота" (sfx_belkarot_stinger.mp3)</p>
-                        <audio controls src="../audio/sfx_belkarot_stinger.mp3"></audio>
+                        <audio controls src="../audio/sfx_belkarot_stinger.mp3" preload="metadata"></audio>
                     </div>
                 </div>
             </section>
@@ -139,5 +138,29 @@
 
     <script src="../shared/js/cheat.js" defer></script>
     <script src="../shared/js/gate.js" defer></script>
-</body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Находим главный саундтрек страницы
+            const pageAudio = document.getElementById('page-audio');
+            
+            // 2. Находим все плееры в "джукбоксе"
+            const jukeboxTracks = document.querySelectorAll('.jukebox audio');
+
+            if (!pageAudio || jukeboxTracks.length === 0) {
+                // Если чего-то нет, ничего не делаем
+                return;
+            }
+
+            // 3. Перебираем каждый трек в джукбоксе
+            jukeboxTracks.forEach(track => {
+                // 4. Добавляем "слушатель" на событие 'play'
+                track.addEventListener('play', () => {
+                    // 5. Когда этот трек начинает играть, ставим главный саундтрек на паузу
+                    pageAudio.pause();
+                });
+            });
+        });
+    </script>
+    </body>
 </html>
