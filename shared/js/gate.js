@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!overlay || !wrapper || !audio) {
         // Если на странице нет гейта или музыки, ничего не делаем
-        // (но прячем гейт, если он вдруг есть, а музыки нет)
         if (overlay) overlay.classList.add('hidden');
         if (wrapper) wrapper.classList.add('unlocked');
         return;
@@ -24,16 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.classList.add('hidden');
             wrapper.classList.add('unlocked');
 
-            // *** ИСПРАВЛЕНИЕ ЗДЕСЬ (Фикс "Белкарота") ***
-            // Мы должны дать музыке 100 мс, чтобы ОНА УСПЕЛА ЗАИГРАТЬ,
-            // ПРЕЖДЕ ЧЕМ 'prompt()' "заморозит" страницу.
-            if (typeof belkarot_prompt === 'function') {
-                setTimeout(belkarot_prompt, 100); // 100ms задержка
-            }
-            // *** КОНЕЦ ИСПРАВЛЕНИЯ ***
+            // *** ИЗМЕНЕНИЕ: Мы УБИРАЕМ отсюда вызов 'belkarot_prompt()' ***
+            // Он больше не нужен, так как 'prompt' теперь вызывается
+            // отдельной кнопкой ВНУТРИ страницы.
+            // *** КОНЕЦ ИЗМЕНЕНИЯ ***
 
         }).catch(error => {
-            // Если браузер все еще блокирует (очень редкий случай)
+            // Если браузер все еще блокирует
             console.error("Не удалось запустить аудио:", error);
             // Оставляем гейт, чтобы пользователь мог кликнуть еще раз
         });

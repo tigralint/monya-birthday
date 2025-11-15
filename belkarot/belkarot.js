@@ -1,16 +1,22 @@
-// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 let stingerPlayed = false;
-// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
     const stinger = document.getElementById('audio-stinger');
     
-    // --- ИЗМЕНЕНИЕ (Фикс Звука): Эта функция теперь вызывается из gate.js ПОСЛЕ клика ---
-    window.belkarot_prompt = function() {
-        requestQuarantineCode();
+    // *** НОВЫЙ КОД (Фикс Звука): Находим новую кнопку ***
+    const showPromptButton = document.getElementById('show-prompt-button');
+
+    // *** ИЗМЕНЕНИЕ (Фикс Звука): Окно пароля НЕ запускается само. ***
+    // Оно ждет клика по кнопке.
+    if (showPromptButton) {
+        showPromptButton.addEventListener('click', (e) => {
+            e.preventDefault(); // Не даем ссылке-кнопке прыгать
+            requestQuarantineCode(); // Запускаем квест с паролем
+        });
     }
 
+    // "Квест" с паролем
     function requestQuarantineCode() {
         
         const code = prompt(
@@ -22,13 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         if (code === null) {
-            alert(
-                "[ОШИБКА! ЗАПРОС НА СТАБИЛИЗАЦИЮ ОТКЛОНЕН!]\n\n" +
-                "Отказ от ввода протокола недопустим. Система впадает в неконтролируемый резонанс...\n\n" +
-                "ПОВТОРНЫЙ ЗАПРОС ПРОТОКОЛА СДЕРЖИВАНИЯ."
-            );
-            requestQuarantineCode(); 
-
+            // (Пользователь нажал "Отмена")
+            // Ничего не делаем, он остается на странице с играющей музыкой.
         } else if (code.trim() === '1488') {
             // УСПЕХ!
             document.body.classList.add('stabilized');
@@ -36,12 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
             header.innerText = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
             header.dataset.text = "ПРОТОКОЛ 1488 ПРИНЯТ. СИСТЕМА СТАБИЛИЗИРОВАНА.";
 
-            const horrorAudio = document.getElementById('page-audio'); // <-- ID изменен
+            const horrorAudio = document.getElementById('page-audio'); 
             if (horrorAudio) {
                 horrorAudio.pause();
                 horrorAudio.currentTime = 0;
             }
             localStorage.setItem('belkarot_complete', 'true');
+            
+            // Прячем кнопку, так как она больше не нужна
+            if (showPromptButton) showPromptButton.style.display = 'none';
 
         } else {
             // ПРОВАЛ! 
@@ -55,11 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Аффективный резонанс 'Белкарот' усиливается...\n\n" +
                 "Повторите ввод."
             );
-            requestQuarantineCode(); 
+            // НЕ вызываем requestQuarantineCode() заново,
+            // даем пользователю самому нажать кнопку еще раз.
         }
     }
 
-    // "Печать" текста
+    // "Печать" текста (запускается сразу при загрузке)
     async function typeAllTruths() {
         if (typeof typeText !== 'function') {
             console.error("Функция typeText не найдена. Не могу 'напечатать' истину.");
@@ -85,6 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- ИЗМЕНЕНИЕ (Фикс Звука): Запускаем "печать" сразу. 'Prompt' ждет клика. ---
+    // Запускаем "печать" сразу. 'Prompt' ждет клика.
     typeAllTruths();
 });
