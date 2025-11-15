@@ -179,3 +179,17 @@ body::before {
     color: #fff;
     font-weight: 700;
 }
+
+/* --- НОВЫЙ КОД (Пасхалка Джа-Джа) --- */
+#easter-egg-jarjar {
+    color: #B22222; /* Тускло-красный */
+    text-decoration: line-through;
+    cursor: help;
+    transition: all 0.2s ease;
+    font-style: italic;
+}
+#easter-egg-jarjar:hover {
+    color: #ff4d4d; /* Ярко-красный */
+    text-shadow: 0 0 5px #ff4d4d;
+    text-decoration: none;
+}

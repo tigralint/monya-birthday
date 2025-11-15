@@ -297,7 +297,6 @@ ul li::before {
 }
 /* --- Анимация мигания для "active" --- */
 .light.green.active {
-    /* Твоя тень + наша анимация */
     animation: pulse-green 1.5s infinite;
 }
 
@@ -305,4 +304,10 @@ ul li::before {
     0% { box-shadow: 0 0 10px var(--terminal-green); opacity: 1; }
     50% { box-shadow: 0 0 5px var(--terminal-green); opacity: 0.5; }
     100% { box-shadow: 0 0 10px var(--terminal-green); opacity: 1; }
+}
+
+/* --- НОВЫЙ КОД (Идея 4): Ссылка на зеленом огоньке --- */
+.secret-light-link {
+    text-decoration: none;
+    cursor: help; /* Курсор-подсказка */
 }

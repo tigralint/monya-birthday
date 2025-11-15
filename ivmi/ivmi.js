@@ -51,4 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navLinks.length > 0) {
         navLinks[0].click();
     }
+
+    // --- НОВЫЙ КОД (Пасхалка 1488) ---
+    const egg1488 = document.getElementById('easter-egg-1488');
+    if (egg1488) {
+        egg1488.addEventListener('click', () => {
+            alert('[ЗАМЕЧАНИЕ ИССЛЕДОВАТЕЛЯ]: Совпадение? Не думаю. - Т.М.');
+        });
+    }
+    // --- КОНЕЦ НОВОГО КОДА ---
 });

@@ -1,7 +1,5 @@
-// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 const sfxSuccess = document.getElementById('audio-sfx-success');
 const sfxFail = document.getElementById('audio-sfx-fail');
-// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- ЭЛЕМЕНТЫ DOM ---
@@ -66,6 +64,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 reportContainer.innerHTML = html;
                 reportContainer.classList.remove('hidden');
                 window.scrollTo(0, 0);
+
+                // --- НОВЫЙ КОД (Пасхалка Джа-Джа) ---
+                // Мы можем найти элемент и добавить ему "слушатель"
+                // ТОЛЬКО ПОСЛЕ того, как он был загружен через fetch()
+                const jarjarEgg = document.getElementById('easter-egg-jarjar');
+                if (jarjarEgg) {
+                    let clickCount = 0;
+                    jarjarEgg.addEventListener('click', () => {
+                        clickCount++;
+                        if (clickCount >= 5) {
+                            alert('[СБОЙ СИСТЕМЫ! ОБНАРУЖЕНА НЕСАНКЦИОНИРОВАННАЯ ПОПЫТКА ДОСТУПА К ПРОТОКОЛУ "БЕЛКАРОТ"!]');
+                            clickCount = 0; // Сбрасываем счетчик
+                        }
+                    });
+                }
+                // --- КОНЕЦ НОВОГО КОДА ---
+
             })
             .catch(err => {
                 reportContainer.innerHTML = `<p class="system-message">ОШИБКА ЗАГРУЗКИ ФАЙЛА 731-JJB. СВЯЖИТЕСЬ С АДМИНИСТРАТОРОМ СИНИКЗ.</p>`;

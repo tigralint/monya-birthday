@@ -7,104 +7,146 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="log_style.css">
-
-    <audio src="../audio/level1_hum.mp3" autoplay loop volume="0.4"></audio>
+    
+    <link rel="stylesheet" href="../shared/gate.css">
 </head>
 <body>
 
-    <div class="log-container">
-        <header class="log-header">
-            <h1>ЛИЧНЫЙ ЖУРНАЛ ИССЛЕДОВАТЕЛЯ</h1>
-            <p class="status">[СТАТУС: КОНФИДЕНЦИАЛЬНО. ПРОТОКОЛ 'БЕЛКАРОТ']</p>
-        </header>
+    <audio id="page-audio" src="../audio/level1_hum.mp3" loop volume="0.4"></audio>
 
-        <main>
-            <article class="log-entry">
-                <p class="date">[ДАТА: 03.11.2025]</p>
-                <p class="entry-text">
-                    Записи по "Феномену Тиграна" (ФТ) больше не кажутся мне забавной самоиронией. Я начинаю понимать. Каждый мой "искренний промах" — это не просто неудача. Это... <strong>сбой</strong>.
-                </p>
-            </article>
-
-            <article class="log-entry">
-                <p class="date">[ДАТА: 05.11.2025]</p>
-                <p class="entry-text">
-                    Вчера опять. Я думал, что "думаю сам", как она просила. Оказалось, "думал" не в ту сторону. Уровень сатисфакции (Plena Satisfactio) объекта "Мон" упал на 15 пунктов. Я слышал... я клянусь, я слышал помехи в аудиосистеме лаборатории. Гул.
-                </p>
-            </article>
-
-            <article class="log-entry">
-                <p class="date">[ДАТА: 08.11.2025]</p>
-                <p class="entry-text">
-                    Я заблокировал Досье-001. Ссылка на "Белкарот"... она не должна была там быть. Я не знаю, как она просочилась. Вся эта "наука", весь "Ius Monius" — это же просто Протокол Сдерживания! Мы не изучаем ее, мы ее <em>сдерживаем</em>.
-                </p>
-            </article>
-
-            <article class="log-entry">
-                <p class="date">[ДАТА: 10.11.2025 - СЕГОДНЯ]</p>
-                <p class="entry-text">
-                    Пароль <strong>1488</strong>. Он везде. Номер дела M. против T. (1488/25). Номер Объекта (1488). Статья из моих дурацких стихов (1488).
-                </p>
-                <p class="entry-text">
-                    Это не совпадение. Это <em>Ключ Сдерживания</em>. Если ФТ приведет к полному сбою, если "Монино страдание" достигнет критической точки... этот код — единственное, что может стабилизировать систему.
-                </p>
-                <p class="entry-text">
-                    Я боюсь. Я очень боюсь ее "Весеннего Обострения". Если я снова не угадаю... <em>ОН</em> прорвется.
-                </p>
-            </article>
-            
-            <article class="log-entry" id="log-entry-ft-link" style="display: none;">
-                <p class="date">[ДАТА: 11.11.2025]</p>
-                <p class="entry-text">
-                    Я проанализировал свои ошибки. Дело не в подарках. Дело в <strong>словах</strong>. "Я не понимаю". "Это юмор". "Не ной". Я сам провоцирую сбои. Я должен научиться... говорить. Я должен запустить диагностический симулятор диалога.
-                </p>
-                <div class="warning-box" style="text-align: center; padding: 10px;">
-                    <a href="ft_simulator.html" class="secret-link-level2" style="font-size: 1.1rem;">[ЗАПУСТИТЬ TIGRAN-DIALOGUE-SIM v2.0]</a>
-                </div>
-            </article>
-
-            <article class="log-entry" id="log-entry-memorandum-link" style="display: none;">
-                <p class="date">[ДАТА: 12.11.2025]</p>
-                <p class="entry-text">
-                    Я... я сделал это. Я прошел симулятор диалога. Я... кажется, понял. "Здоровая Речь". Вот оно.
-                </p>
-                <p class="entry-text">
-                    Я составил <strong>"Меморандум о Примирении"</strong>. Это... первый шаг. Надеюсь, он сработает.
-                </p>
-                <div class="warning-box" style="text-align: center; padding: 10px;">
-                    <a href="memorandum.html" class="secret-link-level2" style="font-size: 1.1rem; color: #39FF14;">[ЗАГРУЗИТЬ МЕМОРАНДУМ]</a>
-                </div>
-            </article>
-        </main>
-
-        <footer class="log-footer">
-            <a href="index.html">[ВЕРНУТЬСЯ В АРХИВ ИВМИ]</a>
-        </footer>
+    <div id="audio-gate-overlay">
+        <div id="audio-gate-text">[ ЗАГРУЗКА ЛИЧНОГО ЖУРНАЛА T.M. ]</div>
     </div>
 
-    <script>
+    <div id="content-wrapper">
+
+        <div class="log-container">
+            <header class="log-header">
+                <h1>ЛИЧНЫЙ ЖУРНАЛ ИССЛЕДОВАТЕЛЯ</h1>
+                <p class="status">[СТАТУС: КОНФИДЕНЦИАЛЬНО. ПРОТОКОЛ 'БЕЛКАРОТ']</p>
+            </header>
+
+            <main>
+                <article class="log-entry">
+                    <p class="date">[ДАТА: 03.11.2025]</p>
+                    <p class="entry-text">
+                        Записи по "Феномену Тиграна" (ФТ) больше не кажутся мне забавной самоиронией. Я начинаю понимать. Каждый мой "искренний промах" — это не просто неудача. Это... <strong>сбой</strong>.
+                    </p>
+                </article>
+
+                <article class="log-entry">
+                    <p class="date">[ДАТА: 05.11.2025]</p>
+                    <p class="entry-text">
+                        Вчера опять. Я думал, что "думаю сам", как она просила. Оказалось, "думал" не в ту сторону. Уровень сатисфакции (Plena Satisfactio) объекта "Мон" упал на 15 пунктов. Я слышал... я клянусь, я слышал помехи в аудиосистеме лаборатории. Гул.
+                    </p>
+                </article>
+
+                <article class="log-entry" id="log-entry-gorlovka" style="display: none;">
+                    <p class="date">[ДАТА: 07.11.2025]</p>
+                    <p class="entry-text">
+                        Только что получил доступ к архивам ИВМИ, пройдя верификацию "Древней Горловки". Это не просто игры. "Plena Satisfactio" у 10 горловчан... "Гармонизація Душъ"... Принципы "Ius Goricarlianum"... они легли в основу *всего*. Я должен копнуть глубже в Досье-001.
+                    </p>
+                </article>
+                
+                <article class="log-entry" id="log-entry-quiz" style="display: none;">
+                    <p class="date">[ДАТА: 10.11.2025]</p>
+                    <p class="entry-text">
+                        Пароль <strong>1488</strong>. Он везде. Номер дела M. против T. (1488/25). Номер Объекта (1488). Статья из моих дурацких стихов (1488). Я прошел верификацию в Досье-007, и система подтвердила.
+                    </p>
+                    <p class="entry-text">
+                        Это не совпадение. Это <em>Ключ Сдерживания</em>. Если ФТ приведет к полному сбою, если "Монино страдание" достигнет критической точки... этот код — единственное, что может стабилизировать систему.
+                    </p>
+                    <p class="entry-text">
+                        Я боюсь. Я очень боюсь ее "Весеннего Обострения". Если я снова не угадаю... <em>ОН</em> прорвется.
+                    </p>
+                </article>
+                
+                <article class="log-entry" id="log-entry-mch" style="display: none;">
+                    <p class="date">[ДАТА: 11.11.2025]</p>
+                    <p class="entry-text">
+                        Я проанализировал свои ошибки. Прошел симулятор МСЧ. Дело не в подарках. Дело в <strong>словах</strong>. "Я не понимаю". "Это юмор". "Не ной". Я сам провоцирую сбои. Я должен научиться... говорить. Я должен запустить диагностический симулятор диалога.
+                    </p>
+                    <div class="warning-box" style="text-align: center; padding: 10px;">
+                        <a href="ft_simulator.html" class="secret-link-level2" style="font-size: 1.1rem;">[ЗАПУСТИТЬ TIGRAN-DIALOGUE-SIM v2.0]</a>
+                    </div>
+                </article>
+
+                <article class="log-entry" id="log-entry-ft" style="display: none;">
+                    <p class="date">[ДАТА: 12.11.2025]</p>
+                    <p class="entry-text">
+                        Я... я сделал это. Я прошел симулятор диалога. Я... кажется, понял. "Здоровая Речь". "Я вижу твою боль. Я признаю ее". Вот оно.
+                    </p>
+                    <p class="entry-text">
+                        Я составил <strong>"Меморандум о Примирении"</strong>. Это... первый шаг. Надеюсь, он сработает.
+                    </p>
+                    <div class="warning-box" style="text-align: center; padding: 10px;">
+                        <a href="memorandum.html" class="secret-link-level2" style="font-size: 1.1rem; color: #39FF14;">[ЗАГРУЗИТЬ МЕМОРАНДУМ]</a>
+                    </div>
+                </article>
+
+                <article class="log-entry" id="log-entry-belkarot" style="display: none;">
+                    <p class="date">[ДАТА: 13.11.2025]</p>
+                    <p class="entry-text">
+                        Система стабилизирована. Протокол 1488 сработал. 'Белкарот' сдержан. Но я видел ФАЙЛ 004...
+                    </p>
+                    <p class="entry-text">
+                        "Институт Высших Монианских Исследований" - <strong>ЛОЖЬ</strong>.
+                        "Ius Monius" - <strong>ПРОТОКОЛ СДЕРЖИВАНИЯ 1488</strong>.
+                    </p>
+                    <p class="entry-text">
+                        Все это время... мы не изучали ее. Мы ее <em>сдерживали</em>. Я должен исполнить финальный протокол... Протокол 777 (Поздравление). Это единственный выход.
+                    </p>
+                    <div class="warning-box" style="text-align: center; padding: 10px;">
+                        <a href="../core/index.html" class="secret-link-level2" style="font-size: 1.1rem; color: #ff4d4d;">[ИСПОЛНИТЬ ПРОТОКОЛ 777 (ПОЗДРАВЛЕНИЕ)]</a>
+                    </div>
+                </article>
+
+            </main>
+
+            <footer class="log-footer">
+                <a href="index.html">[ВЕРНУТЬСЯ В АРХИВ ИВМИ]</a>
+            </footer>
+        </div>
+
+    </div> <script>
         document.addEventListener('DOMContentLoaded', () => {
             try {
-                // 1. Проверяем, пройден ли Симулятор МСЧ
-                if (localStorage.getItem('mch_sim_complete') === 'true') {
-                    const entryFtLink = document.getElementById('log-entry-ft-link');
-                    if (entryFtLink) {
-                        entryFtLink.style.display = 'block';
-                    }
+                // 1. Проверяем, пройдена ли Горловка
+                if (localStorage.getItem('gorlovka_complete') === 'true') {
+                    const entry = document.getElementById('log-entry-gorlovka');
+                    if (entry) entry.style.display = 'block';
                 }
 
-                // 2. Проверяем, пройден ли Симулятор Диалога (ФТ)
-                if (localStorage.getItem('ft_sim_complete') === 'true') {
-                    const entryMemorandum = document.getElementById('log-entry-memorandum-link');
-                    if (entryMemorandum) {
-                        entryMemorandum.style.display = 'block';
-                    }
+                // 2. Пройден ли Квиз
+                if (localStorage.getItem('ivmi_quiz_complete') === 'true') {
+                    const entry = document.getElementById('log-entry-quiz');
+                    if (entry) entry.style.display = 'block';
                 }
+                
+                // 3. Пройден ли Симулятор МСЧ
+                if (localStorage.getItem('mch_sim_complete') === 'true') {
+                    const entry = document.getElementById('log-entry-mch');
+                    if (entry) entry.style.display = 'block';
+                }
+
+                // 4. Пройден ли Симулятор ФТ
+                if (localStorage.getItem('ft_sim_complete') === 'true') {
+                    const entry = document.getElementById('log-entry-ft');
+                    if (entry) entry.style.display = 'block';
+                }
+
+                // 5. Пройден ли Белкарот
+                if (localStorage.getItem('belkarot_complete') === 'true') {
+                    const entry = document.getElementById('log-entry-belkarot');
+                    if (entry) entry.style.display = 'block';
+                }
+
             } catch (e) {
                 console.error("Ошибка при проверке 'localStorage' для динамического журнала:", e);
             }
         });
     </script>
     <script src="../shared/js/cheat.js" defer></script>
+    <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>
