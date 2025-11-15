@@ -10,6 +10,7 @@
     --color-bar-bg: #333;
     --color-bar-fill: #39FF14;
     --color-timer: #ffff00;
+    --color-damage: #B22222; /* Красный */
 }
 
 body {
@@ -52,7 +53,6 @@ header h1 {
     padding-bottom: 15px;
 }
 
-/* *** НОВЫЙ КОД (Мигающий курсор) *** */
 header h1::after {
     content: '_';
     font-weight: bold;
@@ -62,7 +62,6 @@ header h1::after {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
-/* *** КОНЕЦ НОВОГО КОДА *** */
 
 .game-intro p, .challenge-box p {
     text-align: center;
@@ -83,7 +82,6 @@ header h1::after {
 }
 .start-button:hover {
     background: #ffff00;
-    /* *** НОВЫЙ КОД (Вибрация кнопки) *** */
     animation: button-vibrate 0.1s infinite alternate;
 }
 .start-button.locked {
@@ -112,8 +110,8 @@ header h1::after {
     border: 2px solid var(--color-border);
     padding: 10px;
     background: #111;
-    position: relative; /* Нужно для всплывающих очков */
-    overflow: hidden; /* Чтобы очки не вылетали */
+    position: relative; 
+    overflow: hidden; 
 }
 
 #don-mak-timer {
@@ -132,7 +130,7 @@ header h1::after {
     margin-bottom: 15px;
 }
 #satisfaction-bar {
-    width: 50%; /* Начинаем с 50% */
+    width: 50%; 
     height: 100%;
     background: var(--color-bar-fill);
     transition: width 0.2s ease;
@@ -188,6 +186,24 @@ header h1::after {
     white-space: nowrap;
     border: 1px solid #000;
 }
+/* *** НОВЫЙ КОД (Шкала терпения клиента) *** */
+.customer-patience-bar {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--color-bar-bg);
+    border: 1px solid #000;
+}
+.customer-patience-bar-inner {
+    width: 100%;
+    height: 100%;
+    background: var(--color-border);
+    transition: width 0.5s linear; /* Плавное "таяние" */
+}
+/* *** КОНЕЦ НОВОГО КОДА *** */
+
 
 /* --- Игра 2: "Прото-Плитки-Фортепіано" --- */
 #piano-game {
@@ -195,8 +211,8 @@ header h1::after {
     padding: 10px;
     background: #111;
     text-align: center;
-    position: relative; /* Нужно для всплывающих очков */
-    overflow: hidden; /* Чтобы очки не вылетали */
+    position: relative; 
+    overflow: hidden; 
 }
 #piano-track {
     width: 300px;
@@ -219,6 +235,17 @@ header h1::after {
 .piano-tile.hit {
     background: #555; 
 }
+
+/* *** НОВЫЙ КОД (Плитка страдания) *** */
+.piano-tile.bad {
+    background: var(--color-damage);
+    border-color: #ff0000;
+}
+.piano-tile.bad.hit {
+    background: #ff8080; /* "Нажатый" красный */
+}
+/* *** КОНЕЦ НОВОГО КОДА *** */
+
 
 @keyframes drop {
     from { top: -100px; }
@@ -252,22 +279,46 @@ header h1::after {
     100% { transform: translateX(0); }
 }
 
-/* *** НОВЫЙ КОД (Всплывающие очки) *** */
+/* --- Всплывающие очки --- */
 .popup-score {
     position: absolute;
     font-family: var(--font-pixel);
     font-size: 1.5rem;
     font-weight: bold;
-    pointer-events: none; /* Нельзя кликнуть */
+    pointer-events: none; 
     animation: float-up 1s ease-out forwards;
 }
 .popup-score.good {
-    color: var(--color-border); /* Зеленый */
+    color: var(--color-border); 
 }
 .popup-score.bad {
-    color: #ff4d4d; /* Красный */
+    color: var(--color-damage); 
 }
 @keyframes float-up {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* *** НОВЫЙ КОД (Глитч-оверлей для Идеи 6) *** */
+.glitch-overlay-jarjar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-damage);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+.glitch-overlay-jarjar.active {
+    animation: glitch-jarjar-active 0.5s;
+}
+@keyframes glitch-jarjar-active {
+    0% { opacity: 0.1; transform: translateX(0); }
+    20% { opacity: 0.05; transform: translateX(-20px); }
+    40% { opacity: 0.1; transform: translateX(20px); }
+    60% { opacity: 0.05; transform: translateX(-10px); }
+    80% { opacity: 0.1; transform: translateX(10px); }
+    100% { opacity: 0; transform: translateX(0); }
 }

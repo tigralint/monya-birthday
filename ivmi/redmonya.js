@@ -1,7 +1,5 @@
-// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 const sfxSuccess = document.getElementById('audio-sfx-success');
 const sfxFail = document.getElementById('audio-sfx-fail');
-// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- ЭЛЕМЕНТЫ DOM ---
@@ -10,8 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const battleResult = document.getElementById('battle-result');
     const enemyAttackText = document.getElementById('enemy-attack');
     const battleMessageText = document.getElementById('battle-message');
-    const rewardLink = document.getElementById('reward-link');
-    const retryButton = document.getElementById('retry-button');
+
+    // --- НОВЫЙ КОД (Идея 5): Элементы HP ---
+    const playerHPBar = document.getElementById('player-hp-bar');
+    const playerHPText = document.getElementById('player-hp-text');
+    const enemyHPBar = document.getElementById('enemy-hp-bar');
+    const enemyHPText = document.getElementById('enemy-hp-text');
+    let playerHP = 100;
+    let enemyHP = 100;
+    // --- КОНЕЦ НОВОГО КОДА ---
+
 
     // --- БАЗА ДАННЫХ КВЕСТА ---
     const questions = [
@@ -51,8 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentQuestionIndex = 0;
 
+    // --- НОВЫЙ КОД (Идея 5): Обновление Шкал HP ---
+    function updateHPBars() {
+        if (playerHPBar) {
+            playerHPBar.style.width = `${playerHP}%`;
+            playerHPText.textContent = `${playerHP}/100`;
+        }
+        if (enemyHPBar) {
+            enemyHPBar.style.width = `${enemyHP}%`;
+            enemyHPText.textContent = `${enemyHP}/100`;
+        }
+    }
+    // --- КОНЕЦ НОВОГО КОДА ---
+
     function startGame() {
         currentQuestionIndex = 0;
+        playerHP = 100;
+        enemyHP = 100;
+        updateHPBars();
+        
         battleResult.classList.add('hidden');
         battleScreen.classList.remove('hidden');
         playerOptions.classList.remove('hidden');
@@ -60,7 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showQuestion() {
-        if (currentQuestionIndex >= questions.length) {
+        // --- ИЗМЕНЕНИЕ: Проверяем победу до показа вопроса ---
+        if (enemyHP <= 0) {
             winGame();
             return;
         }
@@ -95,26 +119,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCorrect) {
             selectedButton.classList.add('correct');
             battleMessageText.textContent = `УДАР! ${selectedButton.dataset.response}`;
-            playAudio(sfxSuccess); // <-- SFX
+            playAudio(sfxSuccess);
+            
+            enemyHP -= 25; // Урон врагу
+            updateHPBars();
+
             setTimeout(() => {
                 currentQuestionIndex++;
                 showQuestion();
             }, 2500);
         } else {
             battleMessageText.textContent = `ПРОВАЛ! ${selectedButton.dataset.response}`;
-            playAudio(sfxFail); // <-- SFX
-            setTimeout(loseGame, 2500);
+            playAudio(sfxFail);
+
+            playerHP -= 50; // Урон игроку
+            updateHPBars();
+
+            if (playerHP <= 0) {
+                setTimeout(loseGame, 2500);
+            } else {
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    showQuestion();
+                }, 2500);
+            }
         }
     }
 
     function winGame() {
         battleScreen.classList.add('hidden');
         playerOptions.classList.add('hidden');
-        
         battleResult.classList.remove('hidden');
         battleResult.classList.add('victory');
         battleResult.classList.remove('defeat');
-        
         battleResult.innerHTML = `
             <h2>ПОБЕДА!</h2>
             <p>Буржуазный идеолог повержен! Классовое сознание Монитариата восторжествовало!</p>
@@ -126,17 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function loseGame() {
         battleScreen.classList.add('hidden');
         playerOptions.classList.add('hidden');
-
         battleResult.classList.remove('hidden');
         battleResult.classList.add('defeat');
         battleResult.classList.remove('victory');
-
         battleResult.innerHTML = `
             <h2>ПОРАЖЕНИЕ...</h2>
             <p>Вы поддались на уловки буржуазной идеологии. Монитариат остается в цепях фрустрации.</p>
             <button id="retry-button" class="retry-button">ПОПРОБОВАТЬ СНОВА</button>
         `;
-        
         document.getElementById('retry-button').addEventListener('click', startGame);
     }
 

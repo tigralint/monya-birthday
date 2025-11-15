@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СИМУЛЯТОР: ИЗЛЕЧЕНИЕ ФТ</title>
+    
+    <link rel="icon" href="../favicon.png" type="image/png">
+    
     <link rel="stylesheet" href="ft_simulator.css">
-
     <link rel="stylesheet" href="../shared/gate.css">
 </head>
 <body>
@@ -38,6 +40,12 @@
                     <p id="monya-dialogue" class="dialogue-text">...</p>
                 </section>
 
+                <section class="psyche-bar-section">
+                    <div class="psyche-bar-label">[РАССУДОК ИССЛЕДОВАТЕЛЯ Т.М.]</div>
+                    <div class="psyche-bar-container">
+                        <div id="psyche-bar" class="psyche-bar"></div>
+                    </div>
+                </section>
                 <section class="options-window">
                     <h2 class="speaker-name tigran">ТИГРАН (МЫСЛИ):</h2>
                     <p id="tigran-thought">Я совершил 'искренний промах'. Она расстроена. Что я должен сказать?</p>
@@ -53,11 +61,11 @@
             </main>
         </div>
 
-    </div> <script src="../shared/js/audio_manager.js" defer></script>
-    
+    </div> 
+
+    <script src="../shared/js/audio_manager.js" defer></script>
     <script src="ft_simulator.js"></script>
     <script src="../shared/js/cheat.js" defer></script>
-    
     <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

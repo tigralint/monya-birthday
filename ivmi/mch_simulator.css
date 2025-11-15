@@ -10,6 +10,7 @@
     --color-bar-bg: #333;
     --color-bar-fill: #39FF14;
     --color-bar-damage: #B22222; /* Красный для урона */
+    --color-timer: #ffff00; /* Желтый */
 }
 
 body {
@@ -56,7 +57,7 @@ header h1 {
 .season-display {
     text-align: center;
     font-size: 1.2rem;
-    color: #ffff00;
+    color: var(--color-timer);
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--color-border-dark);
@@ -67,6 +68,7 @@ header h1 {
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
+    height: 86px; /* Фикс. высота, чтобы не прыгало */
 }
 
 .monya-avatar {
@@ -92,7 +94,8 @@ header h1 {
         inset 30px -40px 0 #000,
         inset 50px -40px 0 #000;
 }
-/* Анимация урона */
+
+/* --- НОВЫЙ КОД (Анимации Аватара) --- */
 .monya-avatar.damage {
     animation: damage-shake 0.3s;
 }
@@ -102,6 +105,28 @@ header h1 {
     50% { transform: translateX(5px); }
     100% { transform: translateX(0); }
 }
+
+.monya-avatar.happy {
+    animation: jump 0.4s;
+    box-shadow: 
+        /* ... (копируем тени лица) ... */
+        inset 10px -10px 0 #542, inset 70px -10px 0 #542,
+        inset 10px -20px 0 #542, inset 70px -20px 0 #542,
+        inset 20px -30px 0 #542, inset 60px -30px 0 #542,
+        inset 20px -40px 0 #fec, inset 60px -40px 0 #fec,
+        inset 30px -50px 0 #fec, inset 50px -50px 0 #fec,
+        inset 30px -40px 0 #000, inset 50px -40px 0 #000,
+        /* Добавляем "сияние" */
+        0 0 20px var(--color-timer);
+    border-color: var(--color-timer);
+}
+@keyframes jump {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+/* --- КОНЕЦ НОВОГО КОДА --- */
+
 
 /* Шкала Сатисфакции */
 .status-bar-container {
@@ -174,7 +199,7 @@ header h1 {
 }
 .sim-result h2 {
     font-size: 1.5rem;
-    color: #ffff00;
+    color: var(--color-timer);
 }
 .sim-result p {
     font-size: 1.1rem;

@@ -7,6 +7,7 @@
     --color-text: #ffb000; /* Янтарный */
     --color-border: #4a3000;
     --color-scanline: rgba(255, 176, 0, 0.05);
+    --color-glitch-red: #B22222; /* Багровый */
 }
 
 body {
@@ -180,16 +181,39 @@ body::before {
     font-weight: 700;
 }
 
-/* --- НОВЫЙ КОД (Пасхалка Джа-Джа) --- */
 #easter-egg-jarjar {
-    color: #B22222; /* Тускло-красный */
+    color: var(--color-glitch-red); 
     text-decoration: line-through;
     cursor: help;
     transition: all 0.2s ease;
     font-style: italic;
 }
 #easter-egg-jarjar:hover {
-    color: #ff4d4d; /* Ярко-красный */
+    color: #ff4d4d; 
     text-shadow: 0 0 5px #ff4d4d;
     text-decoration: none;
+}
+
+/* --- НОВЫЙ КОД (Идея 6): Глитч-оверлей --- */
+.glitch-overlay-jarjar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-glitch-red);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+.glitch-overlay-jarjar.active {
+    animation: glitch-jarjar-active 0.5s;
+}
+@keyframes glitch-jarjar-active {
+    0% { opacity: 0.1; transform: translateX(0); }
+    20% { opacity: 0.05; transform: translateX(-20px); }
+    40% { opacity: 0.1; transform: translateX(20px); }
+    60% { opacity: 0.05; transform: translateX(-10px); }
+    80% { opacity: 0.1; transform: translateX(10px); }
+    100% { opacity: 0; transform: translateX(0); }
 }

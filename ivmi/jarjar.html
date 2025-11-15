@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ДОСТУП ОГРАНИЧЕН: СИНИКЗ</title>
+    
+    <link rel="icon" href="../favicon.png" type="image/png">
+    
     <link rel="stylesheet" href="jarjar.css">
-
     <link rel="stylesheet" href="../shared/gate.css">
 </head>
 <body>
@@ -13,10 +15,14 @@
     <audio id="page-audio" src="../audio/jarjar_spy_loop.mp3" loop volume="0.4"></audio>
     <audio id="audio-sfx-success" src="../audio/sfx_success.mp3" preload="auto"></audio>
     <audio id="audio-sfx-fail" src="../audio/sfx_fail.mp3" preload="auto"></audio>
+    
+    <audio id="audio-stinger" src="../audio/sfx_belkarot_stinger.mp3" preload="auto"></audio>
 
     <div id="audio-gate-overlay">
         <div id="audio-gate-text">[ ДОСТУП К АРХИВУ СИНИКЗ ]</div>
     </div>
+    
+    <div class="glitch-overlay-jarjar" id="glitch-overlay"></div>
 
     <div id="content-wrapper">
 
@@ -63,16 +69,16 @@
                 </div>
 
                 <div id="report-container" class="hidden">
-                    </div>
+                </div>
 
             </div>
         </div>
 
-    </div> <script src="../shared/js/audio_manager.js" defer></script>
-    
+    </div> 
+
+    <script src="../shared/js/audio_manager.js" defer></script>
     <script src="jarjar.js"></script>
     <script src="../shared/js/cheat.js" defer></script>
-
     <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

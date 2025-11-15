@@ -1,5 +1,9 @@
 const sfxSuccess = document.getElementById('audio-sfx-success');
 const sfxFail = document.getElementById('audio-sfx-fail');
+// --- НОВЫЙ КОД (Идея 6): Скример и Глитч ---
+const sfxStinger = document.getElementById('audio-stinger');
+const glitchOverlay = document.getElementById('glitch-overlay');
+// --- КОНЕЦ НОВОГО КОДА ---
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- ЭЛЕМЕНТЫ DOM ---
@@ -11,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
     const pedalOptions = document.querySelectorAll('.pedal-option');
 
-    const correctPassword = "СИТХ"; // Пароль квеста
+    const correctPassword = "СИТХ"; 
 
     // --- ЛОГИКА МИНИ-КВЕСТА "ПЕДАЛЬНАЯ СЕМИОТИКА" ---
     pedalOptions.forEach(option => {
@@ -20,15 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
             pedalOptions.forEach(opt => opt.style.pointerEvents = 'none');
 
             if (choice === 'jarjar') {
-                playAudio(sfxSuccess); // <-- SFX
+                // ПРАВИЛЬНЫЙ ВЫБОР
+                playAudio(sfxSuccess); 
                 quizFeedback.textContent = "> ВЕРНО. ОБЪЕКТ-03 ИДЕНТИФИЦИРОВАН КАК УГРОЗА. ДЕШИФРОВКА КЛЮЧЕВОГО СЛОВА... 'С-И-Т-Х'.";
                 loginPrompt.classList.remove('hidden');
                 passwordInput.focus();
             } else {
-                playAudio(sfxFail); // <-- SFX
-                quizFeedback.textContent = "> ОШИБКА АНАЛИЗА. ВЫ НЕ ГОТОВЫ. СИСТЕМА БЛОКИРУЕТ ДОСТУП.";
+                // --- НОВЫЙ КОД (Идея 6): НЕПРАВИЛЬНЫЙ ВЫБОР ---
+                playAudio(sfxStinger); // Играем "скример"
+                if(glitchOverlay) glitchOverlay.classList.add('active'); // Включаем "глитч"
+                
+                quizFeedback.textContent = "> ОШИБКА АНАЛИЗА. [СИСТЕМА НЕСТАБИЛЬНА]... ВЫ НЕ ГОТОВЫ. БЛОКИРОВКА...";
                 loginPrompt.classList.remove('hidden');
-                loginPrompt.innerHTML = `<p class="system-message">${quizFeedback.textContent}</p><a href="index.html" style="color: #ffb000;">[ВЕРНУТЬСЯ В АРХИВ]</a>`;
+                loginPrompt.innerHTML = `<p class="system-message" style="color: #ff4d4d;">${quizFeedback.textContent}</p><a href="index.html" style="color: #ffb000;">[ВЕРНУТЬСЯ В АРХИВ]</a>`;
+                
+                // Убираем класс "глитча" после анимации
+                setTimeout(() => {
+                    if(glitchOverlay) glitchOverlay.classList.remove('active');
+                }, 500);
+                // --- КОНЕЦ НОВОГО КОДА ---
             }
         });
     });
@@ -44,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkPassword() {
         const input = passwordInput.value.trim().toUpperCase();
         if (input === correctPassword) {
-            playAudio(sfxSuccess); // <-- SFX
+            playAudio(sfxSuccess); 
             grantAccess();
         } else {
-            playAudio(sfxFail); // <-- SFX
+            playAudio(sfxFail); 
             passwordInput.value = '';
             passwordInput.focus();
             alert("НЕВЕРНЫЙ КОД ДОСТУПА. ПОПЫТКА ЗАРЕГИСТРИРОВАНА.");
@@ -65,9 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 reportContainer.classList.remove('hidden');
                 window.scrollTo(0, 0);
 
-                // --- НОВЫЙ КОД (Пасхалка Джа-Джа) ---
-                // Мы можем найти элемент и добавить ему "слушатель"
-                // ТОЛЬКО ПОСЛЕ того, как он был загружен через fetch()
+                // --- Пасхалка "Клик-по-тексту" ---
                 const jarjarEgg = document.getElementById('easter-egg-jarjar');
                 if (jarjarEgg) {
                     let clickCount = 0;
@@ -75,15 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         clickCount++;
                         if (clickCount >= 5) {
                             alert('[СБОЙ СИСТЕМЫ! ОБНАРУЖЕНА НЕСАНКЦИОНИРОВАННАЯ ПОПЫТКА ДОСТУПА К ПРОТОКОЛУ "БЕЛКАРОТ"!]');
-                            clickCount = 0; // Сбрасываем счетчик
+                            clickCount = 0; 
                         }
                     });
                 }
-                // --- КОНЕЦ НОВОГО КОДА ---
-
             })
             .catch(err => {
-                reportContainer.innerHTML = `<p class="system-message">ОШИБКА ЗАГРУЗКИ ФАЙЛА 731-JJB. СВЯЖИТЕСЬ С АДМИНИСТРАТОРОМ СИНИКЗ.</p>`;
+                reportContainer.innerHTML = `<p class="system-message">ОШИБКА ЗАГРУЗКИ ФАЙЛА 731-JJB. СВЯЖИТЕСЬ С АДМИНИСТРОРОМ СИНИКЗ.</p>`;
                 reportContainer.classList.remove('hidden');
             });
     }

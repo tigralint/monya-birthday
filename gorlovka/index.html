@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale:1.0">
     <title>ЗАГРУЗКА... ДРЕВНЯЯ ГОРЛОВКА</title>
-    <link rel="stylesheet" href="style.css">
     
+    <link rel="icon" href="../favicon.png" type="image/png">
+    
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../shared/gate.css">
 </head>
 <body>
@@ -16,10 +18,14 @@
     <audio id="audio-piano" src="../audio/piano_game_8bit.mp3" preload="auto" loop></audio>
     <audio id="audio-sfx-success" src="../audio/sfx_success.mp3" preload="auto"></audio>
     <audio id="audio-sfx-fail" src="../audio/sfx_fail.mp3" preload="auto"></audio>
+    
+    <audio id="audio-stinger" src="../audio/sfx_belkarot_stinger.mp3" preload="auto"></audio>
 
     <div id="audio-gate-overlay">
         <div id="audio-gate-text">[ ЗАПУСК СИСТЕМЫ "ГОРЛОВКА" ]</div>
     </div>
+    
+    <div class="glitch-overlay-jarjar" id="glitch-overlay"></div>
 
     <div id="content-wrapper">
 
@@ -69,7 +75,7 @@
                     <div id="piano-game" class="hidden">
                         <p>ОЧКИ ГАРМОНИИ: <span id="piano-score">0</span></p>
                         <div id="piano-track">
-                            </div>
+                        </div>
                         <p id="piano-message" style="text-align: center;"></p>
                     </div>
                 </section>
@@ -86,11 +92,11 @@
             </main>
         </div>
 
-    </div> <script src="../shared/js/audio_manager.js" defer></script>
+    </div> 
 
+    <script src="../shared/js/audio_manager.js" defer></script>
     <script src="games.js"></script>
     <script src="../shared/js/cheat.js" defer></script>
-    
     <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

@@ -1,11 +1,8 @@
-// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 const sfxSuccess = document.getElementById('audio-sfx-success');
 const sfxFail = document.getElementById('audio-sfx-fail');
-// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- БАЗА ДАННЫХ ИГРЫ ---
     const gameData = [
         {
             season: "СЕЗОН 1: ЛЕТО",
@@ -53,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // --- ЭЛЕМЕНТЫ DOM ---
     const gameScreen = document.getElementById('game-screen');
     const resultScreen = document.getElementById('result-screen');
     const seasonDisplay = document.getElementById('season-display');
@@ -72,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let satisfaction = 50;
     let currentSeason = 0;
 
-    // --- ЛОГИКА ИГРЫ ---
     function startGame() {
         satisfaction = 50;
         currentSeason = 0;
@@ -88,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const season = gameData[currentSeason];
-        
         seasonDisplay.textContent = season.season;
         monyaMessage.textContent = season.message;
         feedbackMessage.textContent = "";
@@ -104,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function selectAnswer(e) {
         const selectedButton = e.target;
         const isCorrect = selectedButton.dataset.correct === 'true';
-
         optionButtons.forEach(button => button.disabled = true);
         const season = gameData[currentSeason];
 
@@ -112,12 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
             satisfaction += 25;
             feedbackMessage.textContent = `> СИСТЕМА: ${season.feedback_correct}`;
             monyaAvatar.classList.remove('damage');
-            playAudio(sfxSuccess); // <-- SFX
+            playAudio(sfxSuccess);
+            
+            // --- НОВЫЙ КОД (Идея 3): Анимация "Счастья" ---
+            monyaAvatar.classList.add('happy');
+            setTimeout(() => monyaAvatar.classList.remove('happy'), 500);
+            // --- КОНЕЦ НОВОГО КОДА ---
+
         } else {
             satisfaction -= 30;
             feedbackMessage.textContent = `> СИСТЕМА: ${season.feedback_incorrect}`;
-            monyaAvatar.classList.add('damage');
-            playAudio(sfxFail); // <-- SFX
+            monyaAvatar.classList.add('damage'); // Анимация "урона" уже была
+            playAudio(sfxFail); 
             setTimeout(() => monyaAvatar.classList.remove('damage'), 300);
         }
 
@@ -146,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultScreen.classList.remove('hidden');
         resultTitle.textContent = "СИМУЛЯЦИЯ УСПЕШНА";
         resultText.textContent = `Plena Satisfactio: ${satisfaction}%. Вы выдержали годичный цикл. Вы обладаете базовыми навыками "Садовника" и "Монианской Эмпатии".`;
-        playAudio(sfxSuccess); // <-- SFX
+        playAudio(sfxSuccess);
         localStorage.setItem('mch_sim_complete', 'true');
     }
 
@@ -155,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultScreen.classList.remove('hidden');
         resultTitle.textContent = "СИМУЛЯЦИЯ ПРОВАЛЕНА";
         resultText.textContent = `Plena Satisfactio: ${satisfaction}%. Достигнуто "Монино Страдание" (Нарушение Статьи 3 ЕКМПФС). Рекомендуется повторное изучение "Феномена Тиграна".`;
-        playAudio(sfxFail); // <-- SFX
+        playAudio(sfxFail);
     }
 
     optionButtons.forEach(button => button.addEventListener('click', selectAnswer));

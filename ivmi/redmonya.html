@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ДИАЛЕКТИЧЕСКИЙ БОЙ</title>
-    <link rel="stylesheet" href="redmonya.css">
     
+    <link rel="icon" href="../favicon.png" type="image/png">
+    
+    <link rel="stylesheet" href="redmonya.css">
     <link rel="stylesheet" href="../shared/gate.css">
 </head>
 <body>
@@ -26,6 +28,23 @@
             </header>
 
             <main id="battle-screen">
+                
+                <div class="hp-battlefield">
+                    <div class="hp-entity">
+                        <div class="hp-label">БУРЖУАЗНЫЙ ИДЕОЛОГ</div>
+                        <div class="hp-bar-container">
+                            <div id="enemy-hp-bar" class="hp-bar enemy"></div>
+                        </div>
+                        <div id="enemy-hp-text" class="hp-text">100/100</div>
+                    </div>
+                    <div class="hp-entity player">
+                        <div class="hp-label">МОНИТАРИАТ</div>
+                        <div class="hp-bar-container">
+                            <div id="player-hp-bar" class="hp-bar player"></div>
+                        </div>
+                        <div id="player-hp-text" class="hp-text">100/100</div>
+                    </div>
+                </div>
                 <p id="battle-message" class="battle-message">Противник готовит идеологическую атаку...</p>
                 <div class="enemy-attack" id="enemy-attack">
                     Загрузка...
@@ -33,17 +52,17 @@
             </main>
 
             <aside id="player-options">
-                </aside>
+            </aside>
 
             <footer id="battle-result" class="battle-result hidden">
-                </footer>
+            </footer>
         </div>
 
-    </div> <script src="../shared/js/audio_manager.js" defer></script>
+    </div> 
 
+    <script src="../shared/js/audio_manager.js" defer></script>
     <script src="redmonya.js"></script>
     <script src="../shared/js/cheat.js" defer></script>
-    
     <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>

@@ -1,7 +1,5 @@
-// --- ИЗМЕНЕНИЕ (Оптимизация): Убрана 'playAudio', она теперь в shared/audio_manager.js ---
 const sfxSuccess = document.getElementById('audio-sfx-success');
 const sfxFail = document.getElementById('audio-sfx-fail');
-// --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -15,14 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackTitle = document.getElementById('feedback-title');
     const feedbackMonyaResponse = document.getElementById('feedback-monya-response');
 
-    // --- БАЗА ДАННЫХ ДИАЛОГА ---
+    // --- НОВЫЙ КОД (Идея 4): Элементы "Шкалы Психики" ---
+    const psycheBar = document.getElementById('psyche-bar');
+    let tigranPsyche = 100;
+    // --- КОНЕЦ НОВОГО КОДА ---
+
     const scenario = {
         monyaSpeech: "Ты... ты опять все сделал не так. Я не это имела в виду.",
         options: [
             {
                 text: "«Так скажи мне прямо, ЧТО ты хочешь, и я это сделаю!»",
                 isCorrect: false,
-                feedback: "ОШИБКА: 'Речь-Приказ'. Вы перекладываете ответственность и требуете инструкцию.",
+                feedback: "ОШИБКА: 'Речь-Приказ'. Вы перекладываете ответственность.",
                 monyaResponse: "«Думай сам!»"
             },
             {
@@ -52,11 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
+    // --- НОВЫЙ КОД (Идея 4): Обновление шкалы ---
+    function updatePsycheBar() {
+        if (psycheBar) {
+            psycheBar.style.width = `${tigranPsyche}%`;
+        }
+    }
+
     function loadScenario() {
         monyaDialogue.textContent = scenario.monyaSpeech;
         tigranThought.textContent = "Я совершил 'искренний промах'. Она расстроена. Что я должен сказать?";
         optionsContainer.innerHTML = '';
         feedbackWindow.classList.add('hidden');
+
+        // Сброс шкалы
+        tigranPsyche = 100;
+        updatePsycheBar();
 
         scenario.options.forEach(option => {
             const button = document.createElement('button');
@@ -88,16 +101,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCorrect) {
             feedbackWindow.classList.add('correct');
             feedbackWindow.classList.remove('error');
-            playAudio(sfxSuccess); // <-- SFX
+            playAudio(sfxSuccess); 
             setTimeout(winGame, 3000);
         } else {
             feedbackWindow.classList.add('error');
             feedbackWindow.classList.remove('correct');
-            playAudio(sfxFail); // <-- SFX
-            setTimeout(loadScenario, 4000);
+            playAudio(sfxFail); 
+            
+            // --- НОВЫЙ КОД (Идея 4): Урон психике ---
+            tigranPsyche -= 34; // 3 удара (34*3 > 100)
+            updatePsycheBar();
+            
+            if (tigranPsyche <= 0) {
+                setTimeout(loseGame, 2000);
+            } else {
+                setTimeout(loadScenario, 4000); // Перезапуск (как было)
+            }
+            // --- КОНЕЦ НОВОГО КОДА ---
         }
     }
 
+    // --- НОВЫЙ КОД (Идея 4): Функция проигрыша ---
+    function loseGame() {
+        alert("[СИСТЕМНЫЙ СБОЙ]\n\nКритическое повреждение рассудка исследователя.\nФЕНОМЕН ТИГРАНА НЕИЗЛЕЧИМ.\n\n...Перезапуск симуляции...");
+        loadScenario();
+    }
+    
     function winGame() {
         gameScreen.classList.add('hidden');
         winScreen.classList.remove('hidden');
