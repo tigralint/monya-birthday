@@ -10,9 +10,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
-
     <link rel="stylesheet" href="../shared/gate.css">
 
+    <style>
+        .lore-divider {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 60px auto;
+            width: 50%;
+        }
+        .personal-message {
+            font-family: 'Lora', serif; /* Возвращаемся к душевному шрифту */
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: left;
+            font-style: italic;
+        }
+    </style>
     <script>
         if (localStorage.getItem('belkarot_complete') !== 'true') {
             alert('СИСТЕМА НЕ СТАБИЛИЗИРОВАНА.\n\nПРОТОКОЛ 777 НЕ МОЖЕТ БЫТЬ ИСПОЛНЕН.\n\nВОЗВРАТ К ПОСЛЕДНЕЙ ТОЧКЕ СДЕРЖИВАНИЯ...');
@@ -21,6 +37,8 @@
             localStorage.removeItem('gorlovka_complete');
             localStorage.removeItem('ivmi_quiz_complete');
             localStorage.removeItem('belkarot_complete');
+            localStorage.removeItem('mch_sim_complete');
+            localStorage.removeItem('ft_sim_complete');
         }
     </script>
 </head>
@@ -50,18 +68,24 @@
                 <p>Ты — эпицентр этого безумного, сложного и невероятно веселого мира, который мы построили вокруг тебя.</p>
                 
                 <p>Твоя главная задача сегодня — нарушить <span>Статью 3 "Европейской Конвенции"</span> и не допустить абсолютно никакого "Мониного страдания".</p>
-
-                <p>Мы тебя очень любим.</p>
             </div>
 
+            <hr class="lore-divider">
+
+            <div class="personal-message">
+                <p>А если серьезно, весь этот сложный мир - это просто наш немного странный способ сказать, как сильно мы тебя ценим.</p>
+                <p>Спасибо тебе за твою глубину, за твой уникальный взгляд на вещи, за твою "особенность", которая делает нашу жизнь бесконечно интереснее. Спасибо за то, что ты настоящий друг.</p>
+                <p>Мы тебя очень любим. Будь счастлива!</p>
+            </div>
             <p class="signoff">
                 — Твой вечно "особенный" исследователь, Тигран
             </p>
 
         </div>
 
-    </div> <script src="../shared/js/cheat.js" defer></script>
-    
+    </div> 
+
+    <script src="../shared/js/cheat.js" defer></script>
     <script src="../shared/js/gate.js" defer></script>
 </body>
 </html>
