@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT: SATISFACTIO 3D</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="ui-layer">
+        
+        <div id="start-screen">
+            <h1>PROJECT: SATISFACTIO</h1>
+            <p>Протокол симуляции сознания "Тигран v3.0"</p>
+            <div class="controls-hint">
+                [W, A, S, D] - Движение<br>
+                [MOUSE] - Обзор<br>
+                [SHIFT] - Бег
+            </div>
+            <button id="start-button">ЗАГРУЗИТЬСЯ В СИСТЕМУ</button>
+        </div>
+
+        <div id="crosshair">+</div>
+
+        <div id="hud" class="hidden">
+            <div class="bar-label">PLENA SATISFACTIO:</div>
+            <div class="bar-container">
+                <div id="satisfaction-bar"></div>
+            </div>
+        </div>
+
+        <div id="death-screen" class="hidden">
+            <h1 class="glitch">СИГНАЛ ПОТЕРЯН</h1>
+            <p>Белкарот поглотил ваше сознание.</p>
+            <button onclick="window.location.reload()">ПЕРЕЗАГРУЗКА</button>
+        </div>
+
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
