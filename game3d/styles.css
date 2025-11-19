@@ -1,117 +1,246 @@
+/* --- НАСТРОЙКИ И ШРИФТЫ --- */
+:root {
+    --neon-green: #39FF14;
+    --dark-green: #0c2b0c;
+    --neon-red: #ff2a2a;
+    --dark-red: #2b0000;
+    --bg-black: #050505;
+}
+
 body {
     margin: 0;
-    overflow: hidden; /* Чтобы не было скролла */
-    background-color: #000;
-    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    background-color: var(--bg-black);
+    font-family: 'Share Tech Mono', monospace; /* Тот самый шрифт */
+    color: var(--neon-green);
     user-select: none;
 }
 
+/* --- ЭФФЕКТЫ МОНИТОРА --- */
+.scanlines {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.vignette {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+    z-index: 6;
+}
+
+/* --- КОНТЕЙНЕР UI --- */
 #ui-layer {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Чтобы клики проходили сквозь UI в игру */
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10;
+    pointer-events: none;
 }
 
-/* Кнопки и экраны должны ловить клики */
-#start-screen, #death-screen {
-    pointer-events: auto;
+/* --- ЭКРАНЫ (СТАРТ И СМЕРТЬ) --- */
+.screen-overlay {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px); /* Размытие фона */
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #39FF14; /* Зеленый терминал */
-    z-index: 10;
+    pointer-events: auto; /* Возвращаем клики */
+    z-index: 20;
 }
 
-h1 {
-    font-size: 3rem;
-    text-shadow: 0 0 10px #39FF14;
-    margin-bottom: 10px;
-}
-
-button {
-    background: transparent;
-    color: #39FF14;
-    border: 2px solid #39FF14;
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 20px;
-}
-
-button:hover {
-    background: #39FF14;
-    color: #000;
-    box-shadow: 0 0 20px #39FF14;
-}
-
-.controls-hint {
-    border: 1px dashed #39FF14;
-    padding: 15px;
-    margin: 20px;
-    color: #aaa;
-    text-align: left;
-}
-
-/* Прицел */
-#crosshair {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 20px; height: 20px;
-    transform: translate(-50%, -50%);
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 20px;
+.terminal-box {
+    border: 2px solid var(--neon-green);
+    padding: 40px 60px;
+    background: rgba(0, 20, 0, 0.9);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
     text-align: center;
-    line-height: 20px;
+    max-width: 600px;
+    width: 90%;
 }
 
-/* HUD (Шкала) */
+/* ТИПОГРАФИКА */
+h1.neon-text {
+    font-size: 3rem;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 10px var(--neon-green);
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #88ff88;
+    border-bottom: 1px dashed var(--neon-green);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+/* УПРАВЛЕНИЕ */
+.controls-panel {
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+}
+
+.key-row {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.key {
+    display: inline-block;
+    border: 1px solid var(--neon-green);
+    padding: 2px 8px;
+    margin-right: 5px;
+    background: var(--dark-green);
+    font-weight: bold;
+    box-shadow: 0 0 5px var(--neon-green);
+}
+.key.wide {
+    min-width: 60px;
+    text-align: center;
+}
+
+/* КНОПКИ */
+.cyber-button {
+    background: transparent;
+    color: var(--neon-green);
+    border: 2px solid var(--neon-green);
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cyber-button:hover {
+    background: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 30px var(--neon-green);
+    transform: scale(1.05);
+}
+
+/* --- HUD (ШКАЛА ЗДОРОВЬЯ) --- */
 #hud {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 300px;
+    bottom: 30px;
+    left: 30px;
+    width: 350px;
 }
+
 .bar-label {
-    color: #fff;
+    font-size: 1rem;
     margin-bottom: 5px;
-    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
 }
-.bar-container {
+
+.bar-border {
     width: 100%;
-    height: 20px;
-    border: 2px solid #fff;
-    background: #333;
+    height: 25px;
+    border: 2px solid var(--neon-green);
+    padding: 3px;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px var(--neon-green);
 }
+
 #satisfaction-bar {
     width: 100%;
     height: 100%;
-    background: #39FF14;
-    transition: width 0.2s;
+    background: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green);
+    transition: width 0.2s linear, background-color 0.3s;
 }
 
-.hidden { display: none !important; }
-
-/* Эффект Глитча для смерти */
-.glitch {
-    animation: glitch 0.2s infinite;
-    color: red;
-    text-shadow: 2px 0 blue, -2px 0 yellow;
+/* --- ПРИЦЕЛ --- */
+#crosshair {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--neon-green);
+    font-size: 24px;
+    text-shadow: 0 0 5px var(--neon-green);
+    pointer-events: none;
 }
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
+
+/* --- ЭКРАН СМЕРТИ (RED MODE) --- */
+.error-box {
+    border-color: var(--neon-red);
+    background: rgba(20, 0, 0, 0.95);
+    box-shadow: 0 0 30px var(--neon-red);
+}
+
+.error-msg {
+    font-size: 1.2rem;
+    color: #ff8888;
+}
+.error-code {
+    font-size: 0.9rem;
+    color: #550000;
+    margin-bottom: 20px;
+}
+
+.error-btn {
+    color: var(--neon-red);
+    border-color: var(--neon-red);
+}
+.error-btn:hover {
+    background: var(--neon-red);
+    color: #fff;
+    box-shadow: 0 0 30px var(--neon-red);
+}
+
+/* GLITCH TEXT ANIMATION */
+.glitch-text {
+    font-size: 4rem;
+    color: var(--neon-red);
+    position: relative;
+    animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+.glitch-text::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    overflow: hidden;
+    top: 0;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: -2px 0 #00fff9;
+    overflow: hidden;
+    top: 0;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
+    5% { clip: rect(70px, 9999px, 11px, 0); transform: skew(0.85deg); }
+    /* ... (можно сократить для простоты) */
+    100% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
+}
+@keyframes glitch-anim2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.3deg); }
+    100% { clip: rect(2px, 9999px, 85px, 0); transform: skew(0.3deg); }
+}
+
+/* УТИЛИТЫ */
+.hidden {
+    display: none !important;
 }
