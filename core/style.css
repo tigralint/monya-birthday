@@ -1,58 +1,126 @@
-/* --- Глобальные настройки (Стиль "Финал") --- */
+/* --- Глобальные настройки (Стиль "PLENA SATISFACTIO" / "БОЖЕСТВЕННЫЙ") --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
 body {
     font-family: 'Lora', serif;
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    /* Мягкий, "небесный" градиент, символизирующий умиротворение */
+    background: linear-gradient(135deg, #fdfbfb 0%, #fff0f0 50%, #ebedee 100%);
+    background-size: 400% 400%;
     color: #2c2c2c;
     margin: 0;
     padding: 0;
-    line-height: 1.7;
+    line-height: 1.8;
     overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    
+    /* Идея: Анимация фона - "Течение времени в вечности" */
+    animation: gradient-flow 15s ease infinite;
 }
 
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Контейнер (Ковчег Завета) --- */
 .container {
     max-width: 900px;
     margin: 40px auto;
-    padding: 50px 70px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.15);
+    padding: 60px 80px;
+    background-color: rgba(255, 255, 255, 0.95); /* Почти прозрачный */
+    border-radius: 2px; /* Более строгие, классические углы */
+    
+    /* Идея: "Дыхание Анимуса" - контейнер живой */
+    box-shadow: 0 20px 60px -20px rgba(139, 0, 0, 0.15);
+    animation: animus-breathing 6s ease-in-out infinite;
+    
     text-align: center;
+    border: 1px solid rgba(139, 0, 0, 0.05); /* Тончайшая красная линия */
+    position: relative;
 }
 
-/* --- Интро --- */
+/* Декоративные элементы по углам (как в старинных книгах) */
+.container::before, .container::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #d4af37; /* Золото */
+    transition: all 0.5s ease;
+}
+.container::before { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.container::after { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+.container:hover::before { top: 15px; left: 15px; }
+.container:hover::after { bottom: 15px; right: 15px; }
+
+@keyframes animus-breathing {
+    0% { box-shadow: 0 20px 60px -20px rgba(139, 0, 0, 0.1); transform: translateY(0); }
+    50% { box-shadow: 0 25px 70px -15px rgba(139, 0, 0, 0.2); transform: translateY(-5px); }
+    100% { box-shadow: 0 20px 60px -20px rgba(139, 0, 0, 0.1); transform: translateY(0); }
+}
+
+/* --- Интро (Технический текст) --- */
 .intro {
-    font-size: 1rem;
-    color: #888;
+    font-size: 0.9rem;
+    color: #aaa;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-bottom: 50px;
+    opacity: 0.7;
 }
 
-/* --- Главное сообщение --- */
+/* --- Главное сообщение (Текст Откровения) --- */
 .message {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
     color: #333;
     line-height: 1.6;
     margin-bottom: 50px;
-    text-align: center; /* Или left, если предпочитаешь */
+    text-align: center; 
 }
 
 .message p {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.5em;
+    /* Идея: Плавное появление строк */
+    animation: fade-up 1s ease-out forwards;
+    opacity: 0;
+}
+/* Задержка для каждой строки */
+.message p:nth-child(1) { animation-delay: 0.2s; }
+.message p:nth-child(2) { animation-delay: 0.5s; }
+.message p:nth-child(3) { animation-delay: 0.8s; }
+.message p:nth-child(4) { animation-delay: 1.1s; }
+.message p:nth-child(5) { animation-delay: 1.4s; }
+.message p:nth-child(6) { animation-delay: 1.7s; }
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* Выделенные слова (Ключевые термины Лора) */
 .message span {
-    color: #8B0000; /* Багровый */
+    color: #8B0000; /* Багровый - цвет Белкарота, но укрощенный */
     font-weight: 700;
     font-style: italic;
-    white-space: nowrap; /* Не рвем "лорные" термины */
-    background: #fff8f8;
+    white-space: nowrap;
+    background: linear-gradient(to top, #fff0f0 50%, transparent 50%); /* Подчеркивание маркером */
     padding: 0 5px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.message span:hover {
+    color: #fff;
+    background: #8B0000;
+    cursor: help; /* Намек на глубину термина */
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
 }
 
 /* --- Подпись --- */
@@ -63,37 +131,28 @@ body {
     margin-top: 60px;
     text-align: right;
     font-style: italic;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
 }
 
 /* --- Адаптация для мобильных --- */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    .container {
-        padding: 30px 25px;
-        margin: 20px auto;
-    }
-    .message {
-        font-size: 1.8rem;
-    }
-    .signoff {
-        font-size: 1.3rem;
-        text-align: center;
-    }
+    body { padding: 10px; }
+    .container { padding: 30px 20px; margin: 10px auto; }
+    .message { font-size: 1.6rem; }
+    .container::before, .container::after { display: none; } /* Убираем уголки на мобильных */
 }
 
-/* --- НОВЫЙ КОД (Пасхалка "Благодарности") --- */
+/* --- Пасхалка "Благодарности" --- */
 .secret-credit-link {
-    color: inherit; /* Наследует цвет у .signoff (чтобы не быть синим) */
+    color: inherit;
     text-decoration: none;
-    border-bottom: 1px dotted #aaa; /* Едва заметный намек */
-    cursor: help; /* Курсор-подсказка */
+    border-bottom: 1px dotted #aaa;
+    cursor: help;
     transition: all 0.3s ease;
 }
 
 .secret-credit-link:hover {
-    color: #8B0000; /* Становится багровым */
-    background: #fff8f8; /* Легкая подсветка */
-    border-bottom: 1px dotted #8B0000;
+    color: #d4af37; /* Золото */
+    border-bottom: 1px solid #d4af37;
 }
