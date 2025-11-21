@@ -30,9 +30,12 @@ body {
     line-height: 1.8;
     margin: 0;
     padding: 20px;
-    animation: fadeIn 0.5s ease-in-out;
     position: relative; 
+    
+    /* ИЗМЕНЕНИЕ: Убираем простую анимацию, заменяем на CRT-эффект */
+    /* animation: fadeIn 0.5s ease-in-out; - УДАЛЕНО */
 }
+
 /* --- Эффект Scanlines --- */
 body::before {
     content: " ";
@@ -49,10 +52,6 @@ body::before {
     animation: scanlines 0.2s linear infinite;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
 @keyframes scanlines {
     0% { background-position: 0 0; }
     100% { background-position: 0 4px; }
@@ -74,6 +73,33 @@ body::before {
     animation: text-flicker 3s linear infinite;
 }
 
+/* --- НОВЫЙ КОД: АНИМАЦИЯ "ВКЛЮЧЕНИЯ" (CRT TURN-ON) --- */
+/* Применяем анимацию к content-wrapper, чтобы весь контент "разворачивался" */
+#content-wrapper {
+    animation: crt-turn-on 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    transform-origin: center;
+}
+
+@keyframes crt-turn-on {
+    0% {
+        transform: scale(1, 0.002) scaleX(0);
+        filter: brightness(30);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1, 0.002) scaleX(1);
+        filter: brightness(10);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1, 1) scaleX(1);
+        filter: brightness(1);
+        opacity: 1;
+    }
+}
+/* --- КОНЕЦ НОВОГО КОДА --- */
+
+
 @keyframes text-flicker {
     0%   { text-shadow: 0 0 3px var(--terminal-green); opacity: 1; }
     5%   { text-shadow: 0 0 5px var(--terminal-green); opacity: 0.8; }
@@ -83,31 +109,22 @@ body::before {
     100% { text-shadow: 0 0 3px var(--terminal-green); opacity: 1; }
 }
 
-/* --- НОВЫЙ КОД (Кнопка Стабилизации) --- */
-/* Отключаем эффекты, если body "стабилизирован" */
+/* --- Отключение эффектов при стабилизации --- */
 body.stabilized::before {
     animation: none;
     background: none;
 }
 body.stabilized .terminal-container {
     animation: none;
-    text-shadow: none !important; /* !important, чтобы перебить text-flicker */
+    text-shadow: none !important; 
 }
 body.stabilized .light.green.active {
-    animation: none; /* Отключаем и мигание зеленого */
+    animation: none; 
     box-shadow: 0 0 10px var(--terminal-green);
 }
-
-/* Делаем желтый огонек кликабельным */
-.light.yellow {
-    cursor: pointer;
-    transition: all 0.2s ease;
+body.stabilized #content-wrapper {
+    animation: none; /* Отключаем CRT-включение, если нажата кнопка */
 }
-.light.yellow:hover {
-    background: #fff;
-    box-shadow: 0 0 8px #fff;
-}
-/* --- КОНЕЦ НОВОГО КОДА --- */
 
 
 /* --- Шапка Терминала --- */
@@ -131,22 +148,36 @@ body.stabilized .light.green.active {
     border: 1px solid #111;
 }
 .light.red { background: #ff5f56; }
-.light.yellow { background: #ffbd2e; }
+.light.yellow { 
+    background: #ffbd2e; 
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.light.yellow:hover {
+    background: #fff;
+    box-shadow: 0 0 8px #fff;
+}
 .light.green { background: #27c93f; }
-.light.green.active { box-shadow: 0 0 10px var(--terminal-green); }
+.light.green.active { 
+    box-shadow: 0 0 10px var(--terminal-green); 
+    animation: pulse-green 1.5s infinite;
+}
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 10px var(--terminal-green); opacity: 1; }
+    50% { box-shadow: 0 0 5px var(--terminal-green); opacity: 0.5; }
+    100% { box-shadow: 0 0 10px var(--terminal-green); opacity: 1; }
+}
 
 .header-title {
     color: #ccc;
     font-size: 0.9rem;
 }
 
-/* --- Тело Терминала (Сайдбар + Контент) --- */
+/* --- Остальные стили без изменений, но добавлены для полноты картины... --- */
 .terminal-body {
     display: flex;
     min-height: 80vh;
 }
-
-/* --- Сайдбар (Навигация) --- */
 .sidebar {
     flex: 0 0 300px;
     padding: 20px;
@@ -193,8 +224,6 @@ body.stabilized .light.green.active {
     color: var(--terminal-bg);
     text-shadow: none;
 }
-
-/* --- Область Контента --- */
 .content-area {
     flex: 1;
     padding: 20px 30px;
@@ -206,6 +235,10 @@ body.stabilized .light.green.active {
 .content-panel.active {
     display: block; 
     animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 h2 {
@@ -235,7 +268,6 @@ h4 {
     border-bottom: 1px solid var(--terminal-border);
     padding-bottom: 10px;
 }
-
 blockquote {
     border-left: 3px solid var(--terminal-green);
     padding-left: 15px;
@@ -244,7 +276,6 @@ blockquote {
     color: #ccc;
     background: rgba(0,0,0,0.1);
 }
-
 pre {
     background: #000;
     border: 1px dashed var(--terminal-border);
@@ -254,13 +285,11 @@ pre {
     font-size: 0.9rem;
     border-radius: 4px;
 }
-
 hr {
     border: none;
     border-top: 1px dashed var(--terminal-border);
     margin: 30px 0;
 }
-
 ul li {
     position: relative;
     padding-left: 25px;
@@ -275,16 +304,12 @@ ul li::before {
     font-weight: bold;
 }
 
-/* --- Секретная ссылка на Уровень 2 --- */
 .warning-box {
     border: 2px solid var(--terminal-red);
     background: rgba(255, 77, 77, 0.05);
     padding: 15px;
     border-radius: 4px;
     margin-top: 20px;
-}
-.warning-box h4 {
-    margin-top: 0;
 }
 .secret-link-level2 {
     color: var(--terminal-red);
@@ -298,7 +323,7 @@ ul li::before {
     text-shadow: none;
 }
 
-/* --- Галерея в Терминале --- */
+/* Галерея в Терминале */
 .gallery-grid-terminal {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -332,42 +357,6 @@ ul li::before {
     color: var(--terminal-text);
     text-align: center;
 }
-
-/* --- Адаптация для мобильных --- */
-@media (max-width: 800px) {
-    body {
-        padding: 5px;
-    }
-    .terminal-body {
-        flex-direction: column;
-    }
-    .sidebar {
-        flex: 1 1 auto;
-        border-right: none;
-        border-bottom: 1px dashed var(--terminal-border);
-    }
-    .content-area {
-        padding: 20px 15px;
-    }
-    h2 {
-        font-size: 1.5rem;
-    }
-    h3 {
-        font-size: 1.2rem;
-    }
-}
-/* --- Анимация мигания для "active" --- */
-.light.green.active {
-    animation: pulse-green 1.5s infinite;
-}
-
-@keyframes pulse-green {
-    0% { box-shadow: 0 0 10px var(--terminal-green); opacity: 1; }
-    50% { box-shadow: 0 0 5px var(--terminal-green); opacity: 0.5; }
-    100% { box-shadow: 0 0 10px var(--terminal-green); opacity: 1; }
-}
-
-/* --- (Идея 4): Ссылка на зеленом огоньке --- */
 .secret-light-link {
     text-decoration: none;
     cursor: help; 
@@ -375,7 +364,15 @@ ul li::before {
     display: inline-block;
     line-height: 1;
 }
-
 .secret-light-link .light.green {
     display: block; 
+}
+
+@media (max-width: 800px) {
+    body { padding: 5px; }
+    .terminal-body { flex-direction: column; }
+    .sidebar { flex: 1 1 auto; border-right: none; border-bottom: 1px dashed var(--terminal-border); }
+    .content-area { padding: 20px 15px; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
 }

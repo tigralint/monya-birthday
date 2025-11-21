@@ -4,55 +4,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault(); // Отменяем переход по якорю #
+            e.preventDefault(); 
 
-            // 1. Получаем ID целевой панели (например, "#dossier-001")
             const targetId = link.getAttribute('data-target');
             const targetPanel = document.querySelector(targetId);
 
-            // 2. Снимаем класс 'active' со всех ссылок и панелей
             navLinks.forEach(nav => nav.classList.remove('active'));
             contentPanels.forEach(panel => panel.classList.remove('active'));
 
-            // 3. Добавляем класс 'active' нужной ссылке и панели
             link.classList.add('active');
             
             if (targetPanel) {
                 targetPanel.classList.add('active');
 
-                // --- КОД ДЛЯ "ПИШУЩЕЙ МАШИНКИ" (ЧИНИТ КНОПКИ) ---
+                // --- ОБНОВЛЕННЫЙ КОД: ЭФФЕКТ ДЕШИФРОВКИ ---
                 const titleElement = targetPanel.querySelector('h2');
                 if (titleElement) {
-                    // Сохраняем оригинальный текст в data-атрибут, если его там нет
+                    // Сохраняем оригинал
                     if (!titleElement.dataset.text) {
                         titleElement.dataset.text = titleElement.innerText;
                     }
                     const originalTitle = titleElement.dataset.text;
                     
-                    // Скрываем, "печатаем" и показываем
-                    titleElement.style.visibility = 'hidden'; // Прячем перед печатью
-                    
-                    // Проверяем, подключена ли функция typeText
-                    if (typeof typeText === 'function') {
-                        // Запускаем "печать"
-                        typeText(titleElement, originalTitle, 30); // 30ms - cкорость
+                    // Проверяем наличие функции
+                    if (typeof decryptText === 'function') {
+                        // Запускаем эффект "взлома"
+                        decryptText(titleElement, originalTitle, 30);
                     } else {
-                        // Если скрипт не загрузился, просто показываем текст
                         titleElement.innerText = originalTitle;
                         titleElement.style.visibility = 'visible';
                     }
                 }
-                // --- КОНЕЦ КОДА "ПИШУЩЕЙ МАШИНКИ" ---
+                // --- КОНЕЦ ОБНОВЛЕНИЯ ---
             }
         });
     });
 
-    // Авто-клик по первой ссылке для инициализации "печати" при загрузке
+    // Авто-клик по первой ссылке
     if (navLinks.length > 0) {
         navLinks[0].click();
     }
 
-    // --- "Пасхалка 1488" ---
+    // Пасхалка 1488
     const egg1488 = document.getElementById('easter-egg-1488');
     if (egg1488) {
         egg1488.addEventListener('click', () => {
@@ -60,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Фикс Звука в Новых Вкладках ---
+    // Фикс звука
     const mainAudio = document.getElementById('page-audio');
     const externalLinks = document.querySelectorAll('a[target="_blank"]');
 
@@ -72,15 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // --- НОВЫЙ КОД (Кнопка Стабилизации) ---
+    // Кнопка Стабилизации
     const stabilizeButton = document.getElementById('stabilize-button');
-    const bodyElement = document.body; // Мы будем вешать класс на <body>
+    const bodyElement = document.body; 
 
     if (stabilizeButton && bodyElement) {
         stabilizeButton.addEventListener('click', () => {
-            // Переключаем (toggle) класс 'stabilized' на <body>
             bodyElement.classList.toggle('stabilized');
         });
     }
-    // --- КОНЕЦ НОВОГО КОДА ---
 });

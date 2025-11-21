@@ -20,22 +20,13 @@ body {
     line-height: 1.8;
     padding: 20px;
     font-size: 14px;
-    image-rendering: pixelated; /* Для 8-битного вида */
+    image-rendering: pixelated; 
 }
 
-a {
-    color: #ffff00;
-    text-decoration: underline;
-}
-a:hover {
-    color: #fff;
-}
+a { color: #ffff00; text-decoration: underline; }
+a:hover { color: #fff; }
+.hidden { display: none !important; }
 
-.hidden {
-    display: none !important;
-}
-
-/* --- Главный контейнер --- */
 .game-container {
     max-width: 800px;
     margin: 0 auto;
@@ -52,7 +43,6 @@ header h1 {
     border-bottom: 2px dashed var(--color-border-dark);
     padding-bottom: 15px;
 }
-
 header h1::after {
     content: '_';
     font-weight: bold;
@@ -63,9 +53,7 @@ header h1::after {
     50% { opacity: 0; }
 }
 
-.game-intro p, .challenge-box p {
-    text-align: center;
-}
+.game-intro p, .challenge-box p { text-align: center; }
 
 .start-button {
     display: block;
@@ -84,12 +72,7 @@ header h1::after {
     background: #ffff00;
     animation: button-vibrate 0.1s infinite alternate;
 }
-.start-button.locked {
-    background: #555;
-    color: #999;
-    cursor: not-allowed;
-}
-
+.start-button.locked { background: #555; color: #999; cursor: not-allowed; }
 @keyframes button-vibrate {
     0% { transform: translateX(-1px); }
     100% { transform: translateX(1px); }
@@ -100,10 +83,7 @@ header h1::after {
     padding: 15px;
     margin-top: 20px;
 }
-.challenge-box h2 {
-    font-size: 1.2rem;
-    text-align: center;
-}
+.challenge-box h2 { font-size: 1.2rem; text-align: center; }
 
 /* --- Игра 1: "Дон-Макъ" --- */
 #don-mak-game {
@@ -121,7 +101,6 @@ header h1::after {
     margin: 10px 0;
 }
 
-/* Шкала сатисфакции */
 #satisfaction-bar-container {
     width: 100%;
     height: 30px;
@@ -136,7 +115,6 @@ header h1::after {
     transition: width 0.2s ease;
 }
 
-/* "Прилавок" */
 #don-mak-counter {
     display: flex;
     justify-content: space-around;
@@ -157,7 +135,6 @@ header h1::after {
     color: #000;
 }
 
-/* "Клиенты" */
 #customer-area {
     height: 150px;
     display: flex;
@@ -173,7 +150,33 @@ header h1::after {
     background: var(--color-text); 
     border: 2px solid #000;
     position: relative;
+    
+    /* НОВЫЙ КОД: Анимация появления по умолчанию */
+    animation: slide-in 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
+/* Анимации для клиентов */
+.customer.served {
+    animation: slide-out-right 0.5s forwards;
+    background: #39FF14; /* Зеленеет от счастья */
+}
+.customer.angry {
+    animation: slide-out-left 0.5s forwards;
+    background: #B22222; /* Краснеет от гнева */
+}
+
+@keyframes slide-in {
+    from { transform: translateX(200px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-out-right {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(300px); opacity: 0; }
+}
+@keyframes slide-out-left {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-300px) rotate(-10deg); opacity: 0; }
+}
+
 .customer-order {
     position: absolute;
     top: -30px;
@@ -186,7 +189,6 @@ header h1::after {
     white-space: nowrap;
     border: 1px solid #000;
 }
-/* *** НОВЫЙ КОД (Шкала терпения клиента) *** */
 .customer-patience-bar {
     position: absolute;
     top: -40px;
@@ -200,10 +202,8 @@ header h1::after {
     width: 100%;
     height: 100%;
     background: var(--color-border);
-    transition: width 0.5s linear; /* Плавное "таяние" */
+    transition: width 0.5s linear; 
 }
-/* *** КОНЕЦ НОВОГО КОДА *** */
-
 
 /* --- Игра 2: "Прото-Плитки-Фортепіано" --- */
 #piano-game {
@@ -234,25 +234,22 @@ header h1::after {
 }
 .piano-tile.hit {
     background: #555; 
+    transform: scale(0.9); /* Визуальный отклик */
+    transition: transform 0.1s;
 }
-
-/* *** НОВЫЙ КОД (Плитка страдания) *** */
 .piano-tile.bad {
     background: var(--color-damage);
     border-color: #ff0000;
 }
 .piano-tile.bad.hit {
-    background: #ff8080; /* "Нажатый" красный */
+    background: #ff8080; 
 }
-/* *** КОНЕЦ НОВОГО КОДА *** */
-
-
 @keyframes drop {
     from { top: -100px; }
     to { top: 400px; }
 }
 
-/* --- Финальная награда --- */
+/* --- Остальное --- */
 #gorlovka-reward {
     border: 3px solid #ffff00;
     padding: 20px;
@@ -264,12 +261,7 @@ header h1::after {
     50% { box-shadow: 0 0 30px #ffff00; }
     100% { box-shadow: 0 0 10px #ffff00; }
 }
-
-/* --- Анимация "Тряска экрана" --- */
-.screen-shake {
-    animation: shake 0.4s;
-}
-
+.screen-shake { animation: shake 0.4s; }
 @keyframes shake {
     0% { transform: translateX(0); }
     20% { transform: translateX(-10px); }
@@ -278,8 +270,6 @@ header h1::after {
     80% { transform: translateX(10px); }
     100% { transform: translateX(0); }
 }
-
-/* --- Всплывающие очки --- */
 .popup-score {
     position: absolute;
     font-family: var(--font-pixel);
@@ -287,33 +277,22 @@ header h1::after {
     font-weight: bold;
     pointer-events: none; 
     animation: float-up 1s ease-out forwards;
+    z-index: 100;
 }
-.popup-score.good {
-    color: var(--color-border); 
-}
-.popup-score.bad {
-    color: var(--color-damage); 
-}
+.popup-score.good { color: var(--color-border); }
+.popup-score.bad { color: var(--color-damage); }
 @keyframes float-up {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-50px); opacity: 0; }
 }
 
-/* *** НОВЫЙ КОД (Глитч-оверлей для Идеи 6) *** */
 .glitch-overlay-jarjar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--color-damage);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 9999;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--color-damage); opacity: 0;
+    pointer-events: none; z-index: 9999;
 }
-.glitch-overlay-jarjar.active {
-    animation: glitch-jarjar-active 0.5s;
-}
+.glitch-overlay-jarjar.active { animation: glitch-jarjar-active 0.5s; }
 @keyframes glitch-jarjar-active {
     0% { opacity: 0.1; transform: translateX(0); }
     20% { opacity: 0.05; transform: translateX(-20px); }
